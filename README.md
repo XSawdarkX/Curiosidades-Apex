@@ -16,11 +16,44 @@ Es una referencia ligera y serializable a un sObject o un campo que se valida en
      
 El token de un sObject o un campo se puede obtener ya sea de una **member variable** o del método **getSObjectType()** / **getSObjectField()**
 
-```apex
-//obtener token con member variable 
-Schema.sObjectType tokenMemberVariable = Account.sObjectType;
-System.debug('Sobject Account token: '+tokenMemberVariable);
+```Apex
+//OBJETO
+        
+//obtener Token con member variable 
+Schema.sObjectType tokenObjectMV = Account.sObjectType;
+System.debug('Sobject Account token: '+tokenObjectMV);
+
+//obtener Token con getSObjectType() / getSObjectField()
+Account objAccount = new Account();
+Schema.sObjectType tokenObjectGSOT = objAccount.getSObjectType();
+System.debug('Sobject Account token: '+tokenObjectGSOT);
+
+//CAMPO
+
+//obtener el Token de un campo
+Schema.SObjectField tokenFieldMV = Account.Name;
+System.debug('Field Name Account token: '+tokenFieldMV);
 ```
+
+Apartir de los token, se puede obtener la descripción del Objeto o del Campo con el método **getDescribe()**. El resultado se guardara en tipo de dato:
+**Schema.DescribeSObjectResult**
+
+```Apex
+//Obtiene el Describe usando Tokens
+Schema.DescribeSObjectResult dsrToken = Account.sObjectType.getDescribe();
+System.debug('Describe Token Account: '+dsrToken);
+```
+
+También se puede obtener la Descripción con una **member variable**
+  
+```Apex
+//Obtiene la Descripción usando una member variable
+Schema.DescribeSObjectResult dsrSchema = Schema.SObjectType.Account;
+System.debug('Describe Schema Account: '+dsrSchema);
+
+Schema.DescribeFieldResult dfr = Schema.sObjectType.Account.fields.Name;
+System.debug('Describe Schema Account Name: '+dfr);
+```  
   
 #### 2. Usando describeSObjects Schema method
 
