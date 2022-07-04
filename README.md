@@ -35,13 +35,16 @@ Schema.SObjectField tokenFieldMV = Account.Name;
 System.debug('Field Name Account token: '+tokenFieldMV);
 ```
 
-Apartir de los token, se puede obtener la descripción del Objeto o del Campo con el método **getDescribe()**. El resultado se guardara en tipo de dato:
-**Schema.DescribeSObjectResult**
+Apartir de los token, se puede obtener la descripción del Objeto o del Campo con el método **getDescribe()**. El resultado se guardara en el tipo de dato:
+**Schema.DescribeSObjectResult** / **Schema.DescribeFieldResult** 
 
 ```Apex
 //Obtiene el Describe usando Tokens
 Schema.DescribeSObjectResult dsrToken = Account.sObjectType.getDescribe();
 System.debug('Describe Token Account: '+dsrToken);
+
+Schema.DescribeFieldResult Tokendfr = Account.Description.getDescribe();
+System.debug('Describe token Account Description: '+Tokendfr);
 ```
 
 También se puede obtener la Descripción con una **member variable**
