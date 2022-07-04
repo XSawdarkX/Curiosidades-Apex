@@ -4,7 +4,7 @@ Este repositorio tiene como objetivo consignar funciones útiles que se pueden u
 
 ## Tabla de contenido
 
-- Dynamic Apex 
+- [Dynamic Apex](https://github.com/XSawdarkX/Curiosidades-Apex/blob/main/Dynamic%20Apex.md)
 
 ## Dynamic Apex 
 
