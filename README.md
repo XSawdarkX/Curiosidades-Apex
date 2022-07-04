@@ -14,7 +14,7 @@ Esto se puede lograr a través de dos maneras:
 
 Es una referencia ligera y serializable a un sObject o un campo que se valida en tiempo de compilación.
      
-El token de un sObject o un campo se puede obtener ya sea de una **member variable** o del método **getSObjectType()** / **getSObjectField()**
+El token de un sObject o un campo se puede obtener ya sea de una **Member variable** o del método **getSObjectType()** / **getSObjectField()**
 
 ```Apex
 //OBJETO
@@ -47,10 +47,10 @@ Schema.DescribeFieldResult Tokendfr = Account.Description.getDescribe();
 System.debug('Describe token Account Description: '+Tokendfr);
 ```
 
-También se puede obtener la Descripción con una **member variable**
+También se puede obtener la Descripción con una **Member variable**
   
 ```Apex
-//Obtiene la Descripción usando una member variable
+//Obtiene el Describe usando una Member variable
 Schema.DescribeSObjectResult dsrSchema = Schema.SObjectType.Account;
 System.debug('Describe Schema Account: '+dsrSchema);
 
