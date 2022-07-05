@@ -68,3 +68,33 @@ System.debug('Describe Schema Account, Book: '+results);
 Una vez se obtiene el Describe de un Objeto o un Campo, se puede acceder a su metadata. 
 
 Para ver algunos pequeños ejemplos de lo que se puede hacer, por favor revisar la clase: 
+
+## 2. Acceder a los metadatos correspondientes a la definición de una App y sus Tab.
+
+También es posible obtener la metadata asociada a las Aplicaciones y a sus Tabs con el Describe. 
+
+El tipo de dato para guardar la información de las Apps es: **Schema.DescribeTabSetResult**
+
+A través del Result de las App, yo puedo acceder a sus correspondientes Tabs con el método **getTabs()**. 
+Estas últimas se almacenan con el tipo de datos: **Schema.DescribeTabResult**
+
+```Apex
+List<Schema.DescribeTabSetResult> tabSetDesc = Schema.describeTabs();
+        
+for(DescribeTabSetResult tsr : tabSetDesc) {
+
+  //Label App
+  System.debug('Label App: ' + tsr.getLabel());
+  List<Schema.DescribeTabResult> tabDesc = tsr.getTabs();
+
+  String tabs = '';
+  for(Schema.DescribeTabResult tr : tabDesc){
+      //label of each tab belonging to the app
+      tabs += tr.getLabel()+',';
+
+  }
+
+  tabs = tabs.removeEnd(',');
+  System.debug('Label Tabs: ' + tabs);
+}
+``` 
