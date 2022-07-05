@@ -56,4 +56,15 @@ System.debug('Describe Schema Account Name: '+dfr);
   
 ### 2. Usando describeSObjects Schema method
 
-     Es un método de la clase Schema
+Es un método de la clase Schema que permite obtener el Describe de uno o varios Sobjects. 
+
+```Apex
+List<String> types = new List<String>{'Account','Book__c'};
+Schema.DescribeSobjectResult[] results = Schema.describeSObjects(types); 
+System.debug('Describe Schema Account, Book: '+results);
+``` 
+### Que sigue..     
+
+Una vez se obtiene el Describe de un Objeto o un Campo, se puede acceder a su metadata. 
+
+Para ver algunos pequeños ejemplos de lo que se puede hacer, por favor revisar la clase: 
