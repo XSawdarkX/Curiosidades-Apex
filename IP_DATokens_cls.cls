@@ -1,6 +1,6 @@
 /*
  * Author: Daniel Junca
- * Description: Muestra como obtener el Token y el Describe de un Objeto y un Campo
+ * Description: Muestra como obtener el Token y el Describe de un Objeto y un Campo.
  * CreateDate: 04-07-2022
 */
 public class IP_DATokens_cls {
