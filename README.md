@@ -4,7 +4,7 @@ Este repositorio tiene como objetivo consignar funciones útiles que se pueden u
 
 ## Tabla de contenido
 
-- Conceptos básicos 
+- [Conceptos básicos](https://github.com/XSawdarkX/Curiosidades-Apex/blob/main/Conceptos%20b%C3%A1sicos.md)
 - Buenas prácticas 
 - Triggers
 - Visualforce
