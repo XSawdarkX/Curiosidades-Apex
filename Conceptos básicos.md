@@ -65,17 +65,17 @@ Por último, aunque no es un entorno de desarrollo, haciendo uso de la interfaz 
 
 #### Creación/Edición de Trigger
 
-1. Ingresar a Configuraciones/Setup
-2. Dar clic en la opción Gestor de objetos/Object Manager ubicada en la parte superior izquierda
+1. Ingresar a **Configuraciones/Setup**
+2. Dar clic en la opción **Gestor de objetos/Object Manager** ubicada en la parte superior izquierda
 3. Dar clic en el objeto que se desee 
-4. En la parte izquierda, buscar la opción Desencadenadores/Triggers  
-5. Dar clic en Nuevo/New, o en su defecto Modificar/Edit si ya existe uno.
+4. En la parte izquierda, buscar la opción **Desencadenadores/Triggers**  
+5. Dar clic en **Nuevo/New**, o en su defecto **Modificar/Edit** si ya existe uno.
 
 #### Creación/Edición de una Clase Apex
 
-1. Ingresar a Configuraciones/Setup
-2. Buscar la opción Clases de Apex/Apex classes en el cuadro de búsqueda rápida. 
-5. Dar clic en Nuevo/New, o en su defecto Modificar/Edit si ya existe una.
+1. Ingresar a **Configuraciones/Setup**
+2. Buscar la opción **Clases de Apex/Apex classes** en el cuadro de búsqueda rápida. 
+5. Dar clic en **Nuevo/New**, o en su defecto **Modificar/Edit** si ya existe una.
 
 ## Qué no se puede hacer en Apex
 
