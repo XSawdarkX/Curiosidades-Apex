@@ -49,13 +49,6 @@ Pasos para acceder a la Developer console:
 
 1. Dar clic en el icono de **Setup** ubicado en la parte superior derecha y seleccionar, manteniendo oprimida la tecla **ctrl**, la opción Developer console o
 Consola de desarrollador.  
-![](https://github.com/XSawdarkX/Curiosidades-Apex/blob/main/FilmForth%20Sin%20t%C3%ADtulo.mp4)
-
-![image](https://user-images.githubusercontent.com/100179095/177469334-7fa265d1-23ae-4a0f-9dd6-dab0e8b389d0.png)
-
-Una vez se abra el entorno vera algo como esto:
-
-![image](https://user-images.githubusercontent.com/100179095/177469542-402a43cf-bfed-494e-8e75-9b4b72d02806.png)
 
 ### 2. Visual Studio Code
 
@@ -77,8 +70,6 @@ Por último, aunque no es un entorno de desarrollo, haciendo uso de la interfaz 
 3. Dar clic en el objeto que se desee 
 4. En la parte izquierda, buscar la opción Desencadenadores/Triggers  
 5. Dar clic en Nuevo/New, o en su defecto Modificar/Edit si ya existe uno.
-
-![image](https://user-images.githubusercontent.com/100179095/177475453-b60e9ebc-26a4-4588-98b6-fbb9a357e233.png)
 
 #### Creación/Edición de una Clase Apex
 
