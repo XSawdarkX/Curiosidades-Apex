@@ -47,8 +47,8 @@ Es el entorno de desarrollo propio de Salesforce, y por lo mismo el más complet
 
 Pasos para acceder a la Developer console:
 
-1. Dar clic en el icono de **Setup** ubicado en la parte superior derecha y seleccionar, manteniendo oprimida la tecla **ctrl**, la opción Developer console o
-Consola de desarrollador.  
+1. Dar clic en el icono de **Setup** ubicado en la parte superior derecha y seleccionar, manteniendo oprimida la tecla **ctrl**, la opción **Developer console/
+Consola de desarrollador**.  
 
 ### 2. Visual Studio Code
 
