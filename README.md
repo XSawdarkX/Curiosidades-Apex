@@ -4,6 +4,7 @@ Este repositorio tiene como objetivo consignar funciones útiles que se pueden u
 
 ## Tabla de contenido
 
+- Conceptos básicos 
 - Buenas prácticas 
 - Triggers
 - Visualforce
