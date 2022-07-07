@@ -1,0 +1,3 @@
+# Sintaxis
+
+## Tipos de datos
