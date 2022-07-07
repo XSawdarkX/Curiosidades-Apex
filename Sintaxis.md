@@ -1,6 +1,6 @@
 # Sintaxis
 
-Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que incluye definición de variables, asignaciones, colecciones, condicionales, ciclos y manejo de excepciones.
+Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que incluye definición de variables, asignaciones, constantes, colecciones, condicionales, ciclos y manejo de excepciones.
 
 ## Variables
 
@@ -15,4 +15,15 @@ Además, como su mismo nombre lo indica, las variables pueden cambiar su valor a
 
 ## Asignación de variables
 
-Debido a que Apex es un lenguaje de tipificación fuerte, esto significa que 
+Debido a que Apex es un lenguaje de tipificación fuerte, es necesario siempre indicar el tipo de dato a la hora de definir una variable. 
+
+Dentro de los tipos de datos que se pueden encontrar en Apex estan:
+
+- Tipos de datos **primitivos** como: Integer, String, Boolean, Id, Date, entre otros. 
+- El tipo de dato **sObject**
+- El tipo de dato **Object**
+- El tipo de dato **Enum**
+
+### Datos primitivos
+
+Para definir una variable no más basta con colocar el tipo de dato seguido del nombre de la variable. 
