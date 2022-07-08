@@ -147,7 +147,7 @@ String nombreTexto = (String)nombre;
 
 Como se mencionó en el módulo de Conceptos básicos, Apex es un lenguaje orientado a objetos, por lo que al igual que Java, se pueden crear Clases con sus respectivas propiedades y métodos. Estas clases terminan siendo otro tipo de datos que se puede usar para definir una variable, o como se conoce técnicamente, para instanciar un objeto. 
 
-Teniendo esto en cuenta, si yo creo una clase llamada **Carro_cls**, la siguiente declaración es válida. Nótese que, al usar la Clase como un tipo de dato, también se usa la palabra **New**.
+Teniendo esto en cuenta, si yo creo una clase llamada **Carro_cls**, la siguiente declaración es válida. Nótese que, al usar la Clase como un tipo de dato, también se usa la palabra **new**.
 
 ```Apex
 Carro_cls objCarro = new Carro_cls();
