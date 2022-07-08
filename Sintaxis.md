@@ -63,4 +63,7 @@ Así como es necesario especificar el tipo de dato de una variable, es important
 Integer edad = '15';
 ``` 
 
+#### Tipo de dato Id
+
+En salesforce, cada vez que se crea un **Registro** de cualquier Objeto, se le asigna un Id único que lo identifica de cualquier otro registro. En apex, existe un tipo de dato primitivo para guardar dicho valor.  
 
