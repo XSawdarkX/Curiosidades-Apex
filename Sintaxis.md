@@ -128,6 +128,27 @@ sObject s = new Account();
 Account objAccount = (Account)s;
 ``` 
 
+### Objects
+
+A diferencia del tipo de dato sObject, object es un tipo de dato genérico que sirve para almacenar valores de cualquier otro tipo. También es posible
+realizar un Cast cuando sea necesario y convertir una variable de tipo Object en una variable de un tipo de dato especifico. 
+
+```Apex
+
+Object s = new Account();
+
+Object edad = 15;
+
+Object nombre = 'Daniel';
+String nombreTexto = (String)nombre; 
+``` 
+
+### Clases
+
+Como se mencionó en el módulo de Conceptos básicos, Apex es un lenguaje orientado a objetos, por lo que al igual que Java, se pueden crear Clases con sus respectivas propiedades y métodos. Estas clases terminan siendo otro tipo de datos que se puede usar para definir una variable, o como se conoce técnicamente, para instanciar un objeto. 
+
+
+
 
 
 
