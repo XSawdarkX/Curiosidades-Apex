@@ -74,6 +74,58 @@ Id idCuenta = '0014P000026NPiEQAW';
 
 String idCuenta = '0014P000026NPiEQAW';
 ``` 
+#### Ejemplos
+
+```Apex
+Decimal precioZapatos = 200.20; 
+
+Boolean dolarSubio = true;
+
+String nombre = 'Daniel';
+
+//Año,Mes,Día
+Date birthDay = Date.newInstance(2022, 08, 20);
+
+//Año,Mes,Día,Hora,Minuto,Segundo
+DateTime medicalAppointment = DateTime.newInstance(2022,08,20,04,20,15);
+
+//Hora,Minuto,Segundo,Milisegundo
+Time footballMatch = Time.newInstance(20,4,20,15);
+``` 
+Para ver la lista completa de Tipos de dato primitivos consultar el siguiente enlace [datos primitivos](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_primitives.htm)
+
+### sObjects
+
+El tipo de dato **sObject (Salesforce Object)** es un tipo de dato genérico que se usa para representar Objetos estándar o personalizados. Es importante aclarar que
+los objetos estandar, y cualquier objeto custom que se cree, se pueden utilizar como tipos de datos dentro de Apex, representando uno o varios registros de ese objeto.
+
+Es así como, por ejemplo, podemos utilizar el objeto Account o el objeto Libro__c (Objeto personalizado) como un tipo de dato. 
+
+```Apex
+//Representa un registro del objeto Cuenta
+Account objAccount = new Account();
+
+//Representa un registro del objeto Libro
+Libro__c objLibro = new Libro__c();
+``` 
+Para declarar una variable de este tipo es necesario usar le palabra **new** después del = , más adelante se ahondará un poco más en este tipo de definiciones. 
+
+El tipo de dato sObject me permite almacenar cualquier registro de cualquier Objeto, es por ello que las siguientes sentencias son validas.
+
+```Apex
+sObject s = new Account();
+
+sObject s = new Libro__c();
+``` 
+
+También es posible castear o convertir el tipo de dato genérico sObject a un objeto especifico.
+
+```Apex
+sObject s = new Account();
+
+//Representa un registro del objeto Cuenta
+Account objAccount = (Account)s;
+``` 
 
 
 
