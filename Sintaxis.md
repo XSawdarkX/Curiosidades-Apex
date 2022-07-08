@@ -1,6 +1,6 @@
 # Sintaxis
 
-Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que incluye definición de variables, asignaciones, constantes, colecciones, condicionales, ciclos y manejo de excepciones.
+Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que incluye definición de variables, asignaciones, constantes, comentarios, mensajes de depuración, colecciones, condicionales, ciclos y manejo de excepciones.
 
 ## Variables
 
@@ -17,7 +17,7 @@ Además, como su mismo nombre lo indica, las variables pueden cambiar su valor a
 
 Debido a que Apex es un lenguaje de tipificación fuerte, es necesario siempre indicar el tipo de dato a la hora de definir una variable. 
 
-Dentro de los tipos de datos que se pueden encontrar en Apex estan:
+Dentro de los tipos de datos que se pueden encontrar en Apex están:
 
 - Tipos de datos **primitivos** como: Integer, String, Boolean, Id, Date, entre otros. 
 - El tipo de dato **sObject**
@@ -26,4 +26,41 @@ Dentro de los tipos de datos que se pueden encontrar en Apex estan:
 
 ### Datos primitivos
 
-Para definir una variable no más basta con colocar el tipo de dato seguido del nombre de la variable. 
+Para definir una variable es nesesario seguir la siguiente estructura:
+
+[Scope] [Tipo de dato] [Nombre de la variable];
+
+El scope es un tema que se explicara más adelante, pero por el momento nos basta con saber que es opcional. También es importante aclarar que, como en la mayoría de lenguajes, cada declaración termina con un **;**
+
+Teniendo en cuenta esto, un ejemplo de una declaración seria:
+
+```Apex
+Integer edad;
+``` 
+Para asignar un valor a una variable usamos el signo **=** 
+
+```Apex
+Integer edad;
+edad = 15;
+``` 
+También es posible definir una variable y asignarle un valor al mismo tiempo. 
+
+```Apex
+Integer edad = 15;
+``` 
+
+Cuando se define una variable y no se le asigna un dato, por defecto queda con un valor de **nulo (vacio)**. El cual también puede ser asignado de forma deliberada cuando se necesite. Por lo que las siguientes dos sentencias son equivalentes.
+
+```Apex
+Integer edad;
+
+Integer edad = null;
+``` 
+
+Así como es necesario especificar el tipo de dato de una variable, es importante asignarle un valor del mismo tipo. Por ejemplo, la siguiente sentencia no es válida.
+
+```Apex
+Integer edad = '15';
+``` 
+
+
