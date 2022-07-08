@@ -22,6 +22,7 @@ Dentro de los tipos de datos que se pueden encontrar en Apex están:
 - Tipos de datos **primitivos** como: Integer, String, Boolean, Id, Date, entre otros. 
 - El tipo de dato **sObject**
 - El tipo de dato **Object**
+- Clases
 - El tipo de dato **Enum**
 
 ### Datos primitivos
