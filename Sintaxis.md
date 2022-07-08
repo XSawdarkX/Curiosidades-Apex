@@ -65,5 +65,18 @@ Integer edad = '15';
 
 #### Tipo de dato Id
 
-En salesforce, cada vez que se crea un **Registro** de cualquier Objeto, se le asigna un Id único que lo identifica de cualquier otro registro. En apex, existe un tipo de dato primitivo para guardar dicho valor.  
+En salesforce, cada vez que se crea un **Registro** de cualquier Objeto, se le asigna un **Id** único que lo identifica de cualquier otro registro. En Apex, existe un tipo de dato primitivo para guardar dicho valor.  
+
+Sin embargo, también es posible guardar un Id en una variable de tipo **String**. El sistema, independientemente de que tipo de dato se haya usado, valida que la estructura del Id sea correcta. Esto quiere decir que ambas sentencias de abajo son válidas.
+
+```Apex
+Id idCuenta = '0014P000026NPiEQAW';
+
+String idCuenta = '0014P000026NPiEQAW';
+``` 
+
+
+
+
+
 
