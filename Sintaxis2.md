@@ -53,6 +53,18 @@ Para definir un mensaje de depuración en Apex, se usa el método **debug()** de
 Integer edad = 15;
 System.debug('Mi edad es: '+edad);
 ``` 
+También es posible especificar el nivel de depuración bajo el cual se quiere mostrar el mensaje, si bien este es un tema que se tratara con más detalle en otro modulo, 
+el nivel de depuración me indica la cantidad de información que quiero visualizar sobre una determinada categoría, como el código Apex. 
+
+Para definir el nivel de depuración se hace uso del Enum estándar **LoggingLevel**
+
+```Apex
+Integer edad = 15;
+System.debug(logginglevel.INFO,'Mi edad es: '+edad);
+``` 
+### Niveles de depuración
+
+![image](https://user-images.githubusercontent.com/100179095/178518876-911e25ae-25c2-4e0c-bc62-e324bd94afac.png)
 
 
 
