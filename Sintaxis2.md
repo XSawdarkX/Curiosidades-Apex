@@ -45,6 +45,20 @@ de varias líneas
 ``` 
 ## Mensajes de depuración
 
+Los mensajes de depuración permiten imprimir valores y cadenas de texto con el fin de probar y encontrar errores dentro del código. Estos mensajes son invisibles de cara al usuario final. 
+
+Para definir un mensaje de depuración en Apex, se usa el método **debug()** de la clase estándar **System**.
+
+```Apex
+Integer edad = 15;
+System.debug('Mi edad es: '+edad);
+``` 
+
+
+
+
+
+
 
 
 
