@@ -119,7 +119,7 @@ colores.sort();
 
 Si tengo una lista de enteros o fechas se ordenan de menor a mayor. 
 
-### Listas con notación de Array
+#### Listas con notación de Array
 
 Es posible crear una lista como normalmente se declara un **array**. El termino para ello es: **one-dimensional lists**. Cuando se define este tipo de lista se especifica la cantidad de elementos que puede contener.
 
@@ -143,10 +143,44 @@ Result: Green
 
 Aunque la lista está definida para contener solo 1 elemento, si se usa el método **add()** este límite no aplica.
 
+### Set
+
+Un Set es una colección desordenada de elementos. Esto quiere decir que ningún elemento corresponde con alguna posición. Tampoco admite valores duplicados como si lo hace una Lista. 
+
+Para definir un set se usa la siguiente sintaxis
+
+Set\<Tipo de dato\> [nombreVariable] = new Set\<Tipo de dato\>(); 
+
+```Apex
+Set<String> colores = new Set<String>();
+colores.add('Rojo');
+
+Set<String> colores = new Set<String>{'Rojo','Verde','Morado'};
+``` 
+El set tiene una clase propia con sus respectivos métodos, y de hecho comparte muchos de ellos con la lista, como: **add()**,**clear()**,**isEmpty()**,**contains()**,y el **size()**. 
+
+Sin embargo, aquellos métodos que vimos anteriormente y que involucraban la posición del elemento, se modifican un poco o por fuerza ni siquiera existen, como el caso del método **get()**,**set()**, y la segunda forma del método **add()**. El método **remove()** existe, pero en vez de especificar la posición se usa el elemento literal.
+
+```Apex
+Set<String> colores = new Set<String>{'Rojo','Verde','Morado'};
+//Result: Rojo,Verde,Morado
+
+colores.remove('Verde');
+//Result: Rojo,Morado
+``` 
+El método **sort()** no existe ya que por defecto un set ordena todos los elementos de manera ascendente. 
+
+```Apex
+Set<String> colores = new Set<String>{'Rojo','Verde','Morado'};
+//Result: Morado,Rojo,Verde
+``` 
+### Map
+
 ## Referencias
 
 1. [Listas](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_collections_lists.htm)
 2. [List Class](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_list.htm#apex_System_List_sort)
-3. [Sets]()
-4. [Maps]()
-5. 
+3. [Sets](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_collections_sets.htm)
+4. [Set Class](https://developer.salesforce.com/docs/atlas.en-us.238.0.apexref.meta/apexref/apex_methods_system_set.htm)
+5. [Maps]()
+6. [Map Class]()
