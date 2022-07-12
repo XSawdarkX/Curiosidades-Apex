@@ -6,11 +6,11 @@ Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que 
 - [Constantes]()
 - [Comentarios]()
 - [Mensajes de depuración]()
-- [Colecciones]
-- [Condicionales]
-- [Ciclos]
-- [Manejo de excepciones]
-- [Definición de clases y métodos]
+- [Colecciones]()
+- [Condicionales]()
+- [Ciclos]()
+- [Manejo de excepciones]()
+- [Definición de clases y métodos]()
 
 ## Variables
 
