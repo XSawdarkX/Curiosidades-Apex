@@ -119,9 +119,34 @@ colores.sort();
 
 Si tengo una lista de enteros o fechas se ordenan de menor a mayor. 
 
+### Listas con notación de Array
+
+Es posible crear una lista como normalmente se declara un **array**. El termino para ello es: **one-dimensional lists**. Cuando se define este tipo de lista se especifica la cantidad de elementos que puede contener.
+
+En ese sentido, las siguientes sentencias son válidas. Las dos últimas son equivalentes. 
+
+```Apex
+String[] colors = new List<String>();
+
+List<String> colors = new String[1];
+String[] colors = new String[1];
+``` 
+
+Para agregar un elemento usando este tipo de notación, se usa la siguiente sintaxis.  
+
+```Apex
+List<String> colors = new String[1];
+colores[0] = 'Green';
+
+Result: Green
+``` 
+
+Aunque la lista está definida para contener solo 1 elemento, si se usa el método **add()** este límite no aplica.
+
 ## Referencias
 
-1. [Listas]()
-2. [Sets]()
-3. [Maps]()
-4. 
+1. [Listas](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_collections_lists.htm)
+2. [List Class](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_list.htm#apex_System_List_sort)
+3. [Sets]()
+4. [Maps]()
+5. 
