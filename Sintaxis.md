@@ -168,7 +168,7 @@ Enum es un tipo de dato abstracto que se usa para almacenar un conjunto de valor
 
 Para definir un Enum se usa la siguiente sintaxis
 
-[Scope] [Enum] [Nombre de la variable] {valor1,valor2,valor3}
+[Scope] [enum] [Nombre de la variable] {valor1,valor2,valor3}
 
 ```Apex
 enum Season {WINTER, SPRING, SUMMER, FALL}
