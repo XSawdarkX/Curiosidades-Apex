@@ -206,3 +206,10 @@ String invierno = Season.WINTER.name();
 ```Apex
 Integer posicion = Season.WINTER.ordinal();
 ``` 
+
+## Referencias
+
+1. [Datos primitivos](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_primitives.htm)
+2. [Sobjects](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_SObject_types.htm)
+3. [Enum](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_enums.htm)
+4. [Métodos Enum](https://developer.salesforce.com/docs/atlas.en-us.238.0.apexref.meta/apexref/apex_methods_system_enum.htm)
