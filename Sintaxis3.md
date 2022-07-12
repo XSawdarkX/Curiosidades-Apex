@@ -64,7 +64,7 @@ String colorRojo = colores.get(0);
 
 //Result: Rojo
 ``` 
-- **set()** : permite modificar un elemento en base a su posición
+- **set()** : Permite modificar un elemento de la lista en base a su posición.
 
 ```Apex
 list<String> colores = new list<String>{'Rojo','Verde','Morado'};
@@ -73,7 +73,51 @@ list<String> colores = new list<String>{'Rojo','Verde','Morado'};
 colores.set(1,'Lila');
 //Result: Rojo,Lila,Morado
 ``` 
+- **contains()** : Permite saber si un elemento existe dentro de la lista. Devuelve un **true** si lo contiene y un **false** si no.
 
+```Apex
+list<String> colores = new list<String>{'Rojo','Verde','Morado'};
+Boolean existeVerde = colores.contains('Verde');
+
+//Result: true
+``` 
+- **isEmpty()** : Permite saber si la lista contiene al menos un valor. Devuelve un **true** si la lista esta vacía y un **false** si no.
+
+```Apex
+list<String> colores = new list<String>{'Rojo','Verde','Morado'};
+Boolean listaVacia = colores.isEmpty();
+
+//Result: false
+``` 
+- **remove()** : Permite eliminar un elemento de la lista en base a su posición.
+
+```Apex
+list<String> colores = new list<String>{'Rojo','Verde','Morado'};
+//Result: Rojo,Verde,Morado
+
+colores.remove(1);
+//Result: Rojo,Morado
+``` 
+- **clear()** : Permite eliminar todos los elementos de la lista.
+
+```Apex
+list<String> colores = new list<String>{'Rojo','Verde','Morado'};
+//Result: Rojo,Verde,Morado
+
+colores.clear();
+//Result: 
+``` 
+- **sort()** : Ordena los elementos de la lista en modo ascendente. 
+
+```Apex
+list<String> colores = new list<String>{'Rojo','Verde','Morado','Azul'};
+//Result: Rojo,Verde,Morado,Azul
+
+colores.sort();
+//Result: Azul,Morado,Rojo,Verde
+``` 
+
+Si tengo una lista de enteros o fechas se ordenan de menor a mayor. 
 
 ## Referencias
 
