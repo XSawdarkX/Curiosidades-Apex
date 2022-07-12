@@ -66,7 +66,12 @@ System.debug(logginglevel.INFO,'Mi edad es: '+edad);
 
 ![image](https://user-images.githubusercontent.com/100179095/178518876-911e25ae-25c2-4e0c-bc62-e324bd94afac.png)
 
+## Referencias
 
+1. [Constantes](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_constants.htm)
+2. [Comentarios](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_expressions_comments.htm)
+3. [Clase System](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_system.htm)
+4. [Niveles de depuración](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_enum_System_LoggingLevel.htm)
 
 
 
