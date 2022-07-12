@@ -1,6 +1,16 @@
 # Sintaxis
 
-Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que incluye definición de variables, asignaciones, constantes, comentarios, mensajes de depuración, colecciones, condicionales, ciclos y manejo de excepciones.
+Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que incluye:
+
+- Definición y asignación de variables 
+- [Constantes]()
+- [Comentarios]()
+- [Mensajes de depuración]()
+- Colecciones
+- Condicionales
+- Ciclos 
+- Manejo de excepciones.
+- Definición de clases y métodos
 
 ## Variables
 
@@ -154,5 +164,45 @@ Carro_cls objCarro = new Carro_cls();
 ``` 
 ### Enum
 
+Enum es un tipo de dato abstracto que se usa para almacenar un conjunto de valores constantes. Es útil cuando se desea usar un grupo de datos cuyos valores ya se conocen, como **los días de la semana**, **las estaciones del año**, **las posiciones del futbol**, etc.
 
+Para definir un Enum se usa la siguiente sintaxis
 
+[Scope] [Enum] [Nombre de la variable] {valor1,valor2,valor3}
+
+```Apex
+enum Season {WINTER, SPRING, SUMMER, FALL}
+``` 
+Aunque no es obligatorio, por regla general se recomienda que los valores se especifiquen en mayúscula. También es importante tener en cuenta, que aunque se use la palabra reservada **enum**, para definir una variable de este tipo, es necesario utilizar el nombre que se usó para denominar el conjunto de datos, en este ejemplo: **Season**. 
+
+```Apex
+//Accedemos a uno de los valores del Enum.
+Season invierno = Season.WINTER;
+``` 
+#### Métodos Enum
+
+Este tipo de dato también cuentan con cuatro métodos que permiten interactuar con los valores. 
+
+- Values() : devuelve la lista de valores del enum.
+
+```Apex
+List<Season> values = Season.values();
+``` 
+
+- valueOf(String enumValue) : devuelve un valor enum a partir de un valor de tipo string
+
+```Apex
+Season seasonValue = Season.valueOf('WINTER');
+``` 
+
+- name() : devuelve un valor del enum pero en tipo String
+
+```Apex
+String invierno = Season.WINTER.name();
+``` 
+
+- ordinal() : devuelve la posición de una valor en especifico. Comenzando desde la posición 0
+
+```Apex
+Integer posicion = Season.WINTER.ordinal();
+``` 
