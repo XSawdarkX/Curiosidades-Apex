@@ -183,25 +183,25 @@ Season invierno = Season.WINTER;
 
 Este tipo de dato también cuentan con cuatro métodos que permiten interactuar con los valores. 
 
-- Values() : devuelve la lista de valores del enum.
+- **values()** : devuelve la lista de valores del enum.
 
 ```Apex
 List<Season> values = Season.values();
 ``` 
 
-- valueOf(String enumValue) : devuelve un valor enum a partir de un valor de tipo string
+- **valueOf(String enumValue)** : devuelve un valor enum a partir de un valor de tipo string
 
 ```Apex
 Season seasonValue = Season.valueOf('WINTER');
 ``` 
 
-- name() : devuelve un valor del enum pero en tipo String
+- **name()** : devuelve un valor del enum pero en tipo String
 
 ```Apex
 String invierno = Season.WINTER.name();
 ``` 
 
-- ordinal() : devuelve la posición de una valor en especifico. Comenzando desde la posición 0
+- **ordinal()** : devuelve la posición de una valor en especifico. Comenzando desde la posición 0
 
 ```Apex
 Integer posicion = Season.WINTER.ordinal();
