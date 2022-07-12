@@ -33,7 +33,7 @@ Todas las colecciones en el fondo se pueden entender como Clases, las cuales cue
 
 Dentro de los métodos principales de la lista están:
 
-- **Add()** : Permite agregar un elemento en la lista. Se puede especificar o no la posición de la lista en la que se desea agregar el elemento, si no se especifica se agrega en la última posición.
+- **add()** : Permite agregar un elemento en la lista. Se puede especificar o no la posición de la lista en la que se desea agregar el elemento, si no se especifica se agrega en la última posición.
 
 ```Apex
 list<String> colores = new list<String>();
@@ -47,6 +47,31 @@ También es posible precargar una lista con valores.
 
 ```Apex
 list<String> colores = new list<String>{'Rojo','Verde','Morado'};
+``` 
+- **size()** : Devuelve la cantidad de elementos que hay en la lista.
+
+```Apex
+list<String> colores = new list<String>{'Rojo','Verde','Morado'};
+Integer cantidadColores = colores.size();
+
+//Result: 3
+``` 
+- **get()** : Devuelve un elemento de la lista en base a su posición. 
+
+```Apex
+list<String> colores = new list<String>{'Rojo','Verde','Morado'};
+String colorRojo = colores.get(0);
+
+//Result: Rojo
+``` 
+- **set()** : permite modificar un elemento en base a su posición
+
+```Apex
+list<String> colores = new list<String>{'Rojo','Verde','Morado'};
+//Result: Rojo,Verde,Morado
+
+colores.set(1,'Lila');
+//Result: Rojo,Lila,Morado
 ``` 
 
 
