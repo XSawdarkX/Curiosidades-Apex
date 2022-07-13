@@ -128,6 +128,12 @@ else
 
 ## Switch
 
+Un Switch es una declaración que permite comparar una expresión con un conjunto de posibles valores.
+
+Los valores pueden ser 
+
+
+
 ## Referencias
 
 1. [Condicionales](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_if_else.htm)
