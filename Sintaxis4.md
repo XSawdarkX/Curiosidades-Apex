@@ -45,6 +45,60 @@ if(edad > 17){
 //Result No soy mayor de edad
 ``` 
 
+Es importante aclarar, que el resultado de una condición se devuelve como un true o un false dependiendo de si se cumple o no, en ese sentido la siguiente sentencia es válida. 
+
+```Apex
+if(true){
+  System.debug('Entro if');
+}
+
+//Result Entro if
+``` 
+Es posible evaluar varias condiciones en diferentes if. Sin embargo, el sistema entrara en todos los if que cumplan la condición. 
+
+```Apex
+Integer edad = 15;
+String result = '';
+
+if(edad > 16){
+  result = 'a';
+}
+
+if(edad > 13){
+  result = 'b';
+}
+
+if(edad > 14){
+  result = 'c';
+}
+
+//Result c
+``` 
+En el ejemplo de arriba, el sistema evalúa todos los if independientemente si entra en ellos o no, en nuestro ejemplo el sistema entro en el segundo y tercer if, por lo que el valor de la variable en un momento fue **b**, pero al final es reemplazado por el valor **c**. 
+
+También se puede usar una estructura llamada **else-if** para evaluar diferentes condiciones. 
+
+```Apex
+Integer edad = 15;
+String result = '';
+
+if(edad > 16){
+  result = 'a';
+}else if(edad > 13){
+  result = 'b';
+}else if(edad > 14){
+  result = 'c';
+}else{
+  result = 'No cumplio ninguna condición';
+}
+
+//Result b
+``` 
+
+A diferencia de la primera forma, en este caso el sistema comienza a evaluar las condiciones, y si se cumple una, ya no evalúa las que están  más abajo. En el ejemplo de arriba, al cumplirse el segundo if, ya no se evalúa el tercero ni el else, por lo que el resultado final es el valor **b**.
+
+
+
 
 
 
