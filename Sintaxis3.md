@@ -176,11 +176,97 @@ Set<String> colores = new Set<String>{'Rojo','Verde','Morado'};
 ``` 
 ### Map
 
+Un Map es una colección de elementos que funciona con una combinación **llave-valor**. Tanto las llaves como los valores aceptan básicamente cualquier tipo de dato.
+Las llaves no se pueden repetir. 
+
+Para definir un Mapa se usa la siguiente sintaxis:
+
+Map\<Tipo de dato llave,Tipo de dato valor\> [nombreVariable] = new Map\<Tipo de dato llave,Tipo de dato valor\>(); 
+
+```Apex
+Map<String, String> country_currencies = new Map<String, String>();
+``` 
+Al igual que las anteriores colecciones, el mapa también cuenta con su propia clase y métodos.
+
+Dentro de los métodos principales del mapa están: 
+
+- **put()** : Permite agregar un elemento al mapa. 
+
+```Apex
+Map<String, String> country_currencies = new Map<String, String>();
+country_currencies.put('Colombia','COP');
+
+//Result Colombia:COP
+```   
+También es posible precargar valores en el mapa.
+
+```Apex
+Map<String, String> country_currencies = new Map<String, String>{'Colombia' => 'COP'};
+//Result Colombia:COP
+```   
+Debido a que la llave debe ser única, cuando intentamos insertar un nuevo elemento al mapa con una llave que ya existe, simplemente se sobrescribe el valor.
+
+```Apex
+Map<String, String> country_currencies = new Map<String, String>{'Colombia' => 'COP'};
+country_currencies.put('Colombia','EUR');
+
+//Result Colombia:EUR
+```   
+
+- **containsKey()** : Permite saber si una llave en especifico esta contenida en el mapa. Devuelve un **true** si lo esta, y un **false** si no.
+
+```Apex
+Map<String, String> country_currencies = new Map<String, String>{'Colombia' => 'COP'};
+Boolean existeValor = country_currencies.containsKey('Colombia');
+
+//Result true
+```  
+
+- **get()** : Permite obtener un valor a partir de la llave.
+
+```Apex
+Map<String, String> country_currencies = new Map<String, String>{'Colombia' => 'COP'};
+String pesoColombiano = country_currencies.get('Colombia');
+
+//Result COP
+```  
+
+- **keySet()** : Devuelve un Set con las llaves del mapa. Debido a que las llaves funcionan como un set, estas se ordenan de manera ascendente.
+
+```Apex
+Map<String, String> country_currencies = new Map<String, String>{'Colombia' => 'COP','España' => 'EUR','EEUU' => 'US'};
+Set<String> lstCountries = country_currencies.keySet();
+
+//Result Colombia,EEUU,España
+```  
+- **values()** : Devuelve una lista con los valores del mapa.
+
+```Apex
+Map<String, String> country_currencies = new Map<String, String>{'Colombia' => 'COP','España' => 'EUR','EEUU' => 'US'};
+List<String> lstCurrencies = country_currencies.values();
+
+//Result COP,EUR,US
+```  
+
+### Cosas a tener en cuenta
+
+- Todas las colecciones pueden contener lo que se conoce como **nested collections**, es decir, es posible tener Listas,Sets y Mapas anidados unos dentro de otros hasta una profundidad de 8 contando con la definición original, por lo que las siguientes sentencias son validas.
+
+```Apex
+List<List<List<List<List<List<List<List<String>>>>>>>> nestedList = new List<List<List<List<List<List<List<List<String>>>>>>>>();
+
+Set<Set<Set<Set<Set<Set<Set<Set<String>>>>>>>> nestedSet = new Set<Set<Set<Set<Set<Set<Set<Set<String>>>>>>>>();
+
+Map<String,Set<Set<Set<Set<Set<Set<Set<String>>>>>>>> nestedMap= new Map<String,Set<Set<Set<Set<Set<Set<Set<String>>>>>>>>();
+
+Map<String,List<Set<Map<Integer,Integer>>>> nestedMapListSet = new Map<String,List<Set<Map<Integer,Integer>>>>();
+``` 
+
 ## Referencias
 
 1. [Listas](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_collections_lists.htm)
 2. [List Class](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_list.htm#apex_System_List_sort)
 3. [Sets](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_collections_sets.htm)
 4. [Set Class](https://developer.salesforce.com/docs/atlas.en-us.238.0.apexref.meta/apexref/apex_methods_system_set.htm)
-5. [Maps]()
-6. [Map Class]()
+5. [Maps](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_collections_maps.htm)
+6. [Map Class](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_map.htm)
