@@ -97,10 +97,36 @@ if(edad > 16){
 
 A diferencia de la primera forma, en este caso el sistema comienza a evaluar las condiciones, y si se cumple una, ya no evalúa las que están  más abajo. En el ejemplo de arriba, al cumplirse el segundo if, ya no se evalúa el tercero ni el else, por lo que el resultado final es el valor **b**.
 
+Cuando no más debemos realizar una acción dentro del if o el else, y por acción me refiero a tener una sola línea de código, es posible omitir las llaves.
+
+```Apex
+Integer edad = 15;
+
+if(edad > 17)
+  System.debug('Soy mayor de edad');
+else
+  System.debug('No soy mayor de edad');
 
 
+//Result No soy mayor de edad
+``` 
+
+El siguiente ejemplo arrojara un error ya que dentro del if hay más de una línea de código, por lo que es necesario usar llaves. 
+
+```Apex
+Integer edad = 15;
+
+if(edad > 17)
+  System.debug('Soy mayor de edad');
+  System.debug('Segunda acción');
+else
+  System.debug('No soy mayor de edad');
 
 
+//Result
+``` 
+
+## Switch
 
 ## Referencias
 
