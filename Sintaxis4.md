@@ -107,7 +107,6 @@ if(edad > 17)
 else
   System.debug('No soy mayor de edad');
 
-
 //Result No soy mayor de edad
 ``` 
 
@@ -122,7 +121,6 @@ if(edad > 17)
 else
   System.debug('No soy mayor de edad');
 
-
 //Result
 ``` 
 
@@ -130,8 +128,89 @@ else
 
 Un Switch es una declaración que permite comparar una expresión con un conjunto de posibles valores.
 
-Los valores pueden ser 
+Tanto los posibles valores como la expresión pueden ser de los siguientes tipos: Integer,Long,sObject,String,Enum. 
 
+Una expresión es una variable, no una condición. 
+
+La sintaxis básica de un Switch es:
+
+switch on **expression** {
+    when **value1** {		// when block 1
+        // code block 1
+    }	
+    when **value2** {		// when block 2
+        // code block 2
+    }
+}
+
+```Apex
+Integer edad = 15;
+
+switch on edad {
+    when 15 {		
+        System.debug('Mi edad es 15');
+    }	
+    when 16 {		
+        System.debug('Mi edad es 16');
+    }
+}
+
+//Result Mi edad es 15
+``` 
+
+También es posible evaluar dos valores en una misma sentencia **when**, simulando una especie de OR. Además, se puede usar la palabra reservada **else** como en el if para configurar un camino por defecto cuando la expresión no coincida con ningún valor. El Else, al igual que en el if, debe estar a lo último de la estructura.  
+
+```Apex
+Integer edad = 15;
+
+switch on edad {
+    when 15,16 {		
+        System.debug('Mi edad es 15');
+    }	
+    when 17 {		
+        System.debug('Mi edad es 16');
+    }
+    when else {	
+        System.debug('Acción por defecto');
+    }
+}
+
+//Result Mi edad es 15
+``` 
+En el ejemplo anterior, si la variable **edad** tiene un valor de 15 o 16, el sistema entrara en el primer when. 
+
+La constante **null** también se puede usar como un valor. 
+
+```Apex
+Integer edad;
+
+switch on edad {
+    when 15 {		
+        System.debug('Mi edad es 15');
+    }	
+    when null {		
+        System.debug('No tengo edad');
+    }
+}
+
+//Result No tengo edad
+``` 
+
+En la **expresión** también se pueden usar métodos o realizar operaciones, siempre y cuando estos retornen uno de los tipos de datos permitidos.
+
+```Apex
+switch on someInteger(i) {
+   when 2 {
+       System.debug('when block 2');
+   }
+   when 3 {
+       System.debug('when block 3');
+   }
+   when else {
+       System.debug('default');
+   }
+}
+``` 
 
 
 ## Referencias
