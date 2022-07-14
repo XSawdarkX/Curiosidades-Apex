@@ -212,6 +212,52 @@ switch on someInteger(i) {
 }
 ``` 
 
+Aquí se muestran unos ejemplos usando los tipos de dato sObject y Enum.
+
+```Apex
+//sObject Example
+
+sObject s = new Account();
+
+switch on s {
+   when Account a {
+       System.debug('account ' + a);
+   }
+   when Contact c {
+       System.debug('contact ' + c);
+   }
+   when null {
+       System.debug('null');
+   }
+   when else {
+       System.debug('default');
+   }
+}
+
+//Result account
+``` 
+
+```Apex
+// Enum Example
+
+enum season {WINTER, SPRING, SUMMER, FALL}
+
+Season seasonValue = Season.valueOf('WINTER');
+
+switch on seasonValue {
+   when WINTER {
+       System.debug('boots');
+   }
+   when SPRING, SUMMER {
+       System.debug('sandals');
+   }
+   when else {
+       System.debug('none of the above');
+   }
+}
+
+//Result boots
+``` 
 
 ## Referencias
 
