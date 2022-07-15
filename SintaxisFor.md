@@ -49,7 +49,7 @@ for (Integer i = 0, j = 10; i < j; i++) {
 ``` 
 En el ejemplo de arriba se imprimen los números del 1 al 10, ya que cuando la variable **i** alcanza el valor de 10 gracias al incremental, la condición deja de cumplirse.
 
-## For each
+### For each
 
 Este tipo de for permite recorrer una lista o un set de elementos. No existe una condición explicita, pero se podría tomar el tamaño o la cantidad de elementos como la condición a cumplir. Es decir, si la lista tiene 3 elementos, el for se ejecutará 3 veces. 
 
