@@ -14,6 +14,16 @@ Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que 
 
 ## Ciclos
 
+Un ciclo es una sentencia que permite ejecutar en repetidas ocasiones un bloque de código hasta que deje de cumplirse una condición.
+
+Los ciclos que maneja Apex son:  
+
+- For tradicionales
+- For each
+- SOQL For
+- While
+- Do while
+
 
 ## Referencias
 
