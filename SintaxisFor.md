@@ -193,7 +193,7 @@ Cuando se ejecuta este tipo de while, el sistema ejecuta una vez lo que está de
 En todos los tipos de ciclos es posible utilizar las siguientes dos palabras reservadas:
 
 - **Break:** Rompe o finaliza el ciclo.
-- **Continue:** se salta la iteración actual del ciclo. 
+- **Continue:** Se salta la iteración actual del ciclo. 
 
 ```Apex
 for (Integer i = 0, j = 10; i < j; i++) {
@@ -239,5 +239,8 @@ for (Integer valor : lstValores) {
 
 ## Referencias
 
-1. [For tradicional]()
-2. [List and Set For]()
+1. [For tradicional](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_loops_for_traditional.htm)
+2. [List and Set For](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_loops_for_lists.htm)
+3. [SOQL For](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_loops_for_SOQL.htm)
+4. [While](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_loops_while.htm)
+5. [Do While](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_loops_do_while.htm)
