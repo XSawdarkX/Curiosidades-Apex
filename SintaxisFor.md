@@ -112,8 +112,37 @@ for (Account a : lstAccount) {
 }
 
 //Result Account Name: Facebook
-``` 
+```
 A primera vista los dos ejemplos anteriores son equivalentes. Sin embargo, se recomienda usar el SOQL for cuando se va a consultar una cantidad de registros muy amplia. Esto porque está mejor optimizado de cara al **Total heap size**. Este término hace referencia a la cantidad de información que se puede almacenar en memoria durante una transacción. 
+
+#### SOQL For Format
+
+Cuando hacemos uso de este for, podemos utilizar dos formatos como se muestra en la sintaxis definida previamente. Podemos usar una variable o una lista para ir almacenando los registros a medida que los recorremos. 
+
+Cuando usamos el formato de lista, el for iterara cada 200 registros. Si usamos la variable normal, el for iterara por cada registro.
+
+```Apex
+//Supongamos que la consulta retorna 50 registros
+
+//Variable format
+
+Integere cantRecords = 0;
+for (Account a : [SELECT Id, Name from Account where Name = 'Facebook']) {
+    cantRecords++;
+}
+
+//Result 50
+
+//List format
+
+Integere cantRecords = 0;
+for (List<Account> a : [SELECT Id, Name from Account where Name = 'Facebook']) {
+    cantRecords++;
+}
+
+//Result 1
+``` 
+Se recomienda usar el formato de lista cuando se deben hacer transacciones sobre la base de datos dentro del for, ya que con esto evitamos el límite de operaciones sobre la base de 100 por proceso. 
 
 ## Referencias
 
