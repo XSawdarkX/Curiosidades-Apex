@@ -126,7 +126,7 @@ Cuando usamos el formato de lista, el for iterara cada 200 registros. Si usamos 
 
 //Variable format
 
-Integere cantRecords = 0;
+Integer cantRecords = 0;
 for (Account a : [SELECT Id, Name from Account where Name = 'Facebook']) {
     cantRecords++;
 }
@@ -135,7 +135,7 @@ for (Account a : [SELECT Id, Name from Account where Name = 'Facebook']) {
 
 //List format
 
-Integere cantRecords = 0;
+Integer cantRecords = 0;
 for (List<Account> a : [SELECT Id, Name from Account where Name = 'Facebook']) {
     cantRecords++;
 }
@@ -143,6 +143,99 @@ for (List<Account> a : [SELECT Id, Name from Account where Name = 'Facebook']) {
 //Result 1
 ``` 
 Se recomienda usar el formato de lista cuando se deben hacer transacciones sobre la base de datos dentro del for, ya que con esto evitamos el límite de operaciones sobre la base de 100 por proceso. 
+
+### While
+
+Este ciclo permite ejecutar repetidamente un bloque de código hasta que deje de cumplirse una condición.
+
+Su sintaxis es: 
+
+while (condición) {
+    bloque de código
+}
+
+```Apex
+Integer i = 0;
+
+while (i < 10) {
+     System.debug(i+1);
+     i++;
+}
+
+//Result 1,2,3,4,5,6,7,8,9,10
+```
+
+### Do While
+
+El Do while maneja la misma lógica del While, con la diferencia que este ciclo se ejecuta al menos una vez.
+
+Su sintaxis es: 
+
+do {
+   code_block
+} while (condition);
+
+```Apex
+Integer i = 0;
+
+do {
+  System.debug(i+1);
+  i++;
+} while (i < 1);
+
+//Result 1
+```
+
+Cuando se ejecuta este tipo de while, el sistema ejecuta una vez lo que está dentro del **do**. Luego continúa funcionando normalmente evaluando en cada iteración si se sigue cumpliendo la condición o no para volver a ejecutar el código dentro del do. 
+
+### Consideraciones ciclos
+
+En todos los tipos de ciclos es posible utilizar las siguientes dos palabras reservadas:
+
+- **Break:** Rompe o finaliza el ciclo.
+- **Continue:** se salta la iteración actual del ciclo. 
+
+```Apex
+for (Integer i = 0, j = 10; i < j; i++) {
+    
+    if ( i == 5)
+        break;
+        
+    System.debug(i+1);
+}
+
+//Result 1,2,3,4,5
+``` 
+
+```Apex
+for (Integer i = 0, j = 10; i < j; i++) {
+    
+    if ( i == 5)
+        continue;
+        
+    System.debug(i+1);
+}
+
+//Result 1,2,3,4,5,7,8,9,10
+``` 
+También es importante tener cuidado a la hora de manipular las variables que permiten la repetición en los ciclos, ya que se pueden generar iteraciones infinitas, lo que causaría un error en el límite de tiempo de la cpu. Aquí unos ejemplos de ciclos infinitos.
+
+```Apex
+Integer i = 0;
+
+while (i < 10) {
+     System.debug(i+1);
+}
+``` 
+
+```Apex
+Integer[] lstValores = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+for (Integer valor : lstValores) {
+    System.debug(valor);
+    lstValores.add(1);
+}
+``` 
 
 ## Referencias
 
