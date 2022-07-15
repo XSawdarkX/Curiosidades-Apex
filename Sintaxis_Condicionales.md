@@ -2,15 +2,15 @@
 
 Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que incluye:
 
-- [Definición y asignación de variables]() 
-- [Constantes]()
-- [Comentarios]()
-- [Mensajes de depuración]()
-- [Colecciones]()
+- [Definición y asignación de variables](https://github.com/XSawdarkX/Curiosidades-Apex/edit/main/Sintaxis_Variables.md) 
+- [Constantes](https://github.com/XSawdarkX/Curiosidades-Apex/blob/main/Sintaxis_Constantes.md)
+- [Comentarios](https://github.com/XSawdarkX/Curiosidades-Apex/blob/main/Sintaxis_Constantes.md)
+- [Mensajes de depuración](https://github.com/XSawdarkX/Curiosidades-Apex/blob/main/Sintaxis_Constantes.md)
+- [Colecciones](https://github.com/XSawdarkX/Curiosidades-Apex/blob/main/Sintaxis_Colecciones.md)
 - Condicionales
-- [Ciclos]()
-- [Manejo de excepciones]()
-- [Definición de clases y métodos]()
+- [Ciclos](https://github.com/XSawdarkX/Curiosidades-Apex/blob/main/Sintaxis_Ciclos.md)
+- [Manejo de excepciones](https://github.com/XSawdarkX/Curiosidades-Apex/blob/main/Sintaxis_Excepciones.md)
+- [Definición de clases y métodos](https://github.com/XSawdarkX/Curiosidades-Apex/blob/main/Sintaxis_ClasesMetodos.md)
 
 ## Condicionales
 
