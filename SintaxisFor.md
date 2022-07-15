@@ -100,6 +100,20 @@ for (Account a : [SELECT Id, Name from Account where Name = 'Facebook']) {
 //Result Account Name: Facebook
 ``` 
 
+En el ejemplo de arriba, el sistema ejecuta la consulta a la base de datos y retorna todas las cuentas que cumplan con la condición. Cada cuenta se almacena momentáneamente en la variable **a**. 
+
+También es posible hacer la consulta previamente y almacenarla en una lista para luego recorrerla con un for each. 
+
+```Apex
+List<> lstAccount = [SELECT Id, Name from Account where Name = 'Facebook'];
+
+for (Account a : lstAccount) {
+    System.debug('Account Name:'+ a.Name);
+}
+
+//Result Account Name: Facebook
+``` 
+A primera vista los dos ejemplos anteriores son equivalentes. Sin embargo, se recomienda usar el SOQL for cuando se va a consultar una cantidad de registros muy amplia. Esto porque está mejor optimizado de cara al **Total heap size**. Este término hace referencia a la cantidad de información que se puede almacenar en memoria durante una transacción. 
 
 ## Referencias
 
