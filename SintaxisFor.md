@@ -74,6 +74,33 @@ for (Integer valor : lstValores) {
 ``` 
 Es importante tener presente que la variable debe ser del mismo tipo que la colección.  
 
+### SOQL For
+
+Este tipo de for es propio de Apex. Su propósito es recorrer o iterar sobre un conjunto de registros pertenecientes a un objeto estándar o personalizado. 
+
+Su sintaxis es similar a un for each:
+
+for (variable : [soql_query]) {
+    code_block
+}
+
+o
+
+for (variable_list : [soql_query]) {
+    code_block
+}
+
+Es importante mencionar que tanto la variable como la lista deben ser del mismo objeto sobre el cual estoy haciendo la consulta.
+
+```Apex
+for (Account a : [SELECT Id, Name from Account where Name = 'Facebook']) {
+    System.debug('Account Name:'+ a.Name);
+}
+
+//Result Account Name: Facebook
+``` 
+
+
 ## Referencias
 
 1. [For tradicional]()
