@@ -59,7 +59,7 @@ for (variable : lista_or_set) {
      bloque de código
 }
 
-En cada iteración del for se asigna momentáneamente un elemento de la colección a la variable, hasta que se recorran todos los valores o se rompa el ciclo. 
+En cada iteración del for se asigna momentáneamente un elemento de la colección a la variable hasta que se recorran todos los valores o se rompa el ciclo. 
 
 El siguiente ejemplo es el equivalente al del for tradicional que vimos previamente. 
 
@@ -72,7 +72,7 @@ for (Integer valor : lstValores) {
 
 //Result 1,2,3,4,5,6,7,8,9,10
 ``` 
-Es importante tener presente que la variable debe ser del mismo tipo de la colección.  
+Es importante tener presente que la variable debe ser del mismo tipo que la colección.  
 
 ## Referencias
 
