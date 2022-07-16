@@ -41,19 +41,80 @@ Aquí algunos Ejemplos:
 ```Apex
 try{
 
-	Integer valorA = 5;
-	Integer valorB;
-
-	Integer resultado = valorA + valorB;
+   Integer valorA = 5;
+   Integer valorB;
+   Integer resultado = valorA + valorB;
+   
+   System.debug('resultado: '+resultado); 
       
 }catch(Exception e){
    System.debug('Ha ocurrido una Excepción: '+e); 
 }
 
-Result Ha ocurrido una Excepción: System.NullPointerException: Attempt to de-reference a null object
+//Result Ha ocurrido una Excepción: System.NullPointerException: Attempt to de-reference a null object
 ``` 
 En este caso, al intentar realizar una operación aritmética entre el valor 5 y un null, se produce una excepción de tipo **NullPointerException**. 
 
+Es importante mencionar que cualquier línea de código ubicada después de la sentencia que produce el error, no se ejecuta. Por lo que el mensaje de depuración con el resultado nunca se imprime. 
+
+### Bloque Try con varios Catch
+
+```Apex
+try{
+
+   List<String> lstNombres = new List<String>();
+   String primerNombre =  lstNombres.get(0);
+      
+}catch(ListException l){
+   System.debug('Ha ocurrido una Excepción de Lista: '+l); 
+}catch(Exception e){
+   System.debug('Ha ocurrido una Excepción: '+e); 
+}
+	
+//Result Ha ocurrido una Excepción de Lista: System.ListException: List index out of bounds: 0
+``` 
+
+Aquí podemos ver un ejemplo de una sentencia Try con varios catch. Cada Catch debe capturar un tipo diferente de error, de lo contrario el sistema no compilara el código. En este caso se genera una excepción de tipo **ListException** porque se esta intentando acceder a una posición dentro de la lista que no existe. 
+
+### Otros ejemplos con Finally
+
+```Apex
+try{
+
+   Integer valorA = 5;
+   Integer valorB = 6;
+   Integer resultado = valorA + valorB;
+   
+   System.debug('resultado: '+resultado); 
+      
+}finally {
+  System.debug('¿Se produjo algún error? No se');  
+}
+
+//Result resultado: 11
+//Result ¿Se produjo algún error? No se
+``` 
+
+```Apex
+try{
+
+   Integer valorA = 5;
+   Integer valorB;
+   Integer resultado = valorA + valorB;
+   
+   System.debug('resultado: '+resultado); 
+      
+}catch(Exception e){
+   System.debug('Ha ocurrido una Excepción: '+e); 
+}finally {
+  System.debug('¿Se produjo algún error? No se');  
+}
+
+//Result Ha ocurrido una Excepción: System.NullPointerException: Attempt to de-reference a null object
+//Result ¿Se produjo algún error? No se
+``` 
+
+Como se puede comprobar, ocurra o no un error, de igual manera se ejecuta el código dentro de la sentencia Finally. Esta siempre debe estar ubicada en última parte de la estructura. 
 
 ## Referencias
 m
