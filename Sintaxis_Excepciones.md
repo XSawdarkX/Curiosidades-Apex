@@ -116,5 +116,70 @@ try{
 
 Como se puede comprobar, ocurra o no un error, de igual manera se ejecuta el código dentro de la sentencia Finally. Esta siempre debe estar ubicada en la última parte de la estructura. Solo se debe agregar una vez por Try. 
 
+### tipos de excepción
+
+Existen diferentes tipos de excepción que permiten capturar errores específicos. Dentro de los principales se encuentran: 
+
+1. **DmlException:** Ocurre cuando se genera un error en una sentencia DML. Como intentar insertar un registro sin haber llenado todos los campos requeridos.
+
+```Apex
+try {
+    Account a = new Account();
+    insert a;
+} catch(DmlException e) {
+    System.debug('The following exception has occurred: ' + e.getMessage());
+}
+``` 
+
+3. **ListException:** Ocurre cuando se genera un error a la hora de operar una lista. Como acceder a una posición que no existe. 
+
+```Apex
+try {
+    List<Integer> li = new List<Integer>();
+    li.add(15);
+    
+    Integer i1 = li[0]; 
+    Integer i2 = li[1]; // Causes a ListException
+} catch(ListException le) {
+    System.debug('The following exception has occurred: ' + le.getMessage());
+}
+``` 
+5. **NullPointerException:** Ocurre cuando intentamos realizar alguna acción con un valor null. 
+
+```Apex
+try {
+    String s;
+    Boolean b = s.contains('abc'); 
+} catch(NullPointerException npe) {
+    System.debug('The following exception has occurred: ' + npe.getMessage());
+}
+``` 
+7. **QueryException:** Ocurre cuando se genera un error ejecutando una consulta SOQL. Como una consulta que no retorna nada y se esta intentando guardar el resultado en un objeto y no en una lista. 
+
+```Apex
+try {
+    List<Merchandise__c> lm = [SELECT Name FROM Merchandise__c WHERE Name = 'XYZ'];
+    System.debug(lm.size());
+    
+    Merchandise__c m = [SELECT Name FROM Merchandise__c WHERE Name = 'XYZ' LIMIT 1];
+} catch(QueryException qe) {
+    System.debug('The following exception has occurred: ' + qe.getMessage());    
+}
+``` 
+9. **SObjectException:** Ocurre cuando se genera un error manipulando un sObject. Como intentar utilizar un campo de un objeto cuando este no se declaró en la consulta. 
+
+```Apex
+try {
+    Invoice_Statement__c inv = new Invoice_Statement__c(Description__c='New Invoice');
+    insert inv;
+    
+    Invoice_Statement__c v = [SELECT Name FROM Invoice_Statement__c WHERE Id = :inv.Id];
+    String s = v.Description__c;
+} catch(SObjectException se) {
+    System.debug('The following exception has occurred: ' + se.getMessage());
+}
+``` 
+### Métodos de excepción
+
 ## Referencias
 1. [ReferOne]()
