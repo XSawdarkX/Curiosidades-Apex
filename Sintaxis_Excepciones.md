@@ -114,8 +114,7 @@ try{
 //Result ¿Se produjo algún error? No se
 ``` 
 
-Como se puede comprobar, ocurra o no un error, de igual manera se ejecuta el código dentro de la sentencia Finally. Esta siempre debe estar ubicada en última parte de la estructura. 
+Como se puede comprobar, ocurra o no un error, de igual manera se ejecuta el código dentro de la sentencia Finally. Esta siempre debe estar ubicada en la última parte de la estructura. Solo se debe agregar una vez por Try. 
 
 ## Referencias
-m
 1. [ReferOne]()
