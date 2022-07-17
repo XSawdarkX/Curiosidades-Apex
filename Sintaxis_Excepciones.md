@@ -367,7 +367,7 @@ Si intentamos crear un constructor con un solo par√°metro String, o con dos par√
 
 ```Apex
 try {
-    for(Integer i = 0; i<160;i++){
+    for(Integer i = 0; i < 160; i++){
     	Libro__c objLibro = new Libro__c();
     	objLibro.Name = 'Harry Potter '+i;
     	insert objLibro;    
