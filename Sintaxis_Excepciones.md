@@ -251,10 +251,80 @@ try {
 
 Existen cuatro formas estandar (constructores de la clase Exception) de lanzar una  excepción personalizada. 
 
-1.  throw new MyException(); : Es la forma más básica de lanzar la excepción. Cuando usamos el método **getMessage()** nos devuelve el mensaje estándar "Script-thrown exception". 
-2.  throw new MyException('Esto es malo'); : Permite especificar un mensaje más legible. Este se obtiene precisamente con el método **getMessage()**. 
-3.  throw new MyException(e); : Permite especificar la causa del error. Este tipo de throw solo se puede usar dentro de una sentencia catch. 
-4.  throw new MyException('Esto es malo',e); : Permite especificar un mensaje y la causa del error.Este tipo de throw solo se puede usar dentro de una sentencia catch. 
+1.  **throw new MyException(); :** Es la forma más básica de lanzar la excepción. Cuando usamos el método **getMessage()** nos devuelve el mensaje estándar "Script-thrown exception". 
+2.  **throw new MyException('Esto es malo'); :** Permite especificar un mensaje más legible. Este se obtiene precisamente con el método **getMessage()**. 
+3.  **throw new MyException(e); :** Permite especificar la causa del error. Este tipo de throw solo se puede usar dentro de una sentencia catch. 
+4.  **throw new MyException('Esto es malo',e); :** Permite especificar un mensaje y la causa del error. Este tipo de throw solo se puede usar dentro de una sentencia catch. 
+
+```Apex
+public class MyException extends Exception {}
+
+try {
+    throw new MyException('Esto es malo');
+} catch(MyException e) {
+    System.debug('The following exception has occurred: ' + e.getMessage());
+}
+
+//Result Esto es malo
+```
+### Relanzamiento de excepciones
+
+Cuando se captura una excepción es posible volver a lanzar otra en el bloque del catch. Esto es útil si el método donde se genera el error está siendo llamado por otro método, y queremos delegar el manejo de la excepción al método principal.
+
+```Apex
+public class My1Exception extends Exception {} 
+public class My2Exception extends Exception {} 
+
+try { 
+    throw new My1Exception('First exception'); 
+} catch (My1Exception e) { 
+    throw new My2Exception('Thrown with inner exception', e);
+}
+```
+
+### Excepcione heredadas
+
+Siguiendo un poco el ejemplo anterior, aquí se puede apreciar un escenario más completo:
+
+```Apex
+public class IP_TestException_cls {
+    
+	public class MerchandiseException extends Exception {}
+    
+    public static void mainProcessing() {
+        try {
+            insertAccount();
+        } catch(MerchandiseException me) {
+            System.debug('Message: ' + me.getMessage());    
+            System.debug('Cause: ' + me.getCause());    
+            System.debug('Line number: ' + me.getLineNumber());    
+            System.debug('Stack trace: ' + me.getStackTraceString());    
+        }
+    }
+    
+    public static void insertAccount() {
+        try {
+            Account a = new Account();
+            insert a;
+        } catch(DmlException e) {
+            throw new MerchandiseException('Merchandise item could not be inserted.', e);
+        }
+    }
+}
+```
+En este caso, se puede observar una clase que contiene dos métodos: **mainProcessing()** y **insertAccount()**. El primero llama al segundo. 
+
+En el segundo método ocurre una DmlException, y dentro de su bloque catch lanzamos nuestra excepción personalizada, la cual es capturada por el catch del primer método. Es decir, estamos delegando el manejo de la excepción al método principal.
+
+Para probar este ejemplo es necesaro crear la clase y ejecutar el método principal desde la ventana anonima.
+
+```Apex
+IP_TestException_cls.mainProcessing();
+```
+
+### Excepcion personalizada Detallada
+
+
 
 ## Referencias
 1. [Excepciones]()
