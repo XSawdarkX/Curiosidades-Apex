@@ -289,12 +289,12 @@ Siguiendo un poco el ejemplo anterior, aquí se puede apreciar un escenario más
 ```Apex
 public class IP_TestException_cls {
     
-	public class MerchandiseException extends Exception {}
+    public class accountException extends Exception {}
     
     public static void mainProcessing() {
         try {
             insertAccount();
-        } catch(MerchandiseException me) {
+        } catch(accountException me) {
             System.debug('Message: ' + me.getMessage());    
             System.debug('Cause: ' + me.getCause());    
             System.debug('Line number: ' + me.getLineNumber());    
@@ -307,7 +307,7 @@ public class IP_TestException_cls {
             Account a = new Account();
             insert a;
         } catch(DmlException e) {
-            throw new MerchandiseException('Merchandise item could not be inserted.', e);
+            throw new accountException('Account item could not be inserted.', e);
         }
     }
 }
@@ -322,12 +322,65 @@ Para probar este ejemplo es necesaro crear la clase y ejecutar el método princi
 IP_TestException_cls.mainProcessing();
 ```
 
-### Excepcion personalizada Detallada
+### Excepción personalizada detallada
 
+Para crear una Excepción personalizada más detallada, podemos crearla en una clase aparte con sus respectivas propiedades y métodos, incluso podemos agregar nuevos constructores. 
 
+Aquí un ejemplo sencillo de una Excepción personalizada con un nuevo constructor, un par de propiedades, y un método.
+
+```Apex
+public class MyException extends Exception {
+   public String mensaje;
+   public Integer prioridadError; 
+   
+    public MyException(String mensaje, Integer prioridadError){
+        this.mensaje = mensaje;
+        this.prioridadError = prioridadError;
+    }
+    
+    public String getUppercaseMensaje(){
+        return this.mensaje.toUpperCase();
+    }
+}
+```
+A partir de esta Excepción personalizada podemos realizar lo siguiente:
+
+```Apex
+try{
+    throw new MyException('Ocurrio un error',1);
+}catch(MyException e){ 
+    System.debug('Message: ' + e.mensaje+' prioridad '+e.prioridadError);    
+    System.debug('Message en mayuscula: '+e.getUppercaseMensaje());
+} 
+
+//Result  Ocurrio un error prioridad 1
+//Result  OCURRIO UN ERROR
+```
+
+Si intentamos crear un constructor con un solo parámetro String, o con dos parámetros: uno String y el otro de tipo Exception, el sistema arrojara un error debido a que la clase principal Exception ya tiene un constructor con esta estructura, es necesario usar otros tipos de datos, o agregar parámetros adicionales.  
+
+### Cosas a tener en cuenta
+
+1. No se pueden capturar límites. Salesforce, al ser un crm que se ejecuta en la nube, debe compartir recursos con todos sus clientes, lo que conlleva a tener una gran cantidad de límites cuyo objetivo es evitar que una entidad en específico monopolice todos los recursos.
+
+Estos límites también están presentes en Apex. Por ejemplo, si yo realizo más de 150 operaciones sobre la base de datos en una misma transacción, el sistema arrojara un error de limite, el cual no puede ser capturado por un bloque catch.  
+
+```Apex
+try {
+    for(Integer i = 0; i<160;i++){
+    	Libro__c objLibro = new Libro__c();
+    	objLibro.Name = 'Harry Potter '+i;
+    	insert objLibro;    
+    }
+}catch(Exception e) {
+    System.debug('The following generic exception has occurred: ' + e.getMessage());
+}
+```
+
+2. Si se usan varios bloques **Catch**, y se quiere usar el catch de tipo Exception, se debe colocar de últimas, de lo contrario el sistema arroja error. 
 
 ## Referencias
-1. [Excepciones]()
+1. [Excepciones](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_exception_definition.htm)
 2. [Tipos de Excepciones](https://developer.salesforce.com/docs/atlas.en-us.238.0.apexref.meta/apexref/apex_classes_exception_methods.htm)
-3. [Excepciones personalizadas]()
+3. [Excepciones personalizadas](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_exception_custom.htm)
 
