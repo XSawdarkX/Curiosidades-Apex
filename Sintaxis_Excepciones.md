@@ -116,7 +116,7 @@ try{
 
 Como se puede comprobar, ocurra o no un error, de igual manera se ejecuta el código dentro de la sentencia Finally. Esta siempre debe estar ubicada en la última parte de la estructura. Solo se debe agregar una vez por Try. 
 
-### tipos de excepción
+### Tipos de excepción
 
 Existen diferentes tipos de excepción que permiten capturar errores específicos. Dentro de los principales se encuentran: 
 
@@ -210,5 +210,25 @@ try {
 
 **Exception** es un tipo genérico de excepción que permite capturar todos los errores de cualquier otro tipo de excepción.  
 
+### Excepciones personalizadas
+
+Es posible crear, lanzar, y capturar excepciones personalizadas.
+
+Las excepciones personalizadas pueden ser clases de alto nivel, es decir, pueden tener variables, constructores y métodos, así como implementar interfaces.
+ 
+La Sintaxis básica para crear una excepción personalizada es:
+
+[scope] class [nombre de la Exception] extends Exception {}
+
+```Apex
+public class MyException extends Exception {}
+``` 
+Hay que tener en cuenta dos cosas importantes:
+
+1. La clase que representa la excepción personalizada debe extender de la clase **Exception**
+2. El nombre de la clase debe finalizar con la palabra **Exception**
+
+
 ## Referencias
-1. [ReferOne]()
+1. [Excepciones]()
+2. [Tipos de Excepciones](https://developer.salesforce.com/docs/atlas.en-us.238.0.apexref.meta/apexref/apex_classes_exception_methods.htm)
