@@ -120,7 +120,7 @@ Como se puede comprobar, ocurra o no un error, de igual manera se ejecuta el có
 
 Existen diferentes tipos de excepción que permiten capturar errores específicos. Dentro de los principales se encuentran: 
 
-1. **DmlException:** Ocurre cuando se genera un error en una sentencia DML. Como intentar insertar un registro sin haber llenado todos los campos requeridos.
+1. **DmlException:** Ocurre cuando se genera un error en una sentencia DML, como intentar insertar un registro sin haber llenado todos los campos requeridos.
 
 ```Apex
 try {
@@ -131,7 +131,7 @@ try {
 }
 ``` 
 
-3. **ListException:** Ocurre cuando se genera un error a la hora de operar una lista. Como acceder a una posición que no existe. 
+3. **ListException:** Ocurre cuando se genera un error a la hora de operar una lista, como acceder a una posición que no existe. 
 
 ```Apex
 try {
@@ -154,7 +154,7 @@ try {
     System.debug('The following exception has occurred: ' + npe.getMessage());
 }
 ``` 
-7. **QueryException:** Ocurre cuando se genera un error ejecutando una consulta SOQL. Como una consulta que no retorna nada y se esta intentando guardar el resultado en un objeto y no en una lista. 
+7. **QueryException:** Ocurre cuando se genera un error ejecutando una consulta SOQL, como una consulta que no retorna nada y se esta intentando guardar el resultado en un objeto y no en una lista. 
 
 ```Apex
 try {
@@ -166,7 +166,7 @@ try {
     System.debug('The following exception has occurred: ' + qe.getMessage());    
 }
 ``` 
-9. **SObjectException:** Ocurre cuando se genera un error manipulando un sObject. Como intentar utilizar un campo de un objeto cuando este no se declaró en la consulta. 
+9. **SObjectException:** Ocurre cuando se genera un error manipulando un sObject, como intentar utilizar un campo de un objeto cuando este no se declaró en la consulta. 
 
 ```Apex
 try {
@@ -180,6 +180,35 @@ try {
 }
 ``` 
 ### Métodos de excepción
+
+Cuando se captura una excepción es posible obtener más información acerca de la misma a través de una serie de métodos. Los métodos que comparten todos los tipos de excepción son: 
+
+- **getCause:** Retorna la causa de la excepción.
+- **getLineNumber:** Retorna la línea de código en la que se originó la excepción.
+- **getMessage:** Retorna el mensaje de error que el usuario ve en pantalla.
+- **getStackTraceString:** Retorna el rastro o la ruta de ejecución desde donde se originó la excepción.
+- **getTypeName:** Retorna el tipo de excepción. SObjectException,QueryException,ListException, etc.
+
+```Apex
+try {
+    Merchandise__c m = [SELECT Name FROM Merchandise__c LIMIT 1];
+    Double inventory = m.Total_Inventory__c;
+} catch(Exception e) {
+    System.debug('Exception type caught: ' + e.getTypeName());    
+    System.debug('Message: ' + e.getMessage());    
+    System.debug('Cause: ' + e.getCause());    
+    System.debug('Line number: ' + e.getLineNumber());    
+    System.debug('Stack trace: ' + e.getStackTraceString());    
+}
+
+//Result Exception type caught: System.SObjectException
+//Result Message: SObject row was retrieved via SOQL without querying the requested field: Merchandise__c.Total_Inventory__c
+//Result Cause: null
+//Result Line number: 5
+//Result Stack trace: AnonymousBlock: line 5, column 1
+``` 
+
+**Exception** es un tipo genérico de excepción que permite capturar todos los errores de cualquier otro tipo de excepción.  
 
 ## Referencias
 1. [ReferOne]()
