@@ -235,8 +235,29 @@ public class MyException extends Exception {}
 
 throw new MyException();
 ```
+Para capturar una excepción personalizada se usa el **catch** especificando el nombre de la clase.
 
+```Apex
+public class MyException extends Exception {}
+
+try {
+    throw new MyException();
+} catch(MyException e) {
+    System.debug('The following exception has occurred: ' + e.getMessage());
+}
+
+//Result Script-thrown exception
+```
+
+Existen cuatro formas estandar (constructores de la clase Exception) de lanzar una  excepción personalizada. 
+
+1.  throw new MyException(); : Es la forma más básica de lanzar la excepción. Cuando usamos el método **getMessage()** nos devuelve el mensaje estándar "Script-thrown exception". 
+2.  throw new MyException('Esto es malo'); : Permite especificar un mensaje más legible. Este se obtiene precisamente con el método **getMessage()**. 
+3.  throw new MyException(e); : Permite especificar la causa del error. Este tipo de throw solo se puede usar dentro de una sentencia catch. 
+4.  throw new MyException('Esto es malo',e); : Permite especificar un mensaje y la causa del error.Este tipo de throw solo se puede usar dentro de una sentencia catch. 
 
 ## Referencias
 1. [Excepciones]()
 2. [Tipos de Excepciones](https://developer.salesforce.com/docs/atlas.en-us.238.0.apexref.meta/apexref/apex_classes_exception_methods.htm)
+3. [Excepciones personalizadas]()
+
