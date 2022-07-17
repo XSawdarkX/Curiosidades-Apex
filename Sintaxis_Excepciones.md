@@ -363,7 +363,7 @@ Si intentamos crear un constructor con un solo parámetro String, o con dos par�
 
 1. No se pueden capturar límites. Salesforce, al ser un crm que se ejecuta en la nube, debe compartir recursos con todos sus clientes, lo que conlleva a tener una gran cantidad de límites cuyo objetivo es evitar que una entidad en específico monopolice todos los recursos.
 
-Estos límites también están presentes en Apex. Por ejemplo, si yo realizo más de 150 operaciones sobre la base de datos en una misma transacción, el sistema arrojara un error de limite, el cual no puede ser capturado por un bloque catch.  
+   Estos límites también están presentes en Apex. Por ejemplo, si yo realizo más de 150 operaciones sobre la base de datos en una misma transacción, el sistema        arrojara un error de limite, el cual no puede ser capturado por un bloque catch.  
 
 ```Apex
 try {
