@@ -377,8 +377,29 @@ try {
 }
 ```
 
-2. Si se usan varios bloques **Catch**, y se quiere usar el catch de tipo Exception, se debe colocar de últimas, de lo contrario el sistema arroja error. 
+2.  Tampoco es posible capturar las excepciones generadas por los métodos **Assert** de la clase System.
 
+```Apex
+try {
+    Integer edad = 15;
+    System.assertEquals(14, edad);
+} catch(Exception e) {
+    System.debug('Error message: ' + e.getMessage());
+}
+```
+
+3. Si se usan varios bloques **Catch**, y se quiere usar el catch de tipo Exception, se debe colocar de últimas, de lo contrario el sistema arroja error. 
+
+```Apex
+try {
+    Account a = new Account();
+    insert a;
+}catch(Exception e) {
+    System.debug('Generic Exception: ' + e.getMessage());
+}catch(DmlException e) {
+    System.debug('DmlException: ' + e.getMessage());  
+}
+```    
 ## Referencias
 1. [Excepciones](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_exception_definition.htm)
 2. [Tipos de Excepciones](https://developer.salesforce.com/docs/atlas.en-us.238.0.apexref.meta/apexref/apex_classes_exception_methods.htm)
