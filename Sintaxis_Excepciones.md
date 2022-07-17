@@ -218,7 +218,7 @@ Las excepciones personalizadas pueden ser clases de alto nivel, es decir, pueden
  
 La Sintaxis básica para crear una excepción personalizada es:
 
-[scope] class [nombre de la Exception] extends Exception {}
+[scope] class [nombre de la clase] extends Exception {}
 
 ```Apex
 public class MyException extends Exception {}
@@ -227,6 +227,14 @@ Hay que tener en cuenta dos cosas importantes:
 
 1. La clase que representa la excepción personalizada debe extender de la clase **Exception**
 2. El nombre de la clase debe finalizar con la palabra **Exception**
+
+Para lanzar una excepción se usa la palabra reservada **throw**.
+
+```Apex
+public class MyException extends Exception {}
+
+throw new MyException();
+```
 
 
 ## Referencias
