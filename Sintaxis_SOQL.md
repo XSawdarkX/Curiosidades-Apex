@@ -85,6 +85,38 @@ String nameAccount = [SELECT Id FROM Account LIMIT 1].Name;
 //Este ejemplo funciona sin ningún problema
 String idAccount = [SELECT Name FROM Account LIMIT 1].Id;
 ``` 
+Si yo realizo una consulta para obtener un registro con el fin de modificarlo, es decir, para actualizar el valor de un campo, más no para usar el valor de este, no es necesario indicarlo en la consulta. Por lo tanto este ejemplo es valido.
+
+```Apex
+Account objAccount = [SELECT Id FROM Account LIMIT 1];
+objAccount.Name = 'Toyota';
+``` 
+
+## Trabajando con Relaciones
+
+En salesforce, yo puedo relacionar dos objetos a partir de un campo de tipo relación. Dentro de este concepto de conexión, siempre existe un objeto que representa el padre, y un objeto que representa el hijo. 
+
+El objeto hijo es aquel que tiene el campo de tipo relación. 
+
+Por ejemplo, yo tengo un objeto llamado **Autor**. Este objeto tiene como campos un Nombre y una Nacionalidad.
+
+![image](https://user-images.githubusercontent.com/100179095/179629399-5c782ec8-7e6e-46b5-a155-8dabad9325b0.png)
+
+También tengo un objeto llamado **Libro**, el cual, aparte de la información como el Nombre o la Fecha de lanzamiento, también tiene asociado un **Autor**. 
+Es decir, a nivel del objeto Libro es necesario crear un campo de tipo relación hacia el objeto Autor, lo que significa que el Libro vendría siendo el objeto hijo. 
+
+![image](https://user-images.githubusercontent.com/100179095/179629695-d8bb0f2a-4047-4f2e-a88f-4ddff4eaefe4.png)
+
+Además es importante aclarar que un registro hijo no más puede estar asociado con un registro padre, pero un registro padre puede tener relacionados muchos hijos.
+Siguiendo nuestro ejemplo, podríamos expresar que un Autor puede tener varios libros, pero un libro no más puede tener un Autor. 
+
+### Hijo - Padre
+
+### Padre - Hijos
+
+
+## Cosas a tener en cuenta
+
 
 ## Referencias
 
