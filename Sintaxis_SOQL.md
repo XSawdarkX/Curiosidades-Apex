@@ -55,6 +55,14 @@ Para obtener como resultado de una consulta un número entero usamos el método 
 Integer cantCuentas = [SELECT COUNT() FROM Account];
 ``` 
 
+Aparte de las palabras SELECT y FROM, también existe la palabra **WHERE**, que si bien es opcional termina siendo usada casi en el 100% de las consultas. Esta palabra nos permite indicar una o varias condiciones que tienen que cumplir los registros en la base de datos para ser retornados. 
+
+La siguiente consulta por ejemplo, nos retorna las Cuentas cuyo nombre sea **Acme**.
+
+```Apex
+List<Account> lstAccount = [SELECT Id, Name FROM Account WHERE Name = 'Acme'];
+``` 
+
 ## Referencias
 
 1. [ReferOne]()
