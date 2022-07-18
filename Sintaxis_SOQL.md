@@ -105,18 +105,53 @@ Por ejemplo, yo tengo un objeto llamado **Autor**. Este objeto tiene como campos
 También tengo un objeto llamado **Libro**, el cual, aparte de la información como el Nombre o la Fecha de lanzamiento, también tiene asociado un **Autor**. 
 Es decir, a nivel del objeto Libro es necesario crear un campo de tipo relación hacia el objeto Autor, lo que significa que el Libro vendría siendo el objeto hijo. 
 
-![image](https://user-images.githubusercontent.com/100179095/179629695-d8bb0f2a-4047-4f2e-a88f-4ddff4eaefe4.png)
+![image](https://user-images.githubusercontent.com/100179095/179630279-313f7bff-2973-4c00-91de-66e2189ac396.png)
 
 Además es importante aclarar que un registro hijo no más puede estar asociado con un registro padre, pero un registro padre puede tener relacionados muchos hijos.
 Siguiendo nuestro ejemplo, podríamos expresar que un Autor puede tener varios libros, pero un libro no más puede tener un Autor. 
 
 ### Hijo - Padre
 
+Es posible acceder a campos del objeto padre a través de una consulta en el objeto hijo por medio de la **notación de puntos**.
+
+Antes de presentar un ejemplo, es necesario aclarar que cuando se crea un campo de tipo de relación, por debajo, Salesforce maneja dos representaciones del mismo.
+
+Como se sabe, cada vez que yo creo un registro de algún objeto, bien sea estándar o personalizado, por defecto ese registro nace con un Id único que permite diferenciarlo de cualquier otro registro. 
+
+Pues bien, una de las representaciones de un campo tipo relación, a nivel de SOQL, es precisamente la del ID del registro relacionado. La otra representación consiste en un punto de acceso directo al registro relacionado, sobre el cual puedo obtener cualquier campo de dicho objeto. 
+
+```Apex
+//Representación id registro relacionado
+Libro__c objLibro = [SELECT Id,Name,Autor__c FROM Libro__c LIMIT 1];
+Id idAutor = objLibro.Autor__c;
+
+//Representación punto de acceso
+Libro__c objLibro = [SELECT Id,Name,Autor__r.Name, Autor__r.Nacionalidad__c FROM Libro__c LIMIT 1];
+String nombreAutor = objLibro.Autor__r.Name;
+String nacionalidadAutor =  objLibro.Autor__r.Nacionalidad__c;  
+``` 
+
+En el ejemplo anterior obtenemos el nombre y la nacionalidad del Autor asociado a un Libro. 
+
+Además, aunque el registro hijo se encuentre huérfano, y yo intente acceder a un campo del registro padre, Salesforce no genera ningún tipo de error. 
+
 ### Padre - Hijos
+
+Para obtener los registros del objeto hijo realizando una consulta sobre el objeto Padre, se debe realizar una **subconsulta**.
+
+```Apex
+Autor__c  objAutor = [SELECT Id,Name,(SELECT Name FROM Libros__r) FROM Autor__c  LIMIT 1];
+String nombreLibro = objAutor.Libros__r[0].Name;
+``` 
+
+## Trabajando con Funciones de agregación
+
 
 
 ## Cosas a tener en cuenta
 
+1. A la hora de realizar consultas se debe usar el nombre API de los campos y del objeto. 
+2. 
 
 ## Referencias
 
