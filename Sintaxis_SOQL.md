@@ -62,6 +62,29 @@ La siguiente consulta por ejemplo, nos retorna las Cuentas cuyo nombre sea **Acm
 ```Apex
 List<Account> lstAccount = [SELECT Id, Name FROM Account WHERE Name = 'Acme'];
 ``` 
+Para acceder a un campo es necesario haberlo seleccionado o indicado en la consulta. A continuación, se muestra una serie de ejemplos que muestran como acceder a un campo especifico. 
+
+```Apex
+
+//No generan errores
+
+String nameAccount = [SELECT Id, Name FROM Account LIMIT 1].Name;
+
+String nameAccount  = [SELECT Id, Name FROM Account WHERE Name != null][0].Name;
+
+Account objAccount = [SELECT Id, Name FROM Account LIMIT 1];
+String nameAccount = objAccount.Name;
+
+//Genera error
+
+String nameAccount = [SELECT Id FROM Account LIMIT 1].Name;
+``` 
+Él único campo que no es necesario indicar en la consulta es el Id, ya que siempre se retorna por defecto.
+
+```Apex
+//Este ejemplo funciona sin ningún problema
+String idAccount = [SELECT Name FROM Account LIMIT 1].Id;
+``` 
 
 ## Referencias
 
