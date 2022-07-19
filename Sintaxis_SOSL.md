@@ -72,6 +72,23 @@ El resultado de una consulta SOSL se almacena en una lista de lista de objetos. 
 List<List<SObject>> searchList = [FIND 'Mundo' IN NAME FIELDS RETURNING Account]; 
 ``` 
 
+```Apex
+List<List<SObject>> searchList = [FIND 'Mundo' IN NAME FIELDS RETURNING Autor__c(Name),Libro__c(Name)];
+
+List<Autor__c> lstAutor = searchList.get(0);
+List<Libro__c> lstLibro = searchList.get(1);
+
+System.debug('Objeto Autor__c');
+for(Autor__c objAutor : lstAutor){
+    System.debug('Autor__c Name: '+objAutor.Name);
+}
+
+System.debug('Objeto Libro__c');
+for(Libro__c objLibro : lstLibro){
+    System.debug('Libro__c Name: '+objLibro.Name);
+}
+```
+
 ## Referencias
 
 1. [SOSL](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_sosl.htm)
