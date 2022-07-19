@@ -289,7 +289,15 @@ List<Event> lstEvents = [SELECT Description FROM Event WHERE What.Type IN :lstOb
 ## Cosas a tener en cuenta
 
 1. A la hora de realizar consultas se debe usar el nombre API de los campos y del objeto. 
-2. 
+2. Cuando se usa la notación de puntos en una consulta para acceder a campos del registro padre, se usa el nombre api del campo tipo relación, pero terminado en __r.
+
+**nombre API del campo normal:** Autor__c
+**nombre que se usa para la notación de puntos:** Autors__r.
+
+3. Cuando se realiza una subconsulta se usa el nombre del objeto hijo. Si el objeto hijo es estándar se usa el mismo nombre pero en plural, si el objeto es personalizado, se usa el mismo nombre en plural, y además se añade __r 
+
+**Objetos estandar:** Contact (Nombre normal) - Contacts (Nombre que se debe usar para una subconsulta)
+**Objetos personalizados:** Autor__c (Nombre normal) - Autors__r (Nombre que se debe usar para una subconsulta)
 
 ## Referencias
 
