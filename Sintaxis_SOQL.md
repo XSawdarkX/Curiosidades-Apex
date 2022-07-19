@@ -299,6 +299,42 @@ List<Event> lstEvents = [SELECT Description FROM Event WHERE What.Type IN :lstOb
 - **Objetos estandar:** Contact (Nombre normal) - Contacts (Nombre que se debe usar para una subconsulta)
 - **Objetos personalizados:** Autor__c (Nombre normal) - Autors__r (Nombre que se debe usar para una subconsulta)
 
+4. El operador **LIKE** permite realizar una busqueda parcial sobre el objeto.
+
+```Apex
+//Retorna todos los libros cuyo nombre inicie con la palabra Daniel
+List<Libro__c> lstLibros = [Select id,Name,Autor__c from Libro__c where Name like 'Daniel%'];
+
+//Retorna todos los libros cuyo nombre finalice con la palabra Daniel
+List<Libro__c> lstLibros = [Select id,Name,Autor__c from Libro__c where Name like '%Daniel'];
+
+//Retorna todos los libros cuya palabra Daniel este contenida en el nombre
+List<Libro__c> lstLibros = [Select id,Name,Autor__c from Libro__c where Name like '%Daniel%'];
+``` 
+5. La cláusula **ORDER BY** permite ordenar los resultados en base a un campo. Por defecto el resultado se ordena de manera ascendente, es decir, de menor a mayor. Para cambiar esto se pueden usar las palabras **ASC ** o **DESC**. 
+
+Si la consulta retorna valores nulos, se puede especificar si se imprimen de primeras o de últimas con **NULLS FIRST** o **NULLS LAST**. Por defecto se imprimen de primeras.
+
+Para el siguiente ejemplo supongamos que existen dos autores: Julio Verne y Daniel. También que hay un libro que aún no tiene asociado un autor. 
+
+```Apex
+List<Libro__c> lstLibros = [Select id,Name,Autor__r.Name from Libro__c ORDER BY Autor__r.Name];
+//Result Null,Daniel,Julio Verne
+
+List<Libro__c> lstLibros = [Select id,Name,Autor__r.Name from Libro__c ORDER BY Autor__r.Name ASC];
+//Result Null,Daniel,Julio Verne
+
+List<Libro__c> lstLibros = [Select id,Name,Autor__r.Name from Libro__c ORDER BY Autor__r.Name DESC];
+//Result Null,Julio Verne,Daniel
+
+List<Libro__c> lstLibros = [Select id,Name,Autor__r.Name from Libro__c ORDER BY Autor__r.Name NULLS FIRST];
+//Result Null,Daniel,Julio Verne
+
+List<Libro__c> lstLibros = [Select id,Name,Autor__r.Name from Libro__c ORDER BY Autor__r.Name DESC NULLS LAST];
+//Result Julio Verne,Daniel,Null
+``` 
+
 ## Referencias
 
 1. [SOQL](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_SOQL.htm)
+2. [Algunas Clausulas](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_select_examples.htm)
