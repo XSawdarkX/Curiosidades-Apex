@@ -20,19 +20,17 @@ La sintaxis básica de este tipo de consultas es:
 
 FIND {SearchQuery} 
 
-El resultado de una consulta SOSL se almacena en una lista de lista de objetos. 
-
 En el siguiente ejemplo se busca el término  "Mundo" en todos los objetos de la instancia. Cualquier objeto estándar o personalizado que contenga esta palabra en alguno de sus campos será  retornado. 
 
 ```Apex
-List<List<SObject>> searchList = [FIND 'Mundo'];
+FIND {Mundo}
 ``` 
 También es posible indicar en qué tipo de campos realizar la búsqueda. Si no se especifica este parámetro, por defecto se realiza la búsqueda en todos los campos. Para especificar el tipo de campo usamos la cláusula **IN**.
 
 En el siguiente ejemplo se busca el término "Mundo" en los campos Tipo Name de todos los objetos de la instancia.
 
 ```Apex
-List<List<SObject>> searchList = [FIND 'Mundo' IN NAME FIELDS];
+FIND {Mundo} IN NAME FIELDS
 ``` 
 Los posibles valores como tipo de campo son:
 
@@ -42,7 +40,39 @@ Los posibles valores como tipo de campo son:
 - PHONE FIELDS
 - SIDEBAR FIELDS
 
+Incluso, si se desea ser más específico, podemos indicar en que objetos realizar la búsqueda con la cláusula **RETURNING**.
+
+```Apex
+FIND {Mundo} IN NAME FIELDS RETURNING Account,Contact
+``` 
+
+El ejemplo de arriba busca la palabra "Mundo" en los campos Name de los objetos estándar Account y Contact. 
+
+Además, es posible usar clausulas como LIMIT, ORDER BY, WHERE, y especificar que campos retornar por objeto. Si no se indican los campos, como en los ejemplos anteriores, Salesforce trae por defecto solo el Id. 
+
+Teniendo en cuenta esto, los siguientes ejemplos son validos:
+
+```Apex
+FIND {Mundo} IN NAME FIELDS RETURNING Account (ORDER BY id)
+
+FIND {Mundo} IN NAME FIELDS RETURNING Account (Name, Industry ORDER BY Name)
+
+FIND {Mundo} IN NAME FIELDS RETURNING Account (LIMIT 10)
+
+FIND {Mundo} IN NAME FIELDS RETURNING Account (WHERE name like 'test')
+
+FIND {Mundo} IN NAME FIELDS RETURNING Account (Name, Industry WHERE Name like 'test')
+``` 
+
+Si bien la única palabra obligatoria para una consulta SOSL es **FIND**, Apex obliga a precisar en qué objetos buscar, por lo que la cláusula RETURNING también se vuelve obligatoria. 
+
+El resultado de una consulta SOSL se almacena en una lista de lista de objetos. En apex, en vez de colocar el térmmino en llaves {}, se hace en comillas. 
+
+```Apex
+List<List<SObject>> searchList = [FIND 'Mundo' IN NAME FIELDS RETURNING Account]; 
+``` 
+
 ## Referencias
 
-1. [ReferOne]()
+1. [SOSL](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_sosl.htm)
 
