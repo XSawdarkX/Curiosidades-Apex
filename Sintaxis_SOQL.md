@@ -261,6 +261,30 @@ if (myEvent.What instanceof Account) {
     // myEvent.What references an Opportunity, so process accordingly
 }
 ``` 
+## Usando Expresiones Bind
+
+Es posible usar variables de Apex para interactuar con las consultas SOQL, solo necesitan ir presedidas por **:**
+
+```Apex
+List<String> lstObjetos = new List<String>{'Account', 'Opportunity'};
+List<Event> lstEvents = [SELECT Description FROM Event WHERE What.Type IN :lstObjetos];
+``` 
+Las variables solo se pueden usar con las cláusulas:
+
+- FIND 
+- WHERE
+- LIMIT
+- OFFSET
+- WITH DIVISION
+- IN, NOT IN
+
+## Consultar todos los registros
+
+Con la cláusula **ALL ROWS** es posible consultar todos los registros de un objeto, incluso aquellos que se encuentran en la papelera de reciclaje.
+
+```Apex
+List<Event> lstEvents = [SELECT Description FROM Event WHERE What.Type IN :lstObjetos ALL ROWS];
+``` 
 
 ## Cosas a tener en cuenta
 
