@@ -14,7 +14,7 @@ Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que 
 
 ## SOSL
 
-SOSL es un lenguaje propio de Salesforce que permite consultar un término o una frase en diferentes objetos. SOSL es más útil cuando no sabemos en qué campos y objetos residen nuestros datos.  
+SOSL es un lenguaje propio de Salesforce que permite consultar un término o una frase en diferentes objetos. SOSL es más útil cuando no sabemos en qué campos y objetos residen nuestros datos. Sus siglas significan: Salesforce Object Search Language.  
 
 La sintaxis básica de este tipo de consultas es:
 
