@@ -27,6 +27,20 @@ En el siguiente ejemplo se busca el término  "Mundo" en todos los objetos de la
 ```Apex
 List<List<SObject>> searchList = [FIND 'Mundo'];
 ``` 
+También es posible indicar en qué tipo de campos realizar la búsqueda. Si no se especifica este parámetro, por defecto se realiza la búsqueda en todos los campos. Para especificar el tipo de campo usamos la cláusula **IN**.
+
+En el siguiente ejemplo se busca el término "Mundo" en los campos Tipo Name de todos los objetos de la instancia.
+
+```Apex
+List<List<SObject>> searchList = [FIND 'Mundo' IN NAME FIELDS];
+``` 
+Los posibles valores como tipo de campo son:
+
+- ALL FIELDS	
+- EMAIL FIELDS
+- NAME FIELDS
+- PHONE FIELDS
+- SIDEBAR FIELDS
 
 ## Referencias
 
