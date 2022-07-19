@@ -146,7 +146,46 @@ String nombreLibro = objAutor.Libros__r[0].Name;
 
 ## Trabajando con Funciones de agregación
 
+Las funciones de agregación permiten obtener información resumida en nuestras consultas. Para hacer uso de estas funciones, es necesario usar la cláusula **GROUP BY**.
 
+Cuando se trabaja con este tipo de funciones, el resultado se guarda en una Lista de tipo **AggregateResult**. 
+
+AggregateResult es un objeto estándar de solo lectura que únicamente se usa para guardar los resultados en este tipo de escenarios. 
+
+```Apex
+List<AggregateResult> groupedResults = [SELECT Nacionalidad__c, COUNT(Id) cant from Autor__c group by Nacionalidad__c ];
+    
+for(AggregateResult objResult :groupedResults){
+    System.debug('Nacionalidad: '+objResult.get('Nacionalidad__c'));
+    System.debug('Cantiad: '+objResult.get('cant'));
+}
+``` 
+
+Después de la cláusula GROUP BY es necesario colocar el nombre del campo por el cual vamos a agrupar la información, este mismo campo se debe colocar antes de la función de agregación que usemos. 
+
+Es importante saber, que no se pueden colocar más campos dentro de la consulta, únicamente por el que se va a agrupar. Sin embargo, si es posible usar más de una función de agregación en la misma consulta.
+
+```Apex
+List<AggregateResult> groupedResults = [SELECT Nacionalidad__c, COUNT(Id) cant,COUNT(Name) cantName cant from Autor__c group by Nacionalidad__c ];
+    
+for(AggregateResult objResult :groupedResults){
+    System.debug('Nacionalidad: '+objResult.get('Nacionalidad__c'));
+    System.debug('Cantiad: '+objResult.get('cant'));
+    System.debug('Cantiad Name: '+objResult.get('cantName'));
+}
+``` 
+
+También es pertinente aclarar, que es posible dar un alias a las funciones de agregación, este alias se usa posteriormente para acceder al valor de la función. 
+Si no se especifica uno, por defecto Salesforce agrega como alias "expri", donde la i representa el orden de la función agregada que no cuenta con un alias personalizado. La i comienza en 0. 
+
+```Apex
+List<AggregateResult> groupedResults = [SELECT Nacionalidad__c, COUNT(Id) from Autor__c group by Nacionalidad__c ];
+    
+for(AggregateResult objResult :groupedResults){
+    System.debug('Nacionalidad: '+objResult.get('Nacionalidad__c'));
+    System.debug('Cantiad: '+objResult.get('expr0'));
+}
+``` 
 
 ## Cosas a tener en cuenta
 
