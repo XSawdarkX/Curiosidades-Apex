@@ -187,6 +187,16 @@ for(AggregateResult objResult :groupedResults){
 }
 ``` 
 
+## Consultas más eficientes
+
+Para realizar búsquedas más eficientes, Salesforce recomienda usar **consultas selectivas**. De hecho, si ejecutamos una consulta no selectiva en el contexto de un Trigger, sobre un objeto que tiene más de 1 millón de registros, el sistema arrojara un error.
+
+Una consulta es selectiva cuando se usan **campos indexados** en la cláusula WHERE , y cuando los filtros permiten reducir el número de registros retornados por la misma bajo un **umbral definido por Salesforce**. 
+
+
+usar campos indexados en la clausula WHERE. Esto funciona ya que el CRM, a nivel interno, maneja una lógica que permite 
+
+
 ## Cosas a tener en cuenta
 
 1. A la hora de realizar consultas se debe usar el nombre API de los campos y del objeto. 
