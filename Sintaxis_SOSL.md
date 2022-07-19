@@ -14,7 +14,7 @@ Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que 
 
 ## SOSL
 
-SOSL es un lenguaje propio de Salesforce que permite consultar un término en diferentes objetos.
+SOSL es un lenguaje propio de Salesforce que permite consultar un término o una frase en diferentes objetos. SOSL es más útil cuando no sabemos en qué campos y objetos residen nuestros datos.  
 
 La sintaxis básica de este tipo de consultas es:
 
@@ -22,8 +22,7 @@ FIND {SearchQuery}
 
 El resultado de una consulta SOSL se almacena en una lista de lista de objetos. 
 
-En el siguiente ejemplo se busca el término  "Mundo" en todos los objetos de la instancia. Cualquier objeto estándar o personalizado que contenga esta palabra en alguno de sus campos 
-será  retornado. 
+En el siguiente ejemplo se busca el término  "Mundo" en todos los objetos de la instancia. Cualquier objeto estándar o personalizado que contenga esta palabra en alguno de sus campos será  retornado. 
 
 ```Apex
 List<List<SObject>> searchList = [FIND 'Mundo'];
