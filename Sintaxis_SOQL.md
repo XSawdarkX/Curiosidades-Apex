@@ -193,9 +193,74 @@ Para realizar búsquedas más eficientes, Salesforce recomienda usar **consultas
 
 Una consulta es selectiva cuando se usan **campos indexados** en la cláusula WHERE , y cuando los filtros permiten reducir el número de registros retornados por la misma bajo un **umbral definido por Salesforce**. 
 
+Un campo indexado se puede identificar entrando a la configuración del objeto. 
 
-usar campos indexados en la clausula WHERE. Esto funciona ya que el CRM, a nivel interno, maneja una lógica que permite 
+![image](https://user-images.githubusercontent.com/100179095/179641897-dbb28203-1e64-4469-af70-afc0002605e6.png)
 
+Los campos que por defecto se marcan como indexados son:
+
+- Campos que actuan como llaves primarias: Id, Name, and OwnerId 
+- Campos de tipo relación
+- El campo CreatedDate 
+- El campo Tipo de registro para los objetos estandar que lo tengan configurado
+- Campos personalizados que estan configurados como id externos o únicos.
+
+Salesforce constantemente detecta campos que se usan de manera repetida para marcarlos como indexados y optimizar las consultas.También es posible escalar un caso a Salesforce para solicitar indexar un campo. 
+
+```Apex
+SELECT Id FROM Account WHERE Id IN (<list of account IDs>)
+``` 
+Otra manera de mejorar el rendimiento de una consulta es filtrando los valores nulos.
+
+```Apex
+List<String> lstNacionalidades = new List<String>{'Colombia','México'};
+List<Autor__c> lstAutores = [SELECT Id,Name,Nacionalidad__c FROM Autor__c where Nacionalidad__c IN: lstNacionalidades
+                            AND Nacionalidad__c != null];    
+``` 
+
+## Trabajando con relaciones polimorficas
+
+Una relación polimorfica es una relación entre objetos donde el objeto que se esta referenciando puede ser de diferentes tipos. 
+
+### Ejemplos de relaciones polimorficas
+
+- Campo WhatId en el objeto Task o Event
+- Campo OwnerId en cualquier objeto estándar o personalizado.
+
+Es posible hacer consultas filtrando los tipos de objetos con el calificador **Type**.
+
+```Apex
+//Me retorna los eventos asociados a Cuentas y Oportunidades
+List<Event> events = [SELECT Description FROM Event WHERE What.Type IN ('Account', 'Opportunity')];
+
+//Me retorna los Autores donde el propietario sea un Usuario
+List<Autor__c> lstAutores = [Select id,Name from Autor__c where Owner.Type = 'User'];   
+``` 
+
+También se puede usar la Clausula **TYPEOF** para especificar los campos que quiero traer por cada tipo de objeto.
+
+```Apex
+List<Event> events = [SELECT TYPEOF What 
+                      WHEN Account THEN Phone 
+                      WHEN Opportunity THEN Amount 
+                      END 
+                      FROM Event];
+                      
+//Verificar primero con qué tipo de objeto esta asociado cada registro
+
+System.debug('events Opportunity: '+events[0].What.Amount);
+System.debug('events Account: '+events[0].What.Phone);               
+``` 
+Incluso, a través de la palabra reservada **instanceof**, la cual permite identificar si un objeto es una instancia de una clase particular, se puede dar una lógica diferente a cada tipo de objeto.
+
+```Apex
+Event myEvent = [SELECT Description FROM Event WHERE What.Type IN ('Account', 'Opportunity') LIMIT 1];
+if (myEvent.What instanceof Account) {
+    // myEvent.What references an Account, so process accordingly
+} else if (myEvent.What instanceof Opportunity) {
+    // myEvent.What references an Opportunity, so process accordingly
+}
+``` 
 
 ## Cosas a tener en cuenta
 
