@@ -181,6 +181,28 @@ toma como llave el campo Id por defecto.
 
 En la sentencia se puede usar solo el nombre del campo **N_mero_de_serie__c**, o también se puede incluir el objeto **Libro__c.N_mero_de_serie__c**. 
 
+### Operación Merge
+
+Esta operación permite unir registros "Duplicados". Es posible unir hasta dos registros en un registro maestro, los otros registros son eliminados de la base de datos.
+
+Todos los registros relacionados que pudieran tener los registros que se eliminan, son pasados al registro maestro.
+
+También es importante aclarar que esta operación solo se puede ejecutar con los objetos estándar: Leads, Contacts, cases, and Accounts. Para el objeto Case es necesario ingresar a configuración y habilitar dicha opción en **Case Merge**.
+
+Los valores que se mantienen son los del regisro maestro, si desea mantener el valor de uno de los registros que se va a unir, debe pasar dicho valor al registro maestro primero.
+
+```Apex
+//Supongamos que existen tres Casos que cumplen con esta condición
+
+List<Case> lstCases = [Select id From Case where subject Like 'Test%' order by CaseNumber DESC];
+
+List<Case> lstCasesMerge = new List<Case>{lstCases.get(1),lstCases.get(2)};
+
+merge lstCases.get(0) lstCasesMerge; 
+``` 
+
+Por último, los registros involucrados en una operación de merge, no pueden volver a usarse para esta operación.
+
 ## Referencias
 
 1. [DML]()
