@@ -116,6 +116,39 @@ insert objLibro;
 
 Cabe mencionar que cuando un campo se marca o configura como Id externo, no quiere decir que sea obligatorio o único. Por lo tanto, siguiendo el ejemplo, si se especifica un número de documento que no existe, o uno que se repite más de una vez, el sistema arrojara un DMLException. 
 
+### Crear un registro padre y un registro hijo en la misma transacción.
+
+Continuando  con la lógica del punto anteior, también es posible, a través de un Id externo, crear un registro padre y un registro hijo con una sola operación DML.
+
+Normalmente se tendrían que hacer los siguientes pasos:
+
+1. Crear e insertar el registro Padre.
+2. Consultar el registro Padre creado en el punto 1.
+3. Crear el registro hijo asociándolo con el registro padre a través del Id devuelto por la consulta del punto 2.
+4. Insertar el registro hijo.
+
+Pero con el Id externo es posible realizar lo siguiente:
+
+```Apex
+List<Sobject> lstRecords = new List<Sobject>();
+    
+Autor__c objAutor = new Autor__c();
+objAutor.Name = 'Shelley';
+objAutor.Nacionalidad__c = 'Colombia';
+objAutor.N_mero_de_documento__c = '10206589778';
+
+lstRecords.add(objAutor);
+
+Libro__c objLibro = new Libro__c();
+objLibro.Name = 'Los amigos del hombre III';
+objLibro.Autor__r = new Autor__c(N_mero_de_documento__c = '10206589778');
+objLibro.N_mero_de_serie__c = '08B';
+
+lstRecords.add(objLibro);
+    
+insert lstRecords;
+``` 
+
 
 ## Referencias
 
