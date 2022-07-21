@@ -14,6 +14,24 @@ Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que 
 
 ## DML
 
+DML es el lenguaje propio de Salesforce para realizar operaciones sobre la base de datos. Sus siglas significan Data Manipulation lenguage. 
+
+Estas operaciones se pueden hacer sobre uno o varios registros al tiempo. Su sintaxis es la siguiente:
+
+[Tipo de operación] [registro/Lista de registros]
+
+Dentro de las operaciones que yo puedo realizar se encuentran:
+
+- Insert
+- Update
+- Upsert
+- Delete
+- Undelete
+- Merge
+- Converting Leads
+
+Una cosa importante a tener en cuenta es que solo se pueden realizar 150 operaciones por transacción, razón por la cual no es recomendado ejecutar dichas actividades dentro de un ciclo. 
+
 
 ## Referencias
 
