@@ -32,7 +32,33 @@ Dentro de las operaciones que yo puedo realizar se encuentran:
 
 Una cosa importante a tener en cuenta es que solo se pueden realizar 150 operaciones por transacción, razón por la cual no es recomendado ejecutar dichas actividades dentro de un ciclo. 
 
+Aquí un par de ejemplos utilizando la operación insert:
 
+```Apex
+//Bad practices
+List<Contact> conList = [Select Department , Description from Contact];
+  
+for(Contact badCon : conList) {
+    if (badCon.Department == 'Finance') {
+        badCon.Description__c = 'New description';
+    }
+    update badCon;
+}
+
+//Good practices
+List<Contact> updatedList = new List<Contact>();
+List<Contact> conList = [Select Department , Description from Contact];
+  
+for(Contact con : conList) {
+    if (con.Department == 'Finance') {
+        con.Description = 'New description';
+        updatedList.add(con);
+    }
+}
+
+update updatedList;
+```   
+  
 ## Referencias
 
 1. [DML]()
