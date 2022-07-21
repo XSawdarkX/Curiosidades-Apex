@@ -203,6 +203,24 @@ merge lstCases.get(0) lstCasesMerge;
 
 Por último, los registros involucrados en una operación de merge, no pueden volver a usarse para esta operación.
 
+### Operaciones Delete y Undelete
+
+La operación delete, tal como su nombre lo indica, permite eliminar uno o varios registros de la base de datos. También permite la eliminación en cascada, es decir, si elimino un registro padre, sus hijos correrán la misma suerte siempre y cuando se permita. 
+
+Cuando un registro se elimina, realmente es llevado a la Papelera de reciclaje, donde permanece por 15 días o hasta que esta se llene, antes de eliminarse definitivamente de la instancia. 
+
+En este periodo de tiempo es posible utilizar la operación undetele para recuperar el registro. Es importante tener presente que todas las relaciones lookup en los hijos, se recuperan una vez se restaure el padre siempre y cuando estos no hayan sido reasignados a otro registro. 
+
+Para ejecutar la operación de undelete, la consulta a los registros se debe hacer con la cláusula **ALL ROWS**, la cual permite obtener tanto los datos que aún persisten en la base, como los que se encuentran en la papelera de reciclaje. 
+
+```Apex
+Libro__c objLibro = [Select id from Libro__c where  N_mero_de_serie__c ='12B' limit 1];
+delete objLibro;
+
+Libro__c objLibroUndelete = [Select id from Libro__c where  N_mero_de_serie__c ='12B' limit 1 ALL ROWS];
+undelete objLibroUndelete;
+``` 
+
 ## Referencias
 
 1. [DML]()
