@@ -28,7 +28,6 @@ Dentro de las operaciones que yo puedo realizar se encuentran:
 - Delete
 - Undelete
 - Merge
-- Converting Leads
 
 Una cosa importante a tener en cuenta es que solo se pueden realizar 150 operaciones por transacción, razón por la cual no es recomendado ejecutar dichas actividades dentro de un ciclo. 
 
@@ -214,10 +213,10 @@ En este periodo de tiempo es posible utilizar la operación undetele para recupe
 Para ejecutar la operación de undelete, la consulta a los registros se debe hacer con la cláusula **ALL ROWS**, la cual permite obtener tanto los datos que aún persisten en la base, como los que se encuentran en la papelera de reciclaje. 
 
 ```Apex
-Libro__c objLibro = [Select id from Libro__c where  N_mero_de_serie__c ='12B' limit 1];
+Libro__c objLibro = [Select id from Libro__c where N_mero_de_serie__c = '12B' limit 1];
 delete objLibro;
 
-Libro__c objLibroUndelete = [Select id from Libro__c where  N_mero_de_serie__c ='12B' limit 1 ALL ROWS];
+Libro__c objLibroUndelete = [Select id from Libro__c where N_mero_de_serie__c = '12B' limit 1 ALL ROWS];
 undelete objLibroUndelete;
 ``` 
 
