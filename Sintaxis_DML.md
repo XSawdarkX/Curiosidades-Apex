@@ -149,6 +149,37 @@ lstRecords.add(objLibro);
 insert lstRecords;
 ``` 
 
+### Operación Upsert
+
+Esta operación permite insertar o actualizar un registro dependiendo si este ya existe o no en la base de datos. 
+
+Para determinar si el registro ya existe, se pueden usar alguna de estas llaves:
+
+- Id del registro. Es la llave por defecto.
+- Un campo marcado como Id externo
+- Un campo estándar marcado como true en el atributo idLookup 
+
+Si la llave se encuentra más de una vez, el sistema arroja un error. 
+
+```Apex
+List<Libro__c> lstLibros = new List<Libro__c>();
+
+Libro__c objLibro = new Libro__c();
+objLibro.Name = 'Los amigos del hombre IV';
+objLibro.N_mero_de_serie__c = '07B';
+
+Libro__c objLibro2 = [Select Id,Name,N_mero_de_serie__c from Libro__c where N_mero_de_serie__c = '08B' limit 1]; 
+objLibro2.Name = 'Alicia en el país de las maravillas';
+
+lstLibros.add(objLibro);
+lstLibros.add(objLibro2);
+ 
+upsert lstLibros N_mero_de_serie__c;
+``` 
+En el ejemplo de arriba, el primer registro se crea mientras que el segundo se actualiza. En dado caso de no colocar un campo en la sentencia del upsert, Salesforce 
+toma como llave el campo Id por defecto. 
+
+En la sentencia se puede usar solo el nombre del campo **N_mero_de_serie__c**, o también se puede incluir el objeto **Libro__c.N_mero_de_serie__c**. 
 
 ## Referencias
 
