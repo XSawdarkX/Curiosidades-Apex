@@ -435,7 +435,22 @@ private class MixedDML {
         }
     }
 }
-``` 
+```
+
+## Bloquear registros
+
+Es posible bloquear un registro para evitar que se ejecuten operaciones simultaneamente sobre el. Esto se puede lograr usando la cláusula **FOR UPDATE**.
+
+```Apex
+Account [] accts = [SELECT Id FROM Account LIMIT 2 FOR UPDATE];
+```
+
+Aquí hay varias cosas a tener presente:
+
+1. El usuario que bloquea el registro puede modificarlo sin ningún problema. Otros usuarios deben esperar hasta que finalice la transacción para poder actualizar el registro. Sin embargo, mientras el registro está bloqueado, aún puede ser consultado.
+2. Si intenta bloquear un registro que ya está bloqueado, el proceso espera máximo 10 segundos hasta que se libere del primer bloqueo para aplicar el segundo. Se excede del tiempo se arroja un error. 
+3. Si se intenta modificar un registro bloqueado, y este no es liberado en máximo 10 segundos, el sistema arroja un error.
+
 ## Cosas a tener en cuenta
 
 1. Realmente, cuando se usa la clase Database para hacer operaciones de forma parcial, Salesforce intenta guardar el registro un máximo de tres veces, si en el tercer intento falla, todos los registros que se hayan creado o modificado previamente se devuelven tal como si usáramos DML. 
@@ -444,7 +459,6 @@ private class MixedDML {
 4. Se puede realizar una operación hasta en máximo 10 objetos diferentes a la vez.  
 
 Insert account1, account2, contact1, contact2, contact3, case1, account3, account4, contact4;
-
 
 ## Referencias
 
