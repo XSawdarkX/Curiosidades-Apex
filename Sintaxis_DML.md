@@ -314,6 +314,50 @@ System.debug('numeroSerie después rollback: '+numeroSerie);
 //Result numeroSerie durante Savepoint: 20B
 //Result numeroSerie después rollback: null
 ``` 
+
+Aunque la sentencia **Database.rollback** devuelve los DML hechos después del **Savepoint**, si se realiza una operación de insert, el Id no se limpia. Esto quiere decir que, si se intenta insertar nuevamente la variable que definimos después del Savepoint, el sistema arrojara un error diciendo que no se puede insertar un registro que ya tiene asociado un Id. Asimismo, si se intenta actualizar la variable que definimos después del Savepoint, el sistema arrojara un error diciendo que no se puede modificar un registro que no existe.
+
+```Apex
+Savepoint sp1 = Database.setSavepoint();
+
+Libro__c objLibro = new Libro__c();
+objLibro.Name = 'Java';
+Insert objLibro;
+
+Database.rollback(sp1);
+
+System.debug('objLibro Id: '+objLibro.Id);
+System.debug('objLibro: '+[SELECT Id FROM Libro__c WHERE Name = 'Java' LIMIT 1]);
+
+try{
+	Insert objLibro;    
+}catch(DMLException e){
+    System.debug('Erro: '+e);
+}
+
+//Result objLibro Id: Id del registro
+//Result objLibro: ()
+//Result Error: INVALID_FIELD_FOR_INSERT_UPDATE, cannot specify Id in an insert call
+``` 
+
+Si se definen dos Savepoint, e intento usar la variable del segundo después de haber hecho rollback sobre el primero, el sistema arrojara un error:
+
+```Apex
+Savepoint sp1 = Database.setSavepoint();
+
+Savepoint sp2 = Database.setSavepoint();
+
+Libro__c objLibro = new Libro__c();
+objLibro.Name = 'Java';
+Insert objLibro;
+
+Database.rollback(sp1);
+
+Database.rollback(sp2);
+``` 
+
+De igual manera, es importante tener en cuenta que el Savepoint cuenta como una operación DML de cara al límite de 150 sentencias DML por transacción. 
+
 #### Coversión de Leads
 
 ## Referencias
