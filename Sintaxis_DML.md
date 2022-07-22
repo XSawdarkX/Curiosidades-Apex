@@ -269,6 +269,53 @@ Para finalizar, es importante tener en mente, que cada operación retorna un tip
 
 ![image](https://user-images.githubusercontent.com/100179095/180336162-a1a83f08-7565-4dac-80de-34feb9551748.png)
 
+
+#### Control en transacciones
+
+La clase Database contiene un método que permite generar un punto de guardado durante el código. Este punto almacena el estado de la base de datos hasta ese momento. 
+Cualquier operación DML que se haga después del punto puede ser devuelta, así el proceso puede continuar en otra dirección.
+
+Para agregar un **Savepoint** usamos la siguiente sintaxis:
+
+```Apex
+Savepoint sp = Database.setSavepoint();
+``` 
+
+Para devolver todas las transacciones DML hechas después del punto, hacemos un **rollback**:
+
+```Apex
+Database.rollback(sp);
+```
+
+Aquí un ejemplo más completo:
+
+```Apex
+Libro__c objLibro = new Libro__c();
+objLibro.Name = 'Java';
+insert objLibro;
+
+String numeroSerie = [SELECT Id,N_mero_de_serie__c  FROM Libro__c WHERE Name = 'Java' limit 1].N_mero_de_serie__c;
+System.debug('numeroSerie antes Savepoint: '+numeroSerie);
+
+Savepoint sp = Database.setSavepoint();
+
+objLibro.N_mero_de_serie__c = '20B';
+update objLibro;
+
+numeroSerie = [SELECT Id,N_mero_de_serie__c  FROM Libro__c WHERE Name = 'Java' limit 1].N_mero_de_serie__c;
+System.debug('numeroSerie durante Savepoint: '+numeroSerie);
+
+Database.rollback(sp);
+
+numeroSerie = [SELECT Id,N_mero_de_serie__c  FROM Libro__c WHERE Name = 'Java' limit 1].N_mero_de_serie__c;
+System.debug('numeroSerie después rollback: '+numeroSerie);
+
+//Result numeroSerie antes Savepoint: null
+//Result numeroSerie durante Savepoint: 20B
+//Result numeroSerie después rollback: null
+``` 
+#### Coversión de Leads
+
 ## Referencias
 
 1. [DML](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_dml.htm)
