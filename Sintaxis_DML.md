@@ -220,6 +220,56 @@ Libro__c objLibroUndelete = [Select id from Libro__c where N_mero_de_serie__c = 
 undelete objLibroUndelete;
 ``` 
 
+## Clase Database
+
+Aparte del lenguaje DML, Salesforce nos ofrece otra forma de interactuar con la base de datos. Se trata de los métodos de la clase Database.
+
+Esta segunda forma es más flexible debido a que permite realizar operaciones parciales, es decir, si por algún motivo uno de los registros que estoy intentando insertar, por ejemplo, falla, el sistema permite insertar los demás normalmente. 
+
+A través de la clase Database, también es posible hacer conversión de Leads, así como limpiar la papelera de reciclaje. Cosas que con el lenguaje DML no es posible. 
+
+El siguiente ejemplo muestra el equivalente de la operación dml **insert**.
+
+```Apex
+//Using DML
+List<Account> acctList = new List<Account>();
+acctList.add(new Account(Name='Acme1'));
+acctList.add(new Account(Name='Acme2'));
+
+insert acctList;
+
+//Using Database Class
+List<Account> acctList = new List<Account>();
+acctList.add(new Account(Name='Acme1'));
+acctList.add(new Account(Name='Acme2'));
+
+Database.SaveResult[] srList = Database.insert(acctList, false);
+
+for (Database.SaveResult sr : srList) {
+    if (sr.isSuccess()) {
+        System.debug('Successfully inserted account. Account ID: ' + sr.getId());
+    } else {      
+        for(Database.Error err : sr.getErrors()) {
+            System.debug('The following error has occurred.');                    
+            System.debug(err.getStatusCode() + ': ' + err.getMessage());
+            System.debug('Account fields that affected this error: ' + err.getFields());
+        }
+    }
+}
+``` 
+
+Aquí hay varias cosas por observar. Primero, la forma de realizar la operación cambia totalmente. En este caso, en vez de usar la palabra reservada **insert**,
+usamos el método del mismo nombre de la clase Database, ese método recibe dos parámetros, el registro o la lista de registros que voy a insertar, y un booleano que me indicar si la operación será parcial o no. Si queremos que sea parcial y continue insertando registros, aunque algunos fallen, se debe pasar como **False**.
+
+En segundo lugar, en vez de generar una excepción, el método devuelve una lista de resultados **Database.SaveResult[]**, o un único resultado si solo se insertó un registro. A través de esta información es posible darle un manejo a los errores que se hayan podido generar durante la operación. 
+
+La decisión de utilizar una forma u otra básicamente depende de si queremos realizar una operación parcial, o si queremos generar una excepción cuando algún registro falle. Las excepciones que se pueden generar con DML son de tipo **DMLException**. 
+
+Para finalizar, es importante tener en mente, que cada operación retorna un tipo difetente de dato. Aquí la tabla de los **Result objects** para cada operación:
+
+![image](https://user-images.githubusercontent.com/100179095/180336162-a1a83f08-7565-4dac-80de-34feb9551748.png)
+
 ## Referencias
 
-1. [DML]()
+1. [DML](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_dml.htm)
+2. [Database methods](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_dml_database_result_classes.htm)
