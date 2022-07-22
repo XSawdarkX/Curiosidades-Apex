@@ -361,7 +361,7 @@ De igual manera, es importante tener en cuenta que el Savepoint cuenta como una 
 #### Coversión de Leads
 
 
-### Operaciones que no pueden ser combinadas en la misma transacción.
+## Operaciones que no pueden ser combinadas en la misma transacción.
 
 Hay operaciones en ciertos objetos que no pueden ser combinadas. Esto ocurre en los objectos que alteran la visibilidad de los registros, como Usuario o Grupo por nombrar algunos.
 
@@ -405,11 +405,10 @@ public class Util {
        update objUser;
     }
 }
-
 ``` 
-
 Para evitar este tipo de error en una clase de prueba, las operaciones se deben ejecutar dentro de un bloque **System.runAs**. O en su defecto, una de las operaciones debe ejecutarse en otra clase con un método futuro. 
 
+```Apex
 @isTest
 private class MixedDML {
     static testMethod void mixedDMLExample() {  
@@ -436,6 +435,16 @@ private class MixedDML {
         }
     }
 }
+``` 
+## Cosas a tener en cuenta
+
+1. Realmente, cuando se usa la clase Database para hacer operaciones de forma parcial, Salesforce intenta guardar el registro un máximo de tres veces, si en el tercer intento falla, todos los registros que se hayan creado o modificado previamente se devuelven tal como si usáramos DML. 
+2. Si se intenta hacer una operación DML sobre una lista que tiene registros duplicados, el sistema arrojara un error. 
+3. Se puede hacer una operación DML hasta en máximo 10.000 registros a la vez.
+4. Se puede realizar una operación hasta en máximo 10 objetos diferentes a la vez.  
+
+Insert account1, account2, contact1, contact2, contact3, case1, account3, account4, contact4;
+
 
 ## Referencias
 
