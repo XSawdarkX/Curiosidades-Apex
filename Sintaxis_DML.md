@@ -360,7 +360,88 @@ De igual manera, es importante tener en cuenta que el Savepoint cuenta como una 
 
 #### Coversión de Leads
 
+
+### Operaciones que no pueden ser combinadas en la misma transacción.
+
+Hay operaciones en ciertos objetos que no pueden ser combinadas. Esto ocurre en los objectos que alteran la visibilidad de los registros, como Usuario o Grupo por nombrar algunos.
+
+Tú no puedes actualizar una Cuenta y el rol de un usuario en una misma transacción, por ejemplo. Para evitar esto, la segunda transacción debe hacerse dentro de un método futuro.
+
+```Apex
+//Este código arroja un error: MIXED_DML_OPERATION
+
+Libro__c objLibro = new Libro__c();
+objLibro.Name = 'Java';
+Insert objLibro;
+
+User objUser = [SELECT Email,userroleid  FROM User WHERE Profile.Name != null limit 1];
+UserRole r = [SELECT Id FROM UserRole WHERE Name='CEO'];
+objUser.Email = 'Test@Test.com';
+objUser.userroleid = r.Id;
+update objUser;
+``` 
+```Apex
+//Forma correcta
+
+public class MixedDMLFuture {
+    public static void useFutureMethod() {
+
+        Libro__c objLibro = new Libro__c();
+        objLibro.Name = 'Java';
+        Insert objLibro;
+        
+        Util.insertUserWithRole('Test@Test.com');        
+    }
+}
+
+public class Util {
+    @future
+    public static void insertUserWithRole(String email) {
+
+       User objUser = [SELECT Email,userroleid  FROM User WHERE Profile.Name != null limit 1];
+       UserRole r = [SELECT Id FROM UserRole WHERE Name='CEO'];
+       objUser.Email = email;
+       objUser.userroleid = r.Id;
+       update objUser;
+    }
+}
+
+``` 
+
+Para evitar este tipo de error en una clase de prueba, las operaciones se deben ejecutar dentro de un bloque **System.runAs**. O en su defecto, una de las operaciones debe ejecutarse en otra clase con un método futuro. 
+
+@isTest
+private class MixedDML {
+    static testMethod void mixedDMLExample() {  
+        
+        User u;
+        Account a;
+        
+        User thisUser = [SELECT Id FROM User WHERE Id = :UserInfo.getUserId()];
+        
+        System.runAs (thisUser) {
+            Profile p = [SELECT Id FROM Profile WHERE Name='Standard User'];
+            UserRole r = [SELECT Id FROM UserRole WHERE Name='COO'];
+            
+            u = new User(alias = 'jsmith', email='jsmith@acme.com', 
+                emailencodingkey='UTF-8', lastname='Smith', 
+                languagelocalekey='en_US', 
+                localesidkey='en_US', profileid = p.Id, userroleid = r.Id,
+                timezonesidkey='America/Los_Angeles', 
+                username='jsmith@acme.com');
+            insert u;
+            
+            a = new Account(name='Acme');
+            insert a;
+        }
+    }
+}
+
 ## Referencias
 
 1. [DML](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_dml.htm)
 2. [Database methods](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_dml_database_result_classes.htm)
+3. [Objetos que no pueden combinar DML](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dml_non_mix_sobjects.htm)
+4. [Objetos que no admiten DML](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dml_non_dml_objects.htm)
+
+
