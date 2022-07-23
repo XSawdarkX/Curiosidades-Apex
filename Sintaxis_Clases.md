@@ -45,6 +45,28 @@ No es necesario indicar el modificador de acceso en las inner Class, ya que por 
 
 Si una inner Class es definida como Global, la clase principal también debe serlo. 
 
+### Variables y Métodos
+
+Las variables, como se explicó en su modulo, son elementos que nos permiten guardar información. Estos se definen siguiendo la siguiente sintaxis:
+
+[Modificador de acceso] [Tipo de dato] nombre de la variable;
+
+```Apex
+private Integer edad; 
+```
+
+Los métodos por su lado pueden entenderse como un bloque que recibe unos elementos de entrada llamados **Parámetros**, y retorna un resultado.
+
+La sintaxís para crear un método es:
+
+[modificador de acceso] [Tipo de dato de retorno] nombre del método (Parametro1, Parametro2){}
+
+```Apex
+public Integer getEdad() { 
+     return edad; 
+}
+```
+
 ### Modificadores de Acceso 
 
 ## Referencias
