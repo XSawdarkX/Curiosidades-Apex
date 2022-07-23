@@ -14,6 +14,15 @@ Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que 
 
 ## Clases
 
+```Apex
+for (Integer i = 0, j = 10; i < j; i++) {
+    System.debug(i+1);
+}
+
+//Result 1,2,3,4,5,6,7,8,9,10
+```
+
+
 ## Referencias
 
 1. [ReferOne]()
