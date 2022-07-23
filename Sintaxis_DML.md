@@ -520,5 +520,6 @@ Insert account1, account2, contact1, contact2, contact3, case1, account3, accoun
 3. [Objetos que no pueden combinar DML](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dml_non_mix_sobjects.htm)
 4. [Objetos que no admiten DML](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dml_non_dml_objects.htm)
 5. [Bloqueo de registros](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_locking_records.htm)
+6. [LeadConvert Class](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_dml_convertLead.htm#apex_Database_LeadConvert_setOwnerId)
 
 
