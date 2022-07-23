@@ -59,13 +59,35 @@ Los métodos por su lado pueden entenderse como un bloque que recibe unos elemen
 
 La sintaxís para crear un método es:
 
-[modificador de acceso] [Tipo de dato de retorno] nombre del método (Parametro1, Parametro2){}
+[modificador de acceso] [Tipo de dato de retorno] nombre del método (Parametro1, Parametro2,..){código}
 
 ```Apex
 public Integer getEdad() { 
      return edad; 
 }
 ```
+
+Como se ve en el ejemplo anterior, cuando un método retorna un resultado se usa la palabra clave **return** al final de este. Sin embargo, un método también puede no retornar algo, en ese caso, se debe especificar la palabra **void** en su definición en vez del tipo de dato. 
+
+```Apex
+public void printMessage() { 
+    System.debug('Este es un método que no retorna nada'); 
+}
+```
+
+Aquí un método que representa una suma y que recibe dos valores Enteros como parámetros para su operación. Este método devuelve el resultado de la suma. Es importante especificar el tipo de dato en cada parámetro del método.
+
+```Apex
+public void suma(Integer valorA, Integer valorB) { 
+    return valorA + valorB;
+}
+```
+
+Los parámetros en un método, así como el resultado, son opcionales. Se pueden especificar hasta 32 parámetros. 
+
+Los métodos también pueden ser polimórficos, esto quiere decir que puedo tener más de un método con el mismo nombre, pero con diferentes parámetros.
+
+
 
 ### Modificadores de Acceso 
 
