@@ -361,6 +361,21 @@ De igual manera, es importante tener en cuenta que el Savepoint cuenta como una 
 #### Coversión de Leads
 
 
+```Apex
+Lead myLead = [Select id from Lead where Name = 'Saw Dan' limit 1];
+
+Database.LeadConvert lc = new database.LeadConvert();
+lc.setLeadId(myLead.id);
+
+LeadStatus convertStatus = [SELECT Id, MasterLabel FROM LeadStatus WHERE IsConverted=true LIMIT 1];
+lc.setConvertedStatus(convertStatus.MasterLabel);
+
+Database.LeadConvertResult lcr = Database.convertLead(lc);
+
+System.debug('Id Account: '+lcr.getAccountId());
+System.debug('Id Contact: '+lcr.getContactId());
+``` 
+
 ## Operaciones que no pueden ser combinadas en la misma transacción.
 
 Hay operaciones en ciertos objetos que no pueden ser combinadas. Esto ocurre en los objectos que alteran la visibilidad de los registros, como Usuario o Grupo por nombrar algunos.
