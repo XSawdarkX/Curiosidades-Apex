@@ -14,14 +14,38 @@ Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que 
 
 ## Clases
 
-```Apex
-for (Integer i = 0, j = 10; i < j; i++) {
-    System.debug(i+1);
-}
+Una clase, partiendo de la base del paradigma Orientado a objetos, se podría definir como una plantilla o molde, bajo el cual se pueden crear objetos. Una clase
+consta de propiedades/atributos, y métodos. 
 
-//Result 1,2,3,4,5,6,7,8,9,10
+Para definir una clase se usa la siguiente sintaxis básica:
+
+[Modificador de acceso] Class [Nombre de la clase] {}
+
+
+```Apex
+public class Vehiculo {
+
+}
 ```
 
+También se puede definir una clase dentro de otra, las clases internas son conocidas como **inner Class**, mientras que las clases principales suelen llamarse **top-level class**.
+
+```Apex
+public class Vehiculo {
+
+    class Motor{
+        
+    }
+}
+```
+
+Es importante tener presente que las top-level class solo pueden usar los modificadores de acceso Public y Global. Mientras que las inner Class pueden usar también el modificador Private. 
+
+No es necesario indicar el modificador de acceso en las inner Class, ya que por defecto tienen un valor de Private. Además, solo se permite un nivel de profundidad, es decir, no puedo crear una inner Class dentro de otra inner Class. 
+
+Si una inner Class es definida como Global, la clase principal también debe serlo. 
+
+### Modificadores de Acceso 
 
 ## Referencias
 
