@@ -360,6 +360,9 @@ De igual manera, es importante tener en cuenta que el Savepoint cuenta como una 
 
 #### Coversión de Leads
 
+El proceso de conversión estándar que se puede realizar de manera manual a través de la interfaz de usuario, también es posible ejecutarla desde Apex por medio de la clase Database.  
+
+Aquí un ejemplo de como realizarlo:
 
 ```Apex
 Lead myLead = [Select id from Lead where Name = 'Saw Dan' limit 1];
@@ -375,6 +378,8 @@ Database.LeadConvertResult lcr = Database.convertLead(lc);
 System.debug('Id Account: '+lcr.getAccountId());
 System.debug('Id Contact: '+lcr.getContactId());
 ``` 
+
+También es posible hacer un merge con una Cuenta y un Contacto ya existentes en vez de crearlos. Sin embargo, es necesario que el Contacto esté relacionado a la Cuenta. 
 
 ```Apex
 Lead myLead = [Select id from Lead where Name = 'Junca Test Saw' limit 1];
@@ -394,6 +399,11 @@ Database.LeadConvertResult lcr = Database.convertLead(lc);
 
 System.debug('Id Account: '+lcr.getAccountId());
 System.debug('Id Contact: '+lcr.getContactId());
+``` 
+El proceso de conversión por defecto transforma el Candidato en una Cuenta, en un Contacto, y en una Oportunidad. No obstante, a través del método **setDoNotCreateOpportunity()** es posible evitar la creaciín de la oportunidad.
+
+```Apex
+lc.setDoNotCreateOpportunity(true);
 ``` 
 
 ## Operaciones que no pueden ser combinadas en la misma transacción.
