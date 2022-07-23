@@ -360,7 +360,7 @@ De igual manera, es importante tener en cuenta que el Savepoint cuenta como una 
 
 #### Coversión de Leads
 
-El proceso de conversión estándar que se puede realizar de manera manual a través de la interfaz de usuario, también es posible ejecutarla desde Apex por medio de la clase Database.  
+El proceso de conversión estándar que se puede realizar de manera manual a través de la interfaz de usuario, también es posible ejecutarlo desde Apex por medio de la clase Database.  
 
 Aquí un ejemplo de como realizarlo:
 
@@ -400,11 +400,19 @@ Database.LeadConvertResult lcr = Database.convertLead(lc);
 System.debug('Id Account: '+lcr.getAccountId());
 System.debug('Id Contact: '+lcr.getContactId());
 ``` 
-El proceso de conversión por defecto transforma el Candidato en una Cuenta, en un Contacto, y en una Oportunidad. No obstante, a través del método **setDoNotCreateOpportunity()** es posible evitar la creaciín de la oportunidad.
+El proceso de conversión por defecto transforma el Candidato en una Cuenta, en un Contacto, y en una Oportunidad. No obstante, a través del método **setDoNotCreateOpportunity()** es posible evitar la creación de la oportunidad.
 
 ```Apex
 lc.setDoNotCreateOpportunity(true);
 ``` 
+
+Cuando se convierte un Candidato cuyo propietario es una cola, es necesario especificarle un usuario como owner, ya que, a diferencia del proceso manual, cuando se realiza de este modo, Salesforce intenta crear la Cuenta y el Contacto heredando el propietario del Lead, y estos objetos no permiten usar una cola para este propósito.
+
+Para ello usamos el método **setOwnerId()**
+
+```Apex
+lc.setOwnerId(ID ownerId);
+```
 
 ## Operaciones que no pueden ser combinadas en la misma transacción.
 
