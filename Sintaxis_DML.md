@@ -376,6 +376,26 @@ System.debug('Id Account: '+lcr.getAccountId());
 System.debug('Id Contact: '+lcr.getContactId());
 ``` 
 
+```Apex
+Lead myLead = [Select id from Lead where Name = 'Junca Test Saw' limit 1];
+
+Account myAccount = [Select id from Account where Id = '0014P000026NPiJQAW' limit 1];
+Contact myContact = [Select id from Contact where Id = '0034P00002SrXNbQAN' limit 1];
+
+Database.LeadConvert lc = new database.LeadConvert();
+lc.setLeadId(myLead.Id);
+lc.setAccountId(myAccount.Id);
+lc.setContactId(myContact.Id);
+
+LeadStatus convertStatus = [SELECT Id, MasterLabel FROM LeadStatus WHERE IsConverted=true LIMIT 1];
+lc.setConvertedStatus(convertStatus.MasterLabel);
+
+Database.LeadConvertResult lcr = Database.convertLead(lc);
+
+System.debug('Id Account: '+lcr.getAccountId());
+System.debug('Id Contact: '+lcr.getContactId());
+``` 
+
 ## Operaciones que no pueden ser combinadas en la misma transacción.
 
 Hay operaciones en ciertos objetos que no pueden ser combinadas. Esto ocurre en los objectos que alteran la visibilidad de los registros, como Usuario o Grupo por nombrar algunos.
