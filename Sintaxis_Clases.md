@@ -116,7 +116,10 @@ public Boolean esMayorCero(Integer resultado) {
     return resultado > 0;
 }
 ```
-
+ 
+ Es necesario tener presente como funciona la referencia a los campos primitivos y no primitivos dentro de un método. 
+ 
+ 
 
 ### Modificadores de Acceso 
 
