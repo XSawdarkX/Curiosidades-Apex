@@ -163,6 +163,44 @@ public class PassNonPrimitiveTypeExample {
 }
 ``` 
 
+Si no se especifica un modificador de acceso a la hora de definir una variable o un método, por defecto se marca como private.
+
+### Constructores
+
+Un constructor es un método especial que se invoca o ejecuta cuando instanciamos un objeto de la clase. Este método se identifica porque se llama igual que la clase, y no se especifica con un tipo de dato de retorno, ni siquiera con un void. También es importante definirlo como Public. 
+
+Por defecto todas las clases cuentan con un Constructor intrínseco, el cual no recibe argumentos. Sin embargo, se pueden definir diferentes constructores haciendo uso del polimorfismo. 
+
+Un constructor tiene como objetivo inicializar los atributos de una clase. 
+
+```Apex 
+public class TestObject {
+   
+   public Integer size;
+   
+   public TestObject() {
+      this.size = 5;
+   }
+  
+   public TestObject(Integer size) {
+      this.size = size;
+   }
+}
+``` 
+
+Para instanciar un objeto de la clase se usa la siguiente sintaxis:
+
+```Apex 
+TestObject myObject1 = new TestObject();
+TestObject myObject2 = new TestObject(10);
+
+System.debug('Size: '+myObject1.size);
+System.debug('Size: '+myObject2.size);
+
+//Result Size: 5
+//Result Size: 10
+``` 
+
 ### Modificadores de Acceso 
 
 ## Referencias
