@@ -83,10 +83,39 @@ public void suma(Integer valorA, Integer valorB) {
 }
 ```
 
-Los parámetros en un método, así como el resultado, son opcionales. Se pueden especificar hasta 32 parámetros. 
+Los parámetros en un método, así como el resultado, son opcionales. Además, se pueden especificar hasta 32 parámetros. 
 
 Los métodos también pueden ser polimórficos, esto quiere decir que puedo tener más de un método con el mismo nombre, pero con diferentes parámetros.
 
+```Apex
+public void printMessage() { 
+    System.debug('Este es un método que no retorna nada'); 
+}
+
+public void printMessage(String message) { 
+    System.debug('Este es un método que no retorna nada: '+message); 
+}
+```
+Cuando un método retorna algún valor, este puede guardarse en alguna variable, o usarse simplemente como una sentencia. 
+
+```Apex
+public void mainMethod() { 
+    Integer resultadoSuma = suma(1,3);
+    
+    if(esMayorCero(resultadoSuma)){
+       System.debug('El número es mayor a 0'); 
+    }
+    
+}
+
+public void suma(Integer valorA, Integer valorB) { 
+    return valorA + valorB;
+}
+
+public Boolean esMayorCero(Integer resultado) { 
+    return resultado > 0;
+}
+```
 
 
 ### Modificadores de Acceso 
