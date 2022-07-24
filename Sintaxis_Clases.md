@@ -117,9 +117,51 @@ public Boolean esMayorCero(Integer resultado) {
 }
 ```
  
- Es necesario tener presente como funciona la referencia a los campos primitivos y no primitivos dentro de un método. 
+Es necesario tener presente cómo funciona la referencia a los campos primitivos y no primitivos dentro de un método. Cuando uso datos primitivos como parámetros, estos solo perduran en el scope del método, una vez el método finalicee su ejecución, cualquier cambio que se haya hecho sobre la variable se pierde. 
  
+```Apex 
+public class PassPrimitiveTypeExample {
+    public static void debugStatusMessage() {
+        String msg = 'Original value';
+        processString(msg);
+        System.assertEquals(msg, 'Original value');
+    }
+    
+    public static void processString(String s) {
+        s = 'Modified value';
+    }
+}
+```
  
+Por el contrario, cuando uso un dato no primitivo, como un sobject o una colección, su referencia se mantiene a través de los métodos, por lo que cualquier cambio   que se le haya hecho se mantiene una vez finalizada la ejecución del método.  
+ 
+```Apex 
+public class PassNonPrimitiveTypeExample {
+    
+    public static void createTemperatureHistory() {
+        List<Integer> fillMe = new List<Integer>();        
+        
+        reference(fillMe);
+        System.assertEquals(fillMe.size(),5);        
+        
+        List<Integer> createMe = new List<Integer>();
+        referenceNew(createMe);
+        System.assertEquals(createMe.size(),0);     
+    }
+            
+    public static void reference(List<Integer> m) {
+        m.add(70);
+        m.add(68);
+        m.add(75);
+        m.add(80);
+        m.add(82);
+    }    
+        
+    public static void referenceNew(List<Integer> m) {
+        m = new List<Integer>{55, 59, 62, 60, 63};
+    }    
+}
+``` 
 
 ### Modificadores de Acceso 
 
