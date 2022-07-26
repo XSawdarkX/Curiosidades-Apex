@@ -53,15 +53,11 @@ Además, es posible usar clausulas como LIMIT, ORDER BY, WHERE, y especificar qu
 Teniendo en cuenta esto, los siguientes ejemplos son validos:
 
 ```Apex
-FIND {Mundo} IN NAME FIELDS RETURNING Libro__c (ORDER BY id)
-
 FIND {Mundo} IN NAME FIELDS RETURNING Libro__c (Name, N_mero_de_serie__c ORDER BY Name)
 
-FIND {Mundo} IN NAME FIELDS RETURNING Libro__c (LIMIT 3)
+FIND {Mundo} IN NAME FIELDS RETURNING Libro__c (Name LIMIT 3)
 
-FIND {Mundo} IN NAME FIELDS RETURNING Libro__c (WHERE name like 'faro')
-
-FIND {Mundo} IN NAME FIELDS RETURNING Libro__c (Name, N_mero_de_serie__c WHERE Name like 'faro')
+FIND {Mundo} IN NAME FIELDS RETURNING Libro__c (Name WHERE name like 'faro')
 ``` 
 
 Si bien la única palabra obligatoria para una consulta SOSL es **FIND**, Apex obliga a precisar en qué objetos buscar, por lo que la cláusula RETURNING también se vuelve obligatoria. 
