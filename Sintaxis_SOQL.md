@@ -166,7 +166,7 @@ Después de la cláusula GROUP BY es necesario colocar el nombre del campo por e
 Es importante saber, que no se pueden colocar más campos dentro de la consulta, únicamente por el que se va a agrupar. Sin embargo, si es posible usar más de una función de agregación en la misma consulta.
 
 ```Apex
-List<AggregateResult> groupedResults = [SELECT Nacionalidad__c, COUNT(Id) cant,COUNT(Name) cantName cant from Autor__c group by Nacionalidad__c ];
+List<AggregateResult> groupedResults = [SELECT Nacionalidad__c, COUNT(Id) cant,COUNT(Name) cantName from Autor__c group by Nacionalidad__c ];
     
 for(AggregateResult objResult :groupedResults){
     System.debug('Nacionalidad: '+objResult.get('Nacionalidad__c'));
@@ -244,12 +244,12 @@ List<Event> events = [SELECT TYPEOF What
                       WHEN Account THEN Phone 
                       WHEN Opportunity THEN Amount 
                       END 
-                      FROM Event];
+                      FROM Event WHERE What.Type IN ('Account', 'Opportunity')];
                       
 //Verificar primero con qué tipo de objeto esta asociado cada registro
 
-System.debug('events Opportunity: '+events[0].What.Amount);
-System.debug('events Account: '+events[0].What.Phone);               
+System.debug('events Account: '+events[0].What.Phone);     
+System.debug('events Opportunity: '+events[1].What.Amount);          
 ``` 
 Incluso, a través de la palabra reservada **instanceof**, la cual permite identificar si un objeto es una instancia de una clase particular, se puede dar una lógica diferente a cada tipo de objeto.
 
