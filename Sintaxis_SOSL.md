@@ -70,6 +70,12 @@ El resultado de una consulta SOSL se almacena en una lista de lista de objetos. 
 
 ```Apex
 List<List<SObject>> searchList = [FIND 'Mundo' IN NAME FIELDS RETURNING Account]; 
+
+for(List<SObject> lstsearch : searchList){
+    for(SObject obj : lstsearch){
+       System.debug('obj: '+obj); 
+    }
+}
 ``` 
 
 ```Apex
