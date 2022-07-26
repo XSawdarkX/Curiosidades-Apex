@@ -247,9 +247,11 @@ List<Event> events = [SELECT TYPEOF What
                       FROM Event WHERE What.Type IN ('Account', 'Opportunity')];
                       
 //Verificar primero con qué tipo de objeto esta asociado cada registro
+Opportunity objOpp = events[0].What;
+Account objAct = events[1].What;
 
-System.debug('events Opportunity: '+events[0].What.Amount);    
-System.debug('events Account: '+events[1].What.Phone);           
+System.debug('events Opportunity: '+objOpp.Amount);    
+System.debug('events Account: '+objAct.Phone);            
 ``` 
 Incluso, a través de la palabra reservada **instanceof**, la cual permite identificar si un objeto es una instancia de una clase particular, se puede dar una lógica diferente a cada tipo de objeto.
 
