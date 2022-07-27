@@ -348,7 +348,7 @@ A partir de esta Excepción personalizada podemos realizar lo siguiente:
 ```Apex
 try{
     throw new MyCustomException('Ocurrio un error',1);
-}catch(MyException e){ 
+}catch(MyCustomException e){ 
     System.debug('Message: ' + e.mensaje+' prioridad '+e.prioridadError);    
     System.debug('Message en mayuscula: '+e.getUppercaseMensaje());
 } 
