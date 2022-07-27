@@ -329,7 +329,7 @@ Para crear una Excepción personalizada más detallada, podemos crearla en una c
 Aquí un ejemplo sencillo de una Excepción personalizada con un nuevo constructor, un par de propiedades, y un método.
 
 ```Apex
-public class MyException extends Exception {
+public class MyCustomException extends Exception {
    public String mensaje;
    public Integer prioridadError; 
    
@@ -347,7 +347,7 @@ A partir de esta Excepción personalizada podemos realizar lo siguiente:
 
 ```Apex
 try{
-    throw new MyException('Ocurrio un error',1);
+    throw new MyCustomException('Ocurrio un error',1);
 }catch(MyException e){ 
     System.debug('Message: ' + e.mensaje+' prioridad '+e.prioridadError);    
     System.debug('Message en mayuscula: '+e.getUppercaseMensaje());
