@@ -158,23 +158,23 @@ try {
 
 ```Apex
 try {
-    List<Merchandise__c> lm = [SELECT Name FROM Merchandise__c WHERE Name = 'XYZ'];
-    System.debug(lm.size());
+    List<Libro__c> lstLibro = [SELECT Name FROM Libro__c WHERE Name = 'Test'];
+    System.debug(lstLibro.size());
     
-    Merchandise__c m = [SELECT Name FROM Merchandise__c WHERE Name = 'XYZ' LIMIT 1];
+    Libro__c objLibro = [SELECT Name FROM Libro__c WHERE Name = 'Test' LIMIT 1];
 } catch(QueryException qe) {
     System.debug('The following exception has occurred: ' + qe.getMessage());    
 }
 ``` 
-9. **SObjectException:** Ocurre cuando se genera un error manipulando un sObject, como intentar utilizar un campo de un objeto cuando este no se declaró en la consulta. 
+8. **SObjectException:** Ocurre cuando se genera un error manipulando un sObject, como intentar utilizar un campo de un objeto cuando este no se declaró en la consulta. 
 
 ```Apex
 try {
-    Invoice_Statement__c inv = new Invoice_Statement__c(Description__c='New Invoice');
-    insert inv;
+    Libro__c objLibro = new Libro__c(Name = 'New Book', IP_NumeroSerie__c = '7B');
+    insert objLibro;
     
-    Invoice_Statement__c v = [SELECT Name FROM Invoice_Statement__c WHERE Id = :inv.Id];
-    String s = v.Description__c;
+    Libro__c objLibroQuery = [SELECT Name FROM Libro__c WHERE Id = :objLibro.Id];
+    String numeroSerie = objLibroQuery.IP_NumeroSerie__c;
 } catch(SObjectException se) {
     System.debug('The following exception has occurred: ' + se.getMessage());
 }
@@ -191,8 +191,8 @@ Cuando se captura una excepción es posible obtener más información acerca de 
 
 ```Apex
 try {
-    Merchandise__c m = [SELECT Name FROM Merchandise__c LIMIT 1];
-    Double inventory = m.Total_Inventory__c;
+    Libro__c objLibro = [SELECT Id FROM Libro__c LIMIT 1];
+    String nombreLibro = objLibro.Name;
 } catch(Exception e) {
     System.debug('Exception type caught: ' + e.getTypeName());    
     System.debug('Message: ' + e.getMessage());    
@@ -202,7 +202,7 @@ try {
 }
 
 //Result Exception type caught: System.SObjectException
-//Result Message: SObject row was retrieved via SOQL without querying the requested field: Merchandise__c.Total_Inventory__c
+//Result Message: SObject row was retrieved via SOQL without querying the requested field: Libro__c.Name
 //Result Cause: null
 //Result Line number: 5
 //Result Stack trace: AnonymousBlock: line 5, column 1
