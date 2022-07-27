@@ -215,10 +215,10 @@ En este periodo de tiempo es posible utilizar la operación undetele para recupe
 Para ejecutar la operación de undelete, la consulta a los registros se debe hacer con la cláusula **ALL ROWS**, la cual permite obtener tanto los datos que aún persisten en la base, como los que se encuentran en la papelera de reciclaje. 
 
 ```Apex
-Libro__c objLibro = [Select id from Libro__c where N_mero_de_serie__c = '12B' limit 1];
-delete objLibro;
+Libro__c objLibroDelete = [Select id from Libro__c where IP_NumeroSerie__c  = '999B' limit 1];
+delete objLibroDelete;
 
-Libro__c objLibroUndelete = [Select id from Libro__c where N_mero_de_serie__c = '12B' limit 1 ALL ROWS];
+Libro__c objLibroUndelete = [Select id from Libro__c where IP_NumeroSerie__c  = '999B' limit 1 ALL ROWS];
 undelete objLibroUndelete;
 ``` 
 
@@ -233,28 +233,29 @@ A través de la clase Database, también es posible hacer conversión de Leads, 
 El siguiente ejemplo muestra el equivalente de la operación dml **insert**.
 
 ```Apex
-//Using DML
-List<Account> acctList = new List<Account>();
-acctList.add(new Account(Name='Acme1'));
-acctList.add(new Account(Name='Acme2'));
+List<Libro__c> lstLibros = new List<Libro__c>();
+    
+Libro__c objLibroFrankII = new Libro__c();
+objLibroFrankII.Name = 'Mundo Frankestein II';
+objLibroFrankII.IP_NumeroSerie__c = '7B';
 
-insert acctList;
+lstLibros.add(objLibroFrankII);
 
-//Using Database Class
-List<Account> acctList = new List<Account>();
-acctList.add(new Account(Name='Acme1'));
-acctList.add(new Account(Name='Acme2'));
+Libro__c objLibroFrankIII = new Libro__c();
+objLibroFrankIII.Name = 'Mundo Frankestein III';
 
-Database.SaveResult[] srList = Database.insert(acctList, false);
+lstLibros.add(objLibroFrankIII);    
 
-for (Database.SaveResult sr : srList) {
-    if (sr.isSuccess()) {
-        System.debug('Successfully inserted account. Account ID: ' + sr.getId());
+Database.SaveResult[] srLstLibros = Database.insert(lstLibros, false);
+
+for (Database.SaveResult objSr : srLstLibros) {
+    if (objSr.isSuccess()) {
+        System.debug('Successfully inserted Libro ID: ' + objSr.getId());
     } else {      
-        for(Database.Error err : sr.getErrors()) {
+        for(Database.Error err : objSr.getErrors()) {
             System.debug('The following error has occurred.');                    
             System.debug(err.getStatusCode() + ': ' + err.getMessage());
-            System.debug('Account fields that affected this error: ' + err.getFields());
+            System.debug('Libro fields that affected this error: ' + err.getFields());
         }
     }
 }
@@ -294,27 +295,28 @@ Aquí un ejemplo más completo:
 ```Apex
 Libro__c objLibro = new Libro__c();
 objLibro.Name = 'Java';
+objLibro.IP_NumeroSerie__c = '70B';
 insert objLibro;
 
-String numeroSerie = [SELECT Id,N_mero_de_serie__c  FROM Libro__c WHERE Name = 'Java' limit 1].N_mero_de_serie__c;
+String numeroSerie = [SELECT Id,IP_NumeroSerie__c FROM Libro__c WHERE Name = 'Java' limit 1].IP_NumeroSerie__c;
 System.debug('numeroSerie antes Savepoint: '+numeroSerie);
 
 Savepoint sp = Database.setSavepoint();
 
-objLibro.N_mero_de_serie__c = '20B';
+objLibro.IP_NumeroSerie__c = '20B';
 update objLibro;
 
-numeroSerie = [SELECT Id,N_mero_de_serie__c  FROM Libro__c WHERE Name = 'Java' limit 1].N_mero_de_serie__c;
+numeroSerie = [SELECT Id,IP_NumeroSerie__c FROM Libro__c WHERE Name = 'Java' limit 1].IP_NumeroSerie__c;
 System.debug('numeroSerie durante Savepoint: '+numeroSerie);
 
 Database.rollback(sp);
 
-numeroSerie = [SELECT Id,N_mero_de_serie__c  FROM Libro__c WHERE Name = 'Java' limit 1].N_mero_de_serie__c;
+numeroSerie = [SELECT Id,IP_NumeroSerie__c FROM Libro__c WHERE Name = 'Java' limit 1].IP_NumeroSerie__c;
 System.debug('numeroSerie después rollback: '+numeroSerie);
 
-//Result numeroSerie antes Savepoint: null
+//Result numeroSerie antes Savepoint: 70B
 //Result numeroSerie durante Savepoint: 20B
-//Result numeroSerie después rollback: null
+//Result numeroSerie después rollback: 70B
 ``` 
 
 Aunque la sentencia **Database.rollback** devuelve los DML hechos después del **Savepoint**, si se realiza una operación de insert, el Id no se limpia. Esto quiere decir que, si se intenta insertar nuevamente la variable que definimos después del Savepoint, el sistema arrojara un error diciendo que no se puede insertar un registro que ya tiene asociado un Id. Asimismo, si se intenta actualizar la variable que definimos después del Savepoint, el sistema arrojara un error diciendo que no se puede modificar un registro que no existe.
@@ -323,16 +325,17 @@ Aunque la sentencia **Database.rollback** devuelve los DML hechos después del *
 Savepoint sp1 = Database.setSavepoint();
 
 Libro__c objLibro = new Libro__c();
-objLibro.Name = 'Java';
-Insert objLibro;
+objLibro.Name = 'Java II';
+objLibro.IP_NumeroSerie__c = '70B';
+insert objLibro;
 
 Database.rollback(sp1);
 
 System.debug('objLibro Id: '+objLibro.Id);
-System.debug('objLibro: '+[SELECT Id FROM Libro__c WHERE Name = 'Java' LIMIT 1]);
+System.debug('objLibro: '+[SELECT Id FROM Libro__c WHERE Name = 'Java II' LIMIT 1]);
 
 try{
-    Insert objLibro;    
+    insert objLibro;    
 }catch(DMLException e){
     System.debug('Erro: '+e);
 }
@@ -350,8 +353,9 @@ Savepoint sp1 = Database.setSavepoint();
 Savepoint sp2 = Database.setSavepoint();
 
 Libro__c objLibro = new Libro__c();
-objLibro.Name = 'Java';
-Insert objLibro;
+objLibro.Name = 'Java II';
+objLibro.IP_NumeroSerie__c = '70B';
+insert objLibro;
 
 Database.rollback(sp1);
 
