@@ -126,9 +126,9 @@ Libro__c objLibro = [SELECT Id,Name,Autor__c FROM Libro__c LIMIT 1];
 Id idAutor = objLibro.Autor__c;
 
 //Representación punto de acceso
-Libro__c objLibro = [SELECT Id,Name,Autor__r.Name, Autor__r.Nacionalidad__c FROM Libro__c LIMIT 1];
+Libro__c objLibro = [SELECT Id,Name,Autor__r.Name, Autor__r.IP_Nacionalidad__c FROM Libro__c LIMIT 1];
 String nombreAutor = objLibro.Autor__r.Name;
-String nacionalidadAutor =  objLibro.Autor__r.Nacionalidad__c;  
+String nacionalidadAutor =  objLibro.Autor__r.IP_Nacionalidad__c;  
 ``` 
 
 En el ejemplo anterior obtenemos el nombre y la nacionalidad del Autor asociado a un Libro. 
@@ -153,10 +153,10 @@ Cuando se trabaja con este tipo de funciones, el resultado se guarda en una List
 AggregateResult es un objeto estándar de solo lectura que únicamente se usa para guardar los resultados en este tipo de escenarios. 
 
 ```Apex
-List<AggregateResult> groupedResults = [SELECT Nacionalidad__c, COUNT(Id) cant from Autor__c group by Nacionalidad__c ];
+List<AggregateResult> groupedResults = [SELECT IP_Nacionalidad__c, COUNT(Id) cant from Autor__c group by IP_Nacionalidad__c ];
     
 for(AggregateResult objResult :groupedResults){
-    System.debug('Nacionalidad: '+objResult.get('Nacionalidad__c'));
+    System.debug('Nacionalidad: '+objResult.get('IP_Nacionalidad__c'));
     System.debug('Cantiad: '+objResult.get('cant'));
 }
 ``` 
@@ -166,10 +166,10 @@ Después de la cláusula GROUP BY es necesario colocar el nombre del campo por e
 Es importante saber, que no se pueden colocar más campos dentro de la consulta, únicamente por el que se va a agrupar. Sin embargo, si es posible usar más de una función de agregación en la misma consulta.
 
 ```Apex
-List<AggregateResult> groupedResults = [SELECT Nacionalidad__c, COUNT(Id) cant,COUNT(Name) cantName from Autor__c group by Nacionalidad__c ];
+List<AggregateResult> groupedResults = [SELECT IP_Nacionalidad__c, COUNT(Id) cant,COUNT(Name) cantName from Autor__c group by IP_Nacionalidad__c ];
     
 for(AggregateResult objResult :groupedResults){
-    System.debug('Nacionalidad: '+objResult.get('Nacionalidad__c'));
+    System.debug('Nacionalidad: '+objResult.get('IP_Nacionalidad__c'));
     System.debug('Cantiad: '+objResult.get('cant'));
     System.debug('Cantiad Name: '+objResult.get('cantName'));
 }
@@ -179,10 +179,10 @@ También es pertinente aclarar, que es posible dar un alias a las funciones de a
 Si no se especifica uno, por defecto Salesforce agrega como alias "expri", donde la i representa el orden de la función agregada que no cuenta con un alias personalizado. La i comienza en 0. 
 
 ```Apex
-List<AggregateResult> groupedResults = [SELECT Nacionalidad__c, COUNT(Id) from Autor__c group by Nacionalidad__c ];
+List<AggregateResult> groupedResults = [SELECT IP_Nacionalidad__c, COUNT(Id) from Autor__c group by IP_Nacionalidad__c];
     
 for(AggregateResult objResult :groupedResults){
-    System.debug('Nacionalidad: '+objResult.get('Nacionalidad__c'));
+    System.debug('Nacionalidad: '+objResult.get('IP_Nacionalidad__c'));
     System.debug('Cantiad: '+objResult.get('expr0'));
 }
 ``` 
@@ -213,9 +213,9 @@ SELECT Id FROM Account WHERE Id IN (<list of account IDs>)
 Otra manera de mejorar el rendimiento de una consulta es filtrando los valores nulos.
 
 ```Apex
-List<String> lstNacionalidades = new List<String>{'Colombia','México'};
-List<Autor__c> lstAutores = [SELECT Id,Name,Nacionalidad__c FROM Autor__c where Nacionalidad__c IN: lstNacionalidades
-                            AND Nacionalidad__c != null];    
+List<String> lstNacionalidades = new List<String>{'Colombia','Estados Unidos'};
+List<Autor__c> lstAutores = [SELECT Id,Name,IP_Nacionalidad__c FROM Autor__c where IP_Nacionalidad__c IN: lstNacionalidades
+                            AND IP_Nacionalidad__c != null];   
 ``` 
 
 ## Trabajando con relaciones polimorficas
@@ -231,10 +231,13 @@ Es posible hacer consultas filtrando los tipos de objetos con el calificador **T
 
 ```Apex
 //Me retorna los eventos asociados a Cuentas y Oportunidades
-List<Event> events = [SELECT Description FROM Event WHERE What.Type IN ('Account', 'Opportunity')];
+List<Event> lstevents = [SELECT Subject FROM Event WHERE What.Type IN ('Account', 'Opportunity')];
 
 //Me retorna los Autores donde el propietario sea un Usuario
 List<Autor__c> lstAutores = [Select id,Name from Autor__c where Owner.Type = 'User'];   
+
+//Me retorna los Autores donde el propietario sea una Cola
+List<Autor__c> lstAutores = [Select id,Name from Autor__c where Owner.Type = 'Queue'];
 ``` 
 
 También se puede usar la Clausula **TYPEOF** para especificar los campos que quiero traer por cada tipo de objeto.
@@ -247,8 +250,8 @@ List<Event> events = [SELECT TYPEOF What
                       FROM Event WHERE What.Type IN ('Account', 'Opportunity')];
                       
 //Verificar primero con qué tipo de objeto esta asociado cada registro
-Opportunity objOpp = events[0].What;
-Account objAct = events[1].What;
+Account objAct = events[0].What;
+Opportunity objOpp = events[1].What;
 
 System.debug('events Opportunity: '+objOpp.Amount);    
 System.debug('events Account: '+objAct.Phone);            
@@ -269,7 +272,7 @@ Es posible usar variables de Apex para interactuar con las consultas SOQL, solo 
 
 ```Apex
 List<String> lstObjetos = new List<String>{'Account', 'Opportunity'};
-List<Event> lstEvents = [SELECT Description FROM Event WHERE What.Type IN :lstObjetos];
+List<Event> lstEvents = [SELECT Subject FROM Event WHERE What.Type IN :lstObjetos];
 ``` 
 Las variables solo se pueden usar con las cláusulas:
 
@@ -285,7 +288,7 @@ Las variables solo se pueden usar con las cláusulas:
 Con la cláusula **ALL ROWS** es posible consultar todos los registros de un objeto, incluso aquellos que se encuentran en la papelera de reciclaje.
 
 ```Apex
-List<Event> lstEvents = [SELECT Description FROM Event WHERE What.Type IN :lstObjetos ALL ROWS];
+Integer cantidadLibros = [SELECT count() FROM Libro__c ALL ROWS];
 ``` 
 
 ## Cosas a tener en cuenta
@@ -305,13 +308,13 @@ List<Event> lstEvents = [SELECT Description FROM Event WHERE What.Type IN :lstOb
 
 ```Apex
 //Retorna todos los libros cuyo nombre inicie con la palabra Daniel
-List<Libro__c> lstLibros = [Select id,Name,Autor__c from Libro__c where Name like 'Daniel%'];
+List<Libro__c> lstLibros = [Select id,Name,Autor__c from Libro__c where Name like 'Mundo%'];
 
 //Retorna todos los libros cuyo nombre finalice con la palabra Daniel
-List<Libro__c> lstLibros = [Select id,Name,Autor__c from Libro__c where Name like '%Daniel'];
+List<Libro__c> lstLibros = [Select id,Name,Autor__c from Libro__c where Name like '%Mundo'];
 
 //Retorna todos los libros cuya palabra Daniel este contenida en el nombre
-List<Libro__c> lstLibros = [Select id,Name,Autor__c from Libro__c where Name like '%Daniel%'];
+List<Libro__c> lstLibros = [Select id,Name,Autor__c from Libro__c where Name like '%Mundo%'];
 ``` 
 5. La cláusula **ORDER BY** permite ordenar los resultados en base a un campo. Por defecto el resultado se ordena de manera ascendente, es decir, de menor a mayor. Para cambiar esto se pueden usar las palabras **ASC ** o **DESC**. 
 
