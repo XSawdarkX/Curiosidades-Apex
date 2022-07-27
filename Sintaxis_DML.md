@@ -371,12 +371,12 @@ El proceso de conversión estándar que se puede realizar de manera manual a tra
 Aquí un ejemplo de como realizarlo:
 
 ```Apex
-Lead myLead = [Select id from Lead where Name = 'Saw Dan' limit 1];
+Lead objLead = [Select id from Lead where Name = 'Test Lead to Convert' limit 1];
 
 Database.LeadConvert lc = new database.LeadConvert();
-lc.setLeadId(myLead.id);
+lc.setLeadId(objLead.id);
 
-LeadStatus convertStatus = [SELECT Id, MasterLabel FROM LeadStatus WHERE IsConverted=true LIMIT 1];
+LeadStatus convertStatus = [SELECT Id, MasterLabel FROM LeadStatus WHERE IsConverted = true LIMIT 1];
 lc.setConvertedStatus(convertStatus.MasterLabel);
 
 Database.LeadConvertResult lcr = Database.convertLead(lc);
@@ -430,37 +430,38 @@ Tú no puedes actualizar una Cuenta y el rol de un usuario en una misma transacc
 //Este código arroja un error: MIXED_DML_OPERATION
 
 Libro__c objLibro = new Libro__c();
-objLibro.Name = 'Java';
+objLibro.Name = 'Apex';
+objLibro.IP_NumeroSerie__c  = '100B';
 Insert objLibro;
 
-User objUser = [SELECT Email,userroleid  FROM User WHERE Profile.Name != null limit 1];
-UserRole r = [SELECT Id FROM UserRole WHERE Name='CEO'];
-objUser.Email = 'Test@Test.com';
-objUser.userroleid = r.Id;
+UserRole objRole = [SELECT Id FROM UserRole WHERE Name='CEO'];
+
+User objUser = [SELECT Email,userroleid  FROM User WHERE Name = 'Aprendis' limit 1];
+objUser.userroleid = objRole.Id;
 update objUser;
 ``` 
 ```Apex
 //Forma correcta
 
-public class MixedDMLFuture {
-    public static void useFutureMethod() {
+public class IP_MixedOperation_cls {
+    
+	public static void createBook() {
 
         Libro__c objLibro = new Libro__c();
-        objLibro.Name = 'Java';
-        Insert objLibro;
+		objLibro.Name = 'Apex';
+		objLibro.IP_NumeroSerie__c  = '100B';
+		Insert objLibro;
         
-        Util.insertUserWithRole('Test@Test.com');        
+        updateRoleUser('CEO');        
     }
-}
-
-public class Util {
+    
     @future
-    public static void insertUserWithRole(String email) {
+    public static void updateRoleUser(String rol) {
 
-       User objUser = [SELECT Email,userroleid  FROM User WHERE Profile.Name != null limit 1];
-       UserRole r = [SELECT Id FROM UserRole WHERE Name='CEO'];
-       objUser.Email = email;
-       objUser.userroleid = r.Id;
+       UserRole objRole = [SELECT Id FROM UserRole WHERE Name = :rol];
+       
+       User objUser = [SELECT Email,userroleid  FROM User WHERE Name = 'Aprendis' limit 1];
+       objUser.userroleid = objRole.Id;
        update objUser;
     }
 }
