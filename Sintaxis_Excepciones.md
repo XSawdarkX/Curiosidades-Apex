@@ -370,6 +370,7 @@ try {
     for(Integer i = 0; i < 160; i++){
     	Libro__c objLibro = new Libro__c();
     	objLibro.Name = 'Harry Potter '+i;
+	objLibro.IP_NumeroSerie__c = i+'B';
     	insert objLibro;    
     }
 }catch(Exception e) {
