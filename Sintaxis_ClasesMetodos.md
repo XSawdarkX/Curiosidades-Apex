@@ -51,6 +51,27 @@ IP_ReferenceMethodExample_cls objReference = new IP_ReferenceMethodExample_cls()
 objReference.createTemperatureHistory();
 ```
 
+### Explicación modificadores de acceso
+
+
+```Apex
+JAVA         APEX
+Default      private
+private      protected
+protected    public
+public       global 
+
+JAVA
+
+Paquete 1
+	Clase 1
+	Clase 2
+Paquete 2
+	Clase 3
+```
+
+
+
 ```Apex
 IP_Vehiculo_cls objVehiculo = new IP_Vehiculo_cls(IP_Vehiculo_cls.tipovehiculo.AEREO,'002','Rojo',6000);
 System.debug('objVehiculo: '+objVehiculo);
