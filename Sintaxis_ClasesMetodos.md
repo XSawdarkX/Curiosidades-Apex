@@ -188,6 +188,42 @@ System.debug('Area cuadrado: '+cuadrado.area());
 IP_Figura_itf circulo = new IP_Circulo_cls(3);
 System.debug('Area cuadrado: '+circulo.area());
 ```
+### Propiedades
+
+Usar la clase **IP_Propiedades_cls**
+
+Las propiedades son similares a las variables, pero permiten agregar una lógica antes de asignarle o obtener un valor de ellas.  
+
+```Apex
+IP_Propiedades_cls objPropiedades = new IP_Propiedades_cls();
+objPropiedades.edad = 4;
+System.debug('Edad: '+objPropiedades.edad);
+```
+
+Las pripedades pueden ser de : 
+
+- read only
+- write only
+- read-write
+
+```Apex
+IP_Propiedades_cls objPropiedades = new IP_Propiedades_cls();
+objPropiedades.nombre = 'Daniel';
+
+IP_Propiedades_cls objPropiedades = new IP_Propiedades_cls();
+objPropiedades.color = 'Rojo';
+System.debug('Color: '+objPropiedades.color);
+
+IP_Propiedades_cls objPropiedades = new IP_Propiedades_cls();
+objPropiedades.aplicaDescuento = true;
+System.debug('¿Aplica descuento?: '+objPropiedades.aplicaDescuento);
+```
+Los accesores de propiedad pueden tener sus propios modificadores de acceso, pero estos deben ser de un nivel más bajo que el modificador de acceso de la propiedad.
+
+```Apex
+IP_Propiedades_cls objPropiedades = new IP_Propiedades_cls();
+objPropiedades.descuento = 2.5;
+```
 
 ## Referencias
 
