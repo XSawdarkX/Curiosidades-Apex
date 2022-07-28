@@ -15,9 +15,34 @@ Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que 
 ## Ejemplos Clases
 
 ```Apex
+IP_Calculadora_cls objCalculadora = new IP_Calculadora_cls();
+System.debug('resultado inicial: '+objCalculadora.resultado);
+
+Integer resultadoSuma = objCalculadora.suma(2,3);
+System.debug('resultado operación 1: '+resultadoSuma);
+
+objCalculadora.suma(objCalculadora.resultado,5);
+System.debug('resultado operación 2: '+objCalculadora.resultado);
+
+objCalculadora.resetearResultado();
+
+objCalculadora.suma(1,5);
+System.debug('resultado operación 3: '+objCalculadora.resultado);
+
+if(objCalculadora.suma(objCalculadora.resultado,5) > 10)
+    system.debug('Es mayor');
+else
+    system.debug('Es menor');
+```
+
+```Apex
 IP_Vehiculo_cls objVehiculo = new IP_Vehiculo_cls(IP_Vehiculo_cls.tipovehiculo.AEREO,'002','Rojo',6000);
 System.debug('objVehiculo: '+objVehiculo);
 ```
+
+
+
+
 
 ## Referencias
 
