@@ -14,6 +14,10 @@ Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que 
 
 ## Ejemplos Clases
 
+### Prueba variables y métodos
+
+Usar la clase **IP_Calculadora_cls**
+
 ```Apex
 IP_Calculadora_cls objCalculadora = new IP_Calculadora_cls();
 System.debug('resultado inicial: '+objCalculadora.resultado);
