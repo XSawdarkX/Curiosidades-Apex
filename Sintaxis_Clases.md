@@ -203,6 +203,23 @@ System.debug('Size: '+myObject2.size);
 
 ### Modificadores de Acceso 
 
+**private:** El atributo o el método solo son accesibles a través de la misma clase donde se definen.
+
+**protected:** El atributo o el método solo son accesibles por las subclases o por las clases que extienden de la clase principal donde fueron definidos.
+
+**publico:** El atributo o el método son accesibles desde cualquier clase del mismo paquete. 
+
+**global:** El atributo o el método son accesibles desde cualquier clase del mismo paquete o desde un paquete/aplicación externa. 
+
+Entiendase por paquete la misma instancia. 
+
+Una aplicación externa puede representar otra instancia o otro sistema que intenta acceder al nuestro a través de un servicio web por ejemplo. 
+
+
+
+
+
+
 ## Referencias
 
 1. [ReferOne]()
