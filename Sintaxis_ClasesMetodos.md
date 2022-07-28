@@ -15,9 +15,8 @@ Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que 
 ## Ejemplos Clases
 
 ```Apex
-public class Vehiculo {
-
-}
+IP_Vehiculo_cls objVehiculo = new IP_Vehiculo_cls(IP_Vehiculo_cls.tipovehiculo.AEREO,'002','Rojo',6000);
+System.debug('objVehiculo: '+objVehiculo);
 ```
 
 ## Referencias
