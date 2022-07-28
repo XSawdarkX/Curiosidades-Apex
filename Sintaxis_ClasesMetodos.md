@@ -96,6 +96,42 @@ System.debug('objVehiculo2 Descuento: '+objVehiculo2.getDescuento());
 System.debug('objVehiculo3 Descuento: '+objVehiculo3.getDescuento());
 ```
 
+### Clases abstractas
+
+Usar las clases **IP_Animal_cls**,**IP_Gato_cls**, y **IP_Pato_cls**. 
+
+Las clases abstractas son similares a las clases convecionales pero su objetivo es definir el que se debe de hacer, dejando a las clases que la extienden que especifiquen el como se debe de hacer. 
+
+De podría decir que son las clases padre.
+
+- No se pueden instanciar.
+- Puede tener sus atributos como cualquier otra clase.
+- Puede tener métodos normales, métodos abstractos, y métodos virtuales.
+- No es obligatorio o no arroja error el no declarar un método abstracto, pero la idea es usarlos.
+- Los métodos abstractos solo pueden ser declarados en clases abstractas y no pueden tener cuerpo
+- La clases normales pueden extender de las clases abstractas
+- Cuando una clase normal extiende de una clase abstracta, debe implementar y sobreescribir todos sus métodos abstractos.
+- Un clase no más puede extender de otra clase, pero se pueden hacer extensiones en cascada. La clase de más bajo nivel es la que debe implementar y sobreescribir 
+todos los métodos abtractos
+
+
+```Apex
+IP_Animal_cls animal = new IP_Animal_cls();
+
+IP_Gato_cls gato = new IP_Gato_cls();
+
+IP_Animal_cls gato = new IP_Gato_cls();
+gato.nombre = 'Pelusa';
+gato.imprimirNombre();
+gato.caminar();
+
+IP_Animal_cls pato = new IP_Pato_cls();
+pato.nombre = 'Donald';
+pato.imprimirNombre();
+pato.caminar();
+```
+
+### Clases virtuales
 
 ## Referencias
 
