@@ -41,7 +41,10 @@ else
 
 ### Probar referencias de métodos
 
+
 Usar la clase **IP_ReferenceMethodExample_cls**
+
+Scope : es el contexto o el ambito en el cual se ejcuta cierto código. 
 
 ```Apex
 IP_ReferenceMethodExample_cls objReference = new IP_ReferenceMethodExample_cls();
@@ -53,6 +56,8 @@ objReference.createTemperatureHistory();
 
 ### Explicación modificadores de acceso
 
+Los modificadores de acceso son palabras claves que usamos para definir la accesibilidad hacia un miembro de la clase.
+Un miembro puede ser un atributo o un método.
 
 ```Apex
 JAVA         APEX
