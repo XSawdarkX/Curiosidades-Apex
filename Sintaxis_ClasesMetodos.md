@@ -70,11 +70,30 @@ Paquete 2
 	Clase 3
 ```
 
-## Ejemplo estatico
+### Ejemplo estatico y constructores
+
+Usar la clase  **IP_Vehiculo_cls**. Para probar ejecutar el código así, y luego colocando el atributo descuento como estatico.
 
 ```Apex
-IP_Vehiculo_cls objVehiculo = new IP_Vehiculo_cls(IP_Vehiculo_cls.tipovehiculo.AEREO,'002','Rojo',6000);
-System.debug('objVehiculo: '+objVehiculo);
+IP_Vehiculo_cls objVehiculo1 = new IP_Vehiculo_cls(IP_Vehiculo_cls.tipovehiculo.AEREO,'002','Rojo',6000);
+System.debug('objVehiculo1: '+objVehiculo1);
+
+IP_Vehiculo_cls objVehiculo2 = new IP_Vehiculo_cls(IP_Vehiculo_cls.tipovehiculo.ACUATICO,'003','Azul',7000);
+System.debug('objVehiculo2: '+objVehiculo2);
+
+IP_Vehiculo_cls objVehiculo3 = new IP_Vehiculo_cls();
+System.debug('objVehiculo3: '+objVehiculo3);
+
+System.debug('DESCUENTOS');
+System.debug('objVehiculo1 Descuento: '+objVehiculo1.getDescuento());
+System.debug('objVehiculo2 Descuento: '+objVehiculo2.getDescuento());
+System.debug('objVehiculo3 Descuento: '+objVehiculo3.getDescuento());
+
+System.debug('ANULAR DESCUENTO VEHICULO 1');
+objVehiculo1.anularDescuento();
+System.debug('objVehiculo1 Descuento: '+objVehiculo1.getDescuento());
+System.debug('objVehiculo2 Descuento: '+objVehiculo2.getDescuento());
+System.debug('objVehiculo3 Descuento: '+objVehiculo3.getDescuento());
 ```
 
 
