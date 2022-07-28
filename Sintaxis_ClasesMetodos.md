@@ -39,13 +39,22 @@ else
     system.debug('Es menor');
 ```
 
+### Probar referencias de métodos
+
+Usar la clase **IP_ReferenceMethodExample_cls**
+
+```Apex
+IP_ReferenceMethodExample_cls objReference = new IP_ReferenceMethodExample_cls();
+objReference.debugStatusMessage();
+
+IP_ReferenceMethodExample_cls objReference = new IP_ReferenceMethodExample_cls();
+objReference.createTemperatureHistory();
+```
+
 ```Apex
 IP_Vehiculo_cls objVehiculo = new IP_Vehiculo_cls(IP_Vehiculo_cls.tipovehiculo.AEREO,'002','Rojo',6000);
 System.debug('objVehiculo: '+objVehiculo);
 ```
-
-
-
 
 
 ## Referencias
