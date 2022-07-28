@@ -133,6 +133,34 @@ pato.caminar();
 
 ### Clases virtuales
 
+Usar las clases **IP_Bebida_cls**,**IP_Agua_cls**,**IP_Gaseosa_cls**, y **IP_Jugo_cls**
+
+Las clases virtuales son similares a las abstractas:
+
+- Puede tener sus atributos como cualquier otra clase. 
+- La clases normales pueden extender de las clases virtuales
+- Un clase no más puede extender de otra clase, pero se pueden hacer extensiones en cascada. La clase de más bajo nivel es la que puede implementar y sobreescribir 
+todos los métodos abtractos
+
+pero se diferencian en:
+
+- Solo pueden tener métodos normales y virtuales.
+- Los métodos virtuales pueden tener cuerpo
+- Yo puedo o no implementar y sobreescribir un método virtual cuando extiendo de una clase virtual
+- Las clases virtuales pueden ser instanciadas
+
+```Apex
+IP_Bebida_cls agua = new IP_Agua_cls();
+agua.nombre = 'Cristal';
+agua.imprimirNombre();
+agua.obtenerSabor();
+
+IP_Bebida_cls gaseosa = new IP_Gaseosa_cls();
+gaseosa.nombre = 'Pepsi';
+gaseosa.imprimirNombre();
+gaseosa.obtenerSabor();
+```
+
 ## Referencias
 
 1. [ReferOne]()
