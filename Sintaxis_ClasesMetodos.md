@@ -70,7 +70,7 @@ Paquete 2
 	Clase 3
 ```
 
-
+## Ejemplo estatico
 
 ```Apex
 IP_Vehiculo_cls objVehiculo = new IP_Vehiculo_cls(IP_Vehiculo_cls.tipovehiculo.AEREO,'002','Rojo',6000);
