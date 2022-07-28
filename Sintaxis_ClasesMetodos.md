@@ -12,8 +12,13 @@ Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que 
 - [Manejo de excepciones](https://github.com/XSawdarkX/Curiosidades-Apex/blob/main/Sintaxis_Excepciones.md)
 - Definición de clases y métodos
 
-## Clases
+## Ejemplos Clases
 
+```Apex
+public class Vehiculo {
+
+}
+```
 
 ## Referencias
 
