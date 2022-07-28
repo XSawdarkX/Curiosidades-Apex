@@ -135,6 +135,8 @@ pato.caminar();
 
 Usar las clases **IP_Bebida_cls**,**IP_Agua_cls**,**IP_Gaseosa_cls**, y **IP_Jugo_cls**
 
+Usar La clase **IP_Jugo_cls** para probar el modificador de acceso Protected
+
 Las clases virtuales son similares a las abstractas:
 
 - Puede tener sus atributos como cualquier otra clase. 
@@ -159,6 +161,27 @@ IP_Bebida_cls gaseosa = new IP_Gaseosa_cls();
 gaseosa.nombre = 'Pepsi';
 gaseosa.imprimirNombre();
 gaseosa.obtenerSabor();
+```
+
+### Interfaces
+
+Usar las clases **IP_Figura_itf**, **IP_Cuadrado_cls**., y **IP_Circulo_cls**
+
+Una interfaz permite es parecida a una clase abtracta pero:
+
+- Una clase puede implementar varias interfaces
+- Una interfaz solo puede contener cuerpos sin métodos
+- No se puede especificar un modificador de acceso en los métodos
+- No se pueden definir atributos
+
+Al igual que la clase abstracta, cuando se implementa una interfaz, se deben implementar todos sus métodos. Sin embargo, no es necesario la palabra override para hacerlo.
+
+```Apex
+IP_Figura_itf cuadrado = new IP_Cuadrado_cls(3);
+System.debug('Area cuadrado: '+cuadrado.area());
+
+IP_Figura_itf circulo = new IP_Circulo_cls(3);
+System.debug('Area cuadrado: '+circulo.area());
 ```
 
 ## Referencias
