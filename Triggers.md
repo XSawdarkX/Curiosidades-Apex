@@ -11,14 +11,14 @@ un Trigger se ejecuta después de aplicar alguna de las siguientes operaciones:
 - upsert
 - undelete
 
-Se pueden definir Triggers para objetos estpandar y personalizados.
+Se pueden definir Triggers para objetos estándar y personalizados.
 
 Hay dos tipos de triggers: 
 
-- Before Triggers: Son usados para validar o actulizar valores antes de que el registro se guarde en la base de datos. 
-- After Triggers: Son usados para acceder a valores que ya se encuentran persistidos en la base de datos. También para hacer cambios en otros registros diferentes a los que dispararon el trigger.
+- **Before Triggers:** Son usados para validar o actulizar valores antes de que el registro se guarde en la base de datos. 
+- **After Triggers:** Son usados para acceder a valores que ya se encuentran persistidos en la base de datos. También para hacer cambios en otros registros diferentes a los que dispararon el trigger.
 
-Los registros que disparan el trigger, son de solo lectura en un after. No es posible aplicar un dml sobre el mismo registro que disparo un trrigger en el before.
+Los registros que disparan el trigger, son de solo lectura en un after. No es posible aplicar un dml sobre el mismo registro que disparo un trigger en el before.
 
 Si necesito hacer un callout en un Trigger, este se debe ejecutar en un contexto asincrono para no bloquear el proceso.  
 
@@ -35,8 +35,25 @@ Si la ejecución del trigger resulta exitosa, se hace un commmit automaticamente
 
 ## Variables de contexto
 
-Para identificar que operación esta disparando nuestro trigger, así como obtener el o el conjunto de registros que lo estan disparando, usamos lo que se conoce como variables de contexto, todas contenidad en la clase **System.trigger** 
+Para identificar que operación esta disparando nuestro trigger, así como obtener el o el conjunto de registros que lo estan disparando, usamos lo que se conoce como variables de contexto, todas contenidad}s en la clase **System.trigger** 
 
+- **operationType:** Retorna un Enum correspondiente a la operación actual. 
+- **Size** : Permite saber la cantidad de registros que disparo la operación. 
 
+```Apex
+System.debug('Operación: '+Trigger.operationType);
+System.debug('Número registro: '+Trigger.size);
+```
+- **isInsert:** Esta variable me retorna un true si el trigger se esta disparando por una operación de insert. Cada operación tiene su propia variable. 
 
+```Apex
+System.debug('¿La operación es insert?: '+Trigger.isInsert);
+System.debug('¿La operación es update?: '+Trigger.isUpdate);
+```
 
+- **isBefore y isAfter:** Me permiten saber si el trigger se esta ejecutando en un contexto de Before o After. 
+
+```Apex
+System.debug('¿La operación esta en un Before?: '+Trigger.isBefore);
+System.debug('¿La operación esta en un After?: '+Trigger.isAfter);
+```
