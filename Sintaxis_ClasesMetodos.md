@@ -224,6 +224,50 @@ Los accesores de propiedad pueden tener sus propios modificadores de acceso, per
 IP_Propiedades_cls objPropiedades = new IP_Propiedades_cls();
 objPropiedades.descuento = 2.5;
 ```
+### Clases de prueba
+
+Usae la clase de prueba **IP_Calculadora_tst**. 
+
+Son clases que nos permiten comprobar que la aplicación funcione como se espera. 
+
+Para definir una clase de prueba se debe usar la notación @isTest. La clase de prueba puede ser private, public, y global. 
+
+Una clase de prueba tiene métodos de prueba, estos métodos también deben contar con la anotación @isTest, aunque es posible usar la palabara clave **testmethod**, según la documentación de Salesforce, esta forma ya es obsoleta y recomiendan siempre usar la anotación. [documentación](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_annotation_isTest.htm)
+
+También es posible tener métodos auxiliares que no usan la anotación.
+
+Además, Salesforce recomienda validar:
+
+- Con un único registro
+- Con multiples registros
+- Comportamientos positivos
+- Comportamientos negativos como un catch por ejemplo
+- Comportamientos restrictivos de usuarios
+
+Si se necesia cubrir métodos o usar atirbutos privados de la clase que se esta cubriendo, es necesario usar la anotación @TestVisible en ellos.
+
+Por defecto las clases de prueba no pueden ver los registros de los objetos estandar o personalizados. Solo aquellos objetos estandar que son usados para gestionar la organización o la metadata, como :
+
+- Usuario
+- Perfil
+- Recortype
+
+Para visualizar los datos de la instancia es necesario usar la anotación IsTest(SeeAllData=true), aunque se recomienda, en lo posible, crear la información que se va a usar en la misma clase de prueba. 
+
+Esta anotación puede usarse a nivel de la clase, para que aplique a todos los métodos, o a nivel de una función especifica. 
+
+También es posible cargar datos desde un recurso estatico.
+
+```Apex
+List<sObject> ls = Test.loadData(Account.sObjectType, 'myResource');
+```
+
+#### Recomendaciones
+
+1. Usar una Tets utily class o Test data factory. Esta clase se va a encargar de crear los registros de la mayoria de los objetos custom o estandar, para poder usarlos como insumo en las clases de prueba
+2. utilizar un método principal con la anotación @testSetup, en este método se va a llamar a la Tets utily class para crear toda la información. Y después cada método de la clase de prueba puede acceder a esta información si necesidad de crear la data en cada método. Si se usa la anotación IsTest(SeeAllData=true), este método no puede ser declarado. 
+3. Se recomienda usar el método assertEquals de la clase System para comrpobar que el método hace lo que tiene que hacer. 
+
 
 ## Referencias
 
