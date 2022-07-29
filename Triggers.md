@@ -20,6 +20,15 @@ Hay dos tipos de triggers:
 
 Los registros que disparan el trigger, son de solo lectura en un after. No es posible aplicar un dml sobre el mismo registro que disparo un trigger en el before.
 
+```Apex
+List<Libro__c> lstLibros = Trigger.new; 
+for(Libro__c objLibro : lstLibros){
+   objLibro.Name = 'Alicia en el país de ls maravillas';
+}
+
+update lstLibros;
+```
+
 Si necesito hacer un callout en un Trigger, este se debe ejecutar en un contexto asincrono para no bloquear el proceso.  
 
 Para que se ejecute la lógica en una operación dml especifica, se debe agregar esa operación con su tipo en la definición del trigger.
@@ -127,5 +136,44 @@ if(Trigger.isAfter){
 }
 ```
 
-- New: Retorna una lista con la nueva versión de los registros.
+- **New:** Retorna una lista con la nueva versión de los registros. Solo se puede usar en las operaciones insert, update y undelete.  Y los registros solo pueden ser modificados en los before insert. Si se usa en una operación que no es valida no arroja error, pero tampoco se imprime nada. 
 
+```Apex
+List<Libro__c> lstLibrosVN = Trigger.new; 
+System.debug('lstLibrosVN: '+lstLibrosVN[0]);
+```
+
+- **old:** Retorna una lista con la vieja versión de los registros. Solo se puede usar en las operaciones update, delete.
+
+
+```Apex
+List<Libro__c> lstLibrosVN = Trigger.new; 
+List<Libro__c> lstLibrosVV = Trigger.old; 
+
+Decimal cantidadNueva = lstLibrosVN[0].IP_Cantidad__c;
+Decimal cantidadVieja = lstLibrosVV[0].IP_Cantidad__c;
+
+System.debug('cantidadNueva: '+cantidadNueva);
+System.debug('cantidadVieja: '+cantidadVieja);
+```
+- **newMap:** Retorna una mapa con la nueva versión de los registros. La llave es el Id del registro. Solo se puede usar en before Update, after insert, after update,after undelete.
+
+```Apex
+Map<Id,Libro__c> mapIdxLibro = Trigger.newMap;
+
+for(Id idLibro :mapIdxLibro.keySet()){
+   System.debug('Name book: '+mapIdxLibro.get(idLibro).Name);
+}
+```
+
+- **oldMap:** Retorna una mapa con la vieja versión de los registros. La llave es el Id del registro. Solo se puede usar en el update y en el delete.
+
+```Apex
+List<Libro__c> lstLibros = Trigger.new; 
+Map<Id,Libro__c> mapIdxLibro = Trigger.oldMap;
+
+for(Libro__c objLibro : lstLibros){
+   System.debug('New Name book: '+objLibro.Name);
+   System.debug('Old Name book: '+mapIdxLibro.get(objLibro.Id).Name);
+}
+```
