@@ -235,4 +235,14 @@ try{
 
 - Cuando elimino un registro de la Papelera de reciclaje, no se me ejecuta el Trigger.
 - Siempre diseñar la logica para que funcione masiva y simultaneamente. 
+- Tener cuidado con las recursiones
+
+```Apex
+if(Trigger.isUpdate){
+   System.debug('Entro en el after update');
+   List<Libro__c> lstLibros = [Select Id,IP_Cantidad__c from  Libro__c where Id IN :Trigger.new];
+   update lstLibros;
+}
+```
+
 - Manejar la estructura Trigger --> Handler --> Helper
