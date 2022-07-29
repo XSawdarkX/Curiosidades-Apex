@@ -9,7 +9,7 @@ un Trigger se ejecuta después de aplicar alguna de las siguientes operaciones:
 - delete
 - merge
 - upsert
-- undelete
+- undelete, no sepuede usar en before
 
 Se pueden definir Triggers para objetos estándar y personalizados.
 
@@ -57,3 +57,75 @@ System.debug('¿La operación es update?: '+Trigger.isUpdate);
 System.debug('¿La operación esta en un Before?: '+Trigger.isBefore);
 System.debug('¿La operación esta en un After?: '+Trigger.isAfter);
 ```
+
+Estructuras mal optimizdas:
+
+```Apex
+if(Trigger.isbefore && Trigger.isInsert){
+        
+}
+    
+if(Trigger.isAfter && Trigger.isInsert){
+        
+}
+```
+
+```Apex
+if(Trigger.isbefore && Trigger.isInsert){
+        
+}
+    
+if(Trigger.isAfter && Trigger.isInsert){
+        
+}
+```
+```Apex
+if(Trigger.isInsert){
+   if(Trigger.isbefore){
+
+   }
+
+   if(Trigger.isAfter){
+
+   } 
+}
+```
+Estructura correcta:
+
+```Apex
+if(Trigger.isbefore){
+    if(Trigger.isInsert){
+      System.debug('Entro en el before Insert');
+  }
+
+    if(Trigger.isUpdate){
+      System.debug('Entro en el before update');
+  }
+
+    if(Trigger.isDelete){
+      System.debug('Entro en el before delete');
+  }
+
+}
+
+if(Trigger.isAfter){
+    if(Trigger.isInsert){
+      System.debug('Entro en el after Insert');
+  }
+
+    if(Trigger.isUpdate){
+      System.debug('Entro en el after update');
+  }
+
+    if(Trigger.isDelete){
+      System.debug('Entro en el before delete');
+  }
+
+    if(Trigger.isUndelete){
+      System.debug('Entro en el before undelete');
+  }
+}
+```
+
+- New: Retorna una lista con la nueva versión de los registros.
+
