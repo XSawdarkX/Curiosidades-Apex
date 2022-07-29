@@ -177,3 +177,62 @@ for(Libro__c objLibro : lstLibros){
    System.debug('Old Name book: '+mapIdxLibro.get(objLibro.Id).Name);
 }
 ```
+Si yo quiero usar el camopo de mi registro padre, si o si debo realizar una consulta en el contexto after. 
+
+Si yo intento hacer esto a través de la variable de entorno Trigger.new no es posible
+
+```Apex
+List<Libro__c> lstLibros = Trigger.new;
+System.debug('Entro en el before update : '+lstLibros[0].Autor__r.Name);
+```
+
+### Excepciones
+
+Es posible utilizar el método **addError(message)** para imprimir un mensaje de error en pantalla y evitar que la operación dml que estoy haciendo. Cuando la operación es un insert o un update el método funciona en el Trigger.New, cuando es un delete en el Trigger.old.
+
+```Apex
+//Before upddate
+List<Libro__c> lstLibros = Trigger.new;
+            
+if(lstLibros[0].IP_Cantidad__c > 10){
+   lstLibros[0].addError('El máximo stock de un libro es 10'); 
+}
+```
+
+```Apex
+//Before delete
+List<Libro__c> lstLibros = Trigger.old;
+            
+if(lstLibros[0].IP_Cantidad__c > 0){
+    lstLibros[0].addError('No puede eliminar un libro que tiene stock'); 
+}
+```
+
+Este método solo se puede usar en las variables de contexto new y old. Si yo intento usarlo sobre un registro de una consulta el sistema arroja un error.
+
+```Apex
+List<Libro__c> lstLibros = [Select Id,IP_Cantidad__c from  Libro__c where Id IN :Trigger.new];
+            
+if(lstLibros[0].IP_Cantidad__c > 10){
+   lstLibros[0].addError('El máximo stock de un libro es 10'); 
+}
+```
+Los try catch no capturan el método addError. 
+
+```Apex
+try{
+   List<Libro__c> lstLibros = Trigger.new;
+
+   if(lstLibros[0].IP_Cantidad__c > 10){
+     lstLibros[0].addError('El máximo stock de un libro es 10'); 
+   }
+}catch(Exception e){
+   System.debug('Entro catch'); 
+}
+```
+
+### Consideraciones:
+
+- Cuando elimino un registro de la Papelera de reciclaje, no se me ejecuta el Trigger.
+- Siempre diseñar la logica para que funcione masiva y simultaneamente. 
+- Manejar la estructura Trigger --> Handler --> Helper
