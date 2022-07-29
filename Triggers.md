@@ -29,3 +29,14 @@ trigger IP_Libro_tgr on Libro__c (before insert,after insert,before update,after
 
 }
 ```
+Un trigger puede tener atributos y métodos, pero no es una clase, es decir, no se puede instanciar.
+
+Si la ejecución del trigger resulta exitosa, se hace un commmit automaticamente sobre los cambios. Por el contrario, si en algún punto el proceso falla, se hace un rollback sobre los cambios.
+
+## Variables de contexto
+
+Para identificar que operación esta disparando nuestro trigger, así como obtener el o el conjunto de registros que lo estan disparando, usamos lo que se conoce como variables de contexto, todas contenidad en la clase **System.trigger** 
+
+
+
+
