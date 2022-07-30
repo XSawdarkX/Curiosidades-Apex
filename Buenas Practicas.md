@@ -102,8 +102,18 @@ Solo usar comentarios para documentar las clases. O para explicar cosas especifi
 
 ### Nomenclatura
 
+Salesforce siempre recomienda colocar un sufijo y prefijo. 
+
 ```Apex
 cls : CLase
+tst : Clase de prueba
+tgr : Trigger
+bch : Batch
+sch : Schedule
+lst : Lista
+set : Set
+map : Map
+obj : Objeto
 ```
 
 ### No reproducir fragmentos idénticos de código
