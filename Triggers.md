@@ -463,3 +463,48 @@ public class IP_Libro_tst {
 
 ### Opción correcta
 
+```Apex
+@isTest
+public class IP_Libro_tst {
+	
+    @testSetup static void createData(){
+       
+       Autor__c objAutor = (Autor__c)TestDataFactory.createSObject('Autor__c',new Map<String,Object>{
+  						 'IP_DescuentoAutor__c' => 5 
+	   });
+        
+       Libro__c objLibro = (Libro__c)TestDataFactory.createSObject('Libro__c',new Map<String,Object>{
+  						 'IP_PrecioBase__c' => 5000,
+  						 'IP_Descuento__c' => 5,
+                         'Autor__c' =>  objAutor.Id   
+	   });
+        
+    }
+    
+    @isTest static void calcularDescuentoBase(){
+        
+        List<Libro__c> lstLibros = [Select id,Name,IP_PrecioConDescuento__c from Libro__c limit 1];
+        System.assertEquals(4750, lstLibros[0].IP_PrecioConDescuento__c);
+
+    }
+    
+     @isTest static void calcularDescuentoAutor(){
+        
+        System.debug('Cantidad dml: '+Limits.getDmlStatements()); 
+         
+        Test.startTest(); 
+            List<Libro__c> lstLibros = [Select id,Name,IP_PrecioConDescuento__c from Libro__c limit 1];
+            lstLibros[0].IP_AplicaDescuentoAutor__c = true;
+            update lstLibros[0];
+             
+            List<Libro__c> lstCurrentLibro = [Select id,Name,IP_PrecioConDescuento__c from Libro__c limit 1]; 
+    
+            System.assertEquals(4512.5, lstCurrentLibro[0].IP_PrecioConDescuento__c);
+        Test.stopTest(); 
+        
+        System.debug('Cantidad dml2: '+Limits.getDmlStatements());  
+
+    }
+    
+}
+```
