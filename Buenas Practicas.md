@@ -261,7 +261,17 @@ List<Libro__c> lstLibro = [Select id from Libro__c where Name = 'El mundo de Sof
 ### Manejar excepciones
 
 ```Apex
-cls : CLase
+try{
+
+   Integer valorA = 5;
+   Integer valorB;
+   Integer resultado = valorA + valorB;
+   
+   System.debug('resultado: '+resultado); 
+      
+}catch(Exception e){
+   System.debug('Ha ocurrido una Excepción: '+e); 
+}
 ```
 
 ### Escribir código en ingles
