@@ -150,6 +150,51 @@ Libro__c objLibro= [Select id,CreatedById from Libro__c where Name = 'El fin del
 IP_BuenasPracticas_cls.obtenerIdcreadorRegistro(objLibro);
 ```
 
+### un método solo debe hace runa cosa
+
+```Apex
+// bad practice
+Public void calculadora(String operacion, Integer Valor1, Integer valor2){
+
+    Integer resultado = 0;
+
+    if(operacion == 'suma'){
+        resultado = Valor1 + valor2;          
+    }
+
+    if(operacion == 'resta'){
+       resultado = Valor1 - valor2;   
+    }
+
+}
+```    
+
+```Apex
+// good practice
+ 
+Public void calculadora(String operacion, Integer Valor1, Integer valor2){
+
+    Integer resultado = 0;
+
+    if(operacion == 'suma'){
+        resultado = suma(Valor1,valor2);          
+    }
+
+    if(operacion == 'resta'){
+       resultado =  resta(Valor1,valor2); 
+    }
+
+}
+
+Integer suma(Integer Valor1, Integer valor2){
+    return Valor1 + valor2;  
+}
+
+Integer resta(Integer Valor1, Integer valor2){
+    return Valor1 - valor2;  
+}
+```
+
 ### Realizar control de versiones
 
 ----------
