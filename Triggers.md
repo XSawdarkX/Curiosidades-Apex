@@ -432,3 +432,34 @@ public class IP_Libro_tst {
 ```
 
 #### Clase de prueba opción # 2
+
+```Apex
+@isTest
+public class IP_Libro_tst {
+	
+    @testSetup static void createData(){
+       
+       //IP_TestDataUtil_cls.createBook(true);
+       
+       Libro__c objLibro = new Libro__c();
+       objLibro.Name = 'Libro Test';
+       objLibro.IP_NumeroSerie__c = '200';
+       objLibro.IP_PrecioBase__c = 5000;
+       objLibro.IP_Descuento__c = 25;
+       insert objLibro; 
+        
+    }
+    
+    @isTest static void insertBook(){
+        
+        List<Libro__c> lstLibros = [Select id,Name from Libro__c where Name = 'Libro Test'];
+        System.debug('lstLibros size: '+lstLibros.size());
+        System.debug('lstLibros: '+lstLibros);
+        update lstLibros;
+    }
+    
+}
+```
+
+### Opción correcta
+
