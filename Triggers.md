@@ -294,8 +294,32 @@ if(IP_TriggerExecutionControl_cls.isTriggerActive('IP_Libro_tgr')){
 }
 ```
 
+```Apex
+public class IP_LibroHandler_cls {
+
+    public static void onBeforeUpdate(List<Libro__c> lstLibro){
+		IP_LibroHelper_cls.resetearCantidad(lstLibro);
+    }  
+}
+```
+
+```Apex
+public class IP_LibroHelper_cls {
+	
+    public static void resetearCantidad(List<Libro__c> lstLibro){
+		
+        for(Libro__c objLibro : lstLibro){
+            objLibro.IP_Cantidad__c = 0;
+        }
+    } 
+}
+```
+
 Forma 2:
 
+```Apex
+
+```
 ```Apex
 
 ```
