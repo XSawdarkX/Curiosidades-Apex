@@ -227,12 +227,35 @@ cls : CLase
 
 ### Usar métodos de la clase Limits
 
-
+```Apex
+for(Integer i = 0 ; i < 200 ; i++){
+   
+   if(Limits.getDmlStatements() < Limits.getLimitDMLStatements()){
+     Account objAccount = new Account();
+   	 objAccount.Name = 'Pepito '+i;
+  	 insert objAccount;     
+   }
+}
+```
 
 ### Avoid Harcodings IDs
 
 ```Apex
-cls : CLase
+//Bad practice
+Libro__c objLibro = [Select id from Libro__c where Id = 'a018X00000YPQ5UQAX' limit 1];
+
+//Good Practice
+Libro__c objLibro = [Select id from Libro__c where Name = 'El mundo de Sofía' limit 1];
+```
+
+### Siempre guardar los registros en una lista
+
+```Apex
+//Bad practice
+Libro__c objLibro = [Select id from Libro__c where Name = 'El mundo de Sofía II' limit 1];
+
+//Good Practice
+List<Libro__c> lstLibro = [Select id from Libro__c where Name = 'El mundo de Sofía II' limit 1];
 ```
 
 ### Manejar excepciones
