@@ -298,7 +298,7 @@ if(IP_TriggerExecutionControl_cls.isTriggerActive('IP_Libro_tgr')){
 public class IP_LibroHandler_cls {
 
     public static void onBeforeUpdate(List<Libro__c> lstLibro){
-		IP_LibroHelper_cls.resetearCantidad(lstLibro);
+	IP_LibroHelper_cls.resetearCantidad(lstLibro);
     }  
 }
 ```
