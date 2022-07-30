@@ -318,10 +318,117 @@ public class IP_LibroHelper_cls {
 Forma 2:
 
 ```Apex
-
+trigger IP_Libro_tgr on Libro__c (before insert,after insert,before update,after update,before delete,after delete,after undelete) {
+	 
+    new IP_LibroHandler_cls().run();
+}
 ```
 ```Apex
-
+public class IP_LibroHandler_cls extends TriggerHandler {
+	
+  public override void beforeInsert() {
+	 System.debug('Entro en el before insert');
+     if (!TriggerHandler.isBypassed('IP_Libro_tgr')) {
+         TriggerHandler.bypass('IP_Libro_tgr');
+         
+         IP_LibroHelper_cls.calcularDescuentoBase(Trigger.new);
+         IP_LibroHelper_cls.calcularDescuentoAutor(Trigger.new);
+     } 
+  }
+    
+  public override void beforeUpdate() {
+	 System.debug('Entro en el before update');
+     if (!TriggerHandler.isBypassed('IP_Libro_tgr')) {
+         TriggerHandler.bypass('IP_Libro_tgr');
+          
+         IP_LibroHelper_cls.calcularDescuentoBase(Trigger.new);
+         IP_LibroHelper_cls.calcularDescuentoAutor(Trigger.new);
+     } 
+  }
+    
+}
+```
+```Apex
+public class IP_LibroHelper_cls {
+	
+    public static void calcularDescuentoBase(List<Libro__c> lstLibroNV){
+    	  
+        for(Libro__c objLibro : lstLibroNV){           
+            objLibro.IP_PrecioConDescuento__c = objLibro.IP_PrecioBase__c - ((objLibro.IP_PrecioBase__c * objLibro.IP_Descuento__c)/100); 
+        }
+    }
+    
+    public static void calcularDescuentoAutor(List<Libro__c> lstLibroNV){
+        
+        Set<Id> setIdLibrosConDescuento = getLibrosConDescuentoAutor(lstLibroNV);
+        Map<Id,Decimal> mapIdAutorxDescuento = getDescuentoAutor(setIdLibrosConDescuento);
+        
+        for(Libro__c objLibro : lstLibroNV){
+           if(mapIdAutorxDescuento.containsKey(objLibro.Autor__c)){
+             objLibro.IP_PrecioConDescuento__c = objLibro.IP_PrecioConDescuento__c - ((objLibro.IP_PrecioConDescuento__c *          mapIdAutorxDescuento.get(objLibro.Autor__c))/100);   
+           }   
+        }
+    }
+    
+    static Set<Id> getLibrosConDescuentoAutor(List<Libro__c> lstLibroNV){
+        
+        Set<Id> setIdAutor = new Set<Id>();
+        
+        for(Libro__c objLibro : lstLibroNV){
+            
+            if(objLibro.IP_AplicaDescuentoAutor__c && objLibro.Autor__c != null){
+              setIdAutor.add(objLibro.Autor__c);
+            }
+        }
+        
+        return setIdAutor;
+    }
+    
+    static Map<Id,Decimal> getDescuentoAutor(Set<Id> setIdAutor){
+        
+        Map<Id,Decimal> mapIdAutorxDescuento = new Map<Id,Decimal>();
+        
+        for(Autor__c objAutor : [Select Id,IP_DescuentoAutor__c from Autor__c where Id IN :setIdAutor]){
+            if(objAutor.IP_DescuentoAutor__c > 0){
+               mapIdAutorxDescuento.put(objAutor.Id, objAutor.IP_DescuentoAutor__c);  
+            }
+        }
+	
+		return 	mapIdAutorxDescuento;        
+    }
+}
 ```
 
 - Manejar la estructura Trigger --> Handler --> Helper
+
+### Clase de prueba Trigger
+
+- Se puede hacer una sola clase de prueba para cubrir el Trigger, el Handler y el Helper.
+
+Ejemplo para probar visibilidad de los registros
+
+```Apex
+List<Libro__c> lstLibros = [Select id,Name from Libro__c];
+System.debug('lstLibros size: '+lstLibros.size());
+System.debug('lstLibros: '+lstLibros);
+```
+#### Clase de prueba opción # 1
+
+```Apex
+@isTest
+public class IP_Libro_tst {
+	
+    @isTest static void insertBook(){
+        
+        Libro__c objLibro = new Libro__c();
+        objLibro.Name = 'Libro Test';
+        objLibro.IP_NumeroSerie__c = '200';
+        objLibro.IP_PrecioBase__c = 5000;
+        objLibro.IP_Descuento__c = 25;
+        insert objLibro;
+    }
+    
+}
+```
+
+#### Clase de prueba opción # 2
