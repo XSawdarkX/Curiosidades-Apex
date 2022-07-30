@@ -244,7 +244,7 @@ if(Trigger.isUpdate){
    update lstLibros;
 }
 ```
-Las recursiones se pueden evitar por medio de condiciones o controlando la ejecución del trigger teniendo en cuenta que cuando se genera una recursion todo se ejecuta en la misma transacicón. Esto se puede comprobar fácilmente haciendo uso de la clase limits para validar el número de dmls que se han hecho.
+Las recursiones se pueden evitar por medio de condiciones o controlando la ejecución del trigger teniendo en cuenta que cuando se genera una recursion todo se ejecuta en la misma transacicón. Esto se puede comprobar fácilmente haciendo uso de la clase limits para validar el número de dmls que se han hecho. [articulo](https://help.salesforce.com/s/articleView?language=en_US&type=1&id=000332407)
 
 La profundidad máxima de un trigger es de 15 ejecuciones:
 
