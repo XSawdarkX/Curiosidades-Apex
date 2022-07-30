@@ -244,5 +244,60 @@ if(Trigger.isUpdate){
    update lstLibros;
 }
 ```
+Las recursiones se pueden evitar por medio de condiciones o controlando la ejecución del trigger teniendo en cuenta que cuando se genera una recursion todo se ejecuta en la misma transacicón. Esto se puede comprobar fácilmente haciendo uso de la clase limits para validar el número de dmls que se han hecho.
+
+La profundidad máxima de un trigger es de 15 ejecuciones:
+
+```Apex
+ System.debug('Cantidad dml: '+limits.getDmlStatements());
+```
+
+Forma 1 de controlar la recursividad:
+
+```Apex
+if(IP_TriggerExecutionControl_cls.isTriggerActive('IP_Libro_tgr')){
+
+  if(Trigger.isbefore){
+      if(Trigger.isInsert && !IP_TriggerExecutionControl_cls.hasAlreadyDone('IP_Libro_tgr', 'BeforeInsert')){
+          System.debug('Entro en el before Insert');
+      }
+
+      if(Trigger.isUpdate && !IP_TriggerExecutionControl_cls.hasAlreadyDone('IP_Libro_tgr', 'BeforeUpdate')){
+          System.debug('Entro en el before update');
+          IP_LibroHandler_cls.onBeforeUpdate(Trigger.New);
+      }
+
+      if(Trigger.isDelete && !IP_TriggerExecutionControl_cls.hasAlreadyDone('IP_Libro_tgr', 'BeforeDelete')){
+          System.debug('Entro en el before delete');
+      }
+
+  }
+
+  if(Trigger.isAfter){
+      if(Trigger.isInsert && !IP_TriggerExecutionControl_cls.hasAlreadyDone('IP_Libro_tgr', 'AfterInsert')){
+          System.debug('Entro en el after Insert');
+      }
+
+      if(Trigger.isUpdate && !IP_TriggerExecutionControl_cls.hasAlreadyDone('IP_Libro_tgr', 'AfterUpdate')){
+          System.debug('Entro en el after update');
+          //IP_TriggerExecutionControl_cls.setAlreadyDone('IP_Libro_tgr','AfterUpdate');
+      }
+
+      if(Trigger.isDelete && !IP_TriggerExecutionControl_cls.hasAlreadyDone('IP_Libro_tgr', 'AfterDelete')){
+          System.debug('Entro en el after delete');
+      }
+
+      if(Trigger.isUndelete && !IP_TriggerExecutionControl_cls.hasAlreadyDone('IP_Libro_tgr', 'AfterUndelete')){
+          System.debug('Entro en el after undelete');
+      }
+  }
+}
+```
+
+Forma 2:
+
+```Apex
+
+```
 
 - Manejar la estructura Trigger --> Handler --> Helper
