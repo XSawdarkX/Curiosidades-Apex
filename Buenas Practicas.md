@@ -118,8 +118,36 @@ obj : Objeto
 
 ### No reproducir fragmentos idénticos de código
 
+Usar la clase **IP_BuenasPracticas_cls**.
+
 ```Apex
-cls : CLase
+ public static void obtenerIdcreadorContacto(Contact objContacto){
+       System.debug('El Id del creador del Contacto es: '+objContacto.CreatedById);
+    }
+    
+    public static void obtenerIdcreadorLibro(Libro__c objLibro){
+       System.debug('El Id del creador del Libro es: '+objLibro.CreatedById); 
+    }
+    
+    public static void obtenerIdcreadorRegistro(Sobject registro){
+       System.debug('El Id del creador del registro es: '+registro.get('CreatedById')); 
+    }
+```
+
+```Apex
+// bad practice
+Contact objContact = [Select id,CreatedById from Contact where Name = 'Test Daniel' limit 1];
+IP_BuenasPracticas_cls.obtenerIdcreadorContacto(objContact);
+
+Libro__c objLibro= [Select id,CreatedById from Libro__c where Name = 'El fin del mundo' limit 1];
+IP_BuenasPracticas_cls.obtenerIdcreadorLibro(objLibro);
+
+// Good practice
+Contact objContact = [Select id,CreatedById from Contact where Name = 'Test Daniel' limit 1];
+IP_BuenasPracticas_cls.obtenerIdcreadorRegistro(objContact);
+
+Libro__c objLibro= [Select id,CreatedById from Libro__c where Name = 'El fin del mundo' limit 1];
+IP_BuenasPracticas_cls.obtenerIdcreadorRegistro(objLibro);
 ```
 
 ### Realizar control de versiones
