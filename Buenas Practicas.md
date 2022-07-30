@@ -105,7 +105,7 @@ Solo usar comentarios para documentar las clases. O para explicar cosas especifi
 Salesforce siempre recomienda colocar un sufijo y prefijo. 
 
 ```Apex
-cls : CLase
+cls : Clase
 tst : Clase de prueba
 tgr : Trigger
 bch : Batch
