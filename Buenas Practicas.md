@@ -157,14 +157,66 @@ IP_BuenasPracticas_cls.obtenerIdcreadorRegistro(objLibro);
 ###  Bulfiky Apex Code
 
 ```Apex
-cls : CLase
+//Bad practice
+trigger MyTriggerNotBulk on Account(before insert) {
+    Account a = Trigger.New[0];
+    a.Description = 'New description';
+}
+
+//Good practice
+trigger MyTriggerBulk on Account(before insert) {
+    for(Account a : Trigger.New) {
+        a.Description = 'New description';
+    }
+}
 ```
 
 ### Evitar SOQL y DML dentro de Fors
 
 
 ```Apex
-cls : CLase
+//Bad practices
+Map<String,List<Libro__c>> mapAutorxListaLibros = new Map<String,List<Libro__c>>();
+for(Autor__c objAutor : [Select id,Name from Autor__c]){
+    List<Libro__c> lstLibrosAutor = [Select id from Libro__c where Autor__c = :objAutor.Id];
+    mapAutorxListaLibros.put(objAutor.Name,lstLibrosAutor);
+}
+
+for(Integer i = 0 ; i < 105 ; i++){
+   List<Libro__c> lstLibrosAutor = [Select id from Libro__c]; 
+}
+
+//Good practices
+
+Map<String,List<Libro__c>> mapAutorxListaLibros = new Map<String,List<Libro__c>>();
+for(Autor__c objAutor : [Select id,Name,(Select id from Libros__r) from Autor__c]){
+    mapAutorxListaLibros.put(objAutor.Name,objAutor.Libros__r);
+}
+```
+
+```Apex
+//Bad practices
+for(Integer i = 0 ; i < 200 ; i++){
+   Account objAccount = new Account();
+   objAccount.Name = 'Pepito '+i;
+   insert objAccount; 
+}
+
+//Good practices
+
+List<Account> lstAccount = new List<Account>();
+
+for(Integer i = 0 ; i < 200 ; i++){
+   Account objAccount = new Account();
+   objAccount.Name = 'Pepito '+i;
+   lstAccount.add(objAccount); 
+}
+
+insert lstAccount;
+```
+
+```Apex
+Select id,Name from Account where Name like 'Pepito%' 
 ```
 
 ### Querying Large Data sets
