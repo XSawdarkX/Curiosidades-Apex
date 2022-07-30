@@ -1,0 +1,155 @@
+# Buenas practicas programación
+
+Las buenas practicas de programación con un conjunto de tecnicas, métodologias, recomendaciones que deben adoptar, y aplicar los desarrolladores para que sus aplicaciones 
+sean más eficientes. 
+
+## Beneficios
+
+- El código se vuelve más legible
+- El código se vuelve escalable
+- El código se vuelve más seguro
+- Genera menos estres
+- Permite realizar cambios más rápido
+- Ayuda a reducir o eliminar errores
+- En el caso especifico de Apex permite controlar los limites
+
+## Ejemplos
+
+### Priorizar la legibilidad
+
+Colocar nombre a las variables y métodos que tengan sentido. Con tan solo leer su nombre yo ya debo comprender que va dato almacena y cual es su proposito en el caso de los métodos.
+
+Siempre iniciando los nombres con minuscula y utilizando la estructura Camel Case. 
+
+```Apex
+//Bad practices
+Integer a = 500;
+Integer B = 5;
+Integer c = a - ( (a * b) / 100);
+
+//Good practices
+Integer precioBaseCarro = 500;
+Integer descuentoCarro = 5;
+Integer precioFinalCarro = precioBaseCarro- ( (precioBaseCarro * descuentoCarro) / 100);
+```
+
+```Apex
+//Bad practices
+public List<Integer> getNumeros(List<Integer> numeros){
+
+    List<Integer> result = new List<Integer>(); 
+    for(Integer numero : numeros){
+        if(math.mod(numero,2) == 0){
+            result.add(numero);
+        }
+    }
+
+    return result;
+}
+
+//Good practices
+public List<Integer> getNumerosPares(List<Integer> lstNumerosOriginales){
+   
+    List<Integer> lstNumerosPares = new List<Integer>(); 
+    for(Integer numero : lstNumerosOriginales){
+        if(math.mod(numero,2) == 0){
+            lstNumerosPares.add(numero);
+        }
+    }
+
+    return lstNumerosPares;
+}
+```
+
+### Identar
+
+Siempre respetar los espacios para entender la jerarquía del código y entender que contiene a que. 
+
+```Apex
+//Bad practices
+String colorRojo='Rojo';
+if(Color=='Rojo'){
+System.debug('El color es rojo');    
+}
+
+//Good practices
+String colorRojo = 'Rojo';
+
+if(Color == 'Rojo'){
+   System.debug('El color es rojo');    
+}
+```
+
+### Insertar comentarios
+
+Evitar en lo posible usar comentarios. Un buen código se lee por si mismo. 
+
+Solo usar comentarios para documentar las clases. O para explicar cosas especificas del contexto (La instancia), no del código. 
+
+```Apex
+/* **************************************************************************************************************
+* Globant 
+* @author           Daniel Junca <Daniel.junca@globant.com>
+* Proyect:          AfapSura
+* Description:      ........
+*
+* -------------------------------------
+*           No.     Fecha           Autor                   Descripción
+*           -----   ----------      --------------------    ---------------
+* @version   1.0    29/12/20167     Joseph Ceron JC          Class creation
+************************************************************************************************************* */
+```
+
+### Nomenclatura
+
+```Apex
+cls : CLase
+```
+
+### No reproducir fragmentos idénticos de código
+
+```Apex
+cls : CLase
+```
+
+### Realizar control de versiones
+
+----------
+
+###  Bulfiky Apex Code
+
+```Apex
+cls : CLase
+```
+
+### Evitar SOQL y DML dentro de Fors
+
+
+```Apex
+cls : CLase
+```
+
+### Querying Large Data sets
+
+```Apex
+cls : CLase
+```
+
+### Usar métodos de la clase Limits
+
+
+
+### Avoid Harcodings IDs
+
+```Apex
+cls : CLase
+```
+
+### Manejar excepciones
+
+```Apex
+cls : CLase
+```
+
+### Escribir código en ingles
+
