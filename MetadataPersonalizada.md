@@ -69,8 +69,21 @@ public static void cargarWikiDesdeCustomSetting(List<Autor__c> lstAutores){
 
 ```Apex
 //Ejemplo optimo
+public static void cargarWikiDesdeCustomSetting(List<Autor__c> lstAutores){
 
+    Map<String, Wiki_Autor__mdt> mapAutorWiki = Wiki_Autor__mdt.getAll();
 
+    for(Autor__c objAutor : lstAutores){
+
+        objAutor.Bio_Wikipedia__c = mapAutorWiki.get(objAutor.Name) != null ? mapAutorWiki.get(objAutor.Name).PagWiki__c : mapAutorWiki.get('Default').PagWiki__c;
+    }
+}
+
+Map<String, Wiki_Autor__mdt> mapAutorWiki = new Map<String, Wiki_Autor__mdt>();
+
+for(Wiki_Autor__mdt objWikiAutor : [Select MasterLabel, pagwiki__c FROM Wiki_Autor__mdt]){
+    mapAutorWiki.put(objWikiAutor.MasterLabel,objWikiAutor.pagwiki__c);
+}
 ```
 
 # Custom Settings
