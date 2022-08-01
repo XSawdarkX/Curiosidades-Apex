@@ -43,6 +43,60 @@ Casos de uso:
 - Para guardar información sensible que solo usuarios especiales pueden manipular. Como los datos de conexíón a un servicio web
 - Ejemplo Creditcorp homologación valores
 
+
+```Apex
+//Ejemplo poco optimo
+public static void cargarWikiDesdeCustomSetting(List<Autor__c> lstAutores){
+    for(Autor__c objAutor : lstAutores){
+
+        try{
+            Wiki_Autor__mdt wikiDeAutor = [Select id, MasterLabel, pagwiki__c 
+                                           FROM Wiki_Autor__mdt 
+                                           WHERE MasterLabel = :objAutor.Name 
+                                           LIMIT 1];
+            objAutor.Bio_Wikipedia__c = wikiDeAutor.pagwiki__c;
+            System.debug('Se actualizó el perfil de '+objAutor.name);
+        }catch(Exception e) {
+            Wiki_Autor__mdt defol = [SELECT pagwiki__c 
+                                     FROM Wiki_Autor__mdt 
+                                     WHERE MasterLabel = 'Default' 
+                                     LIMIT 1];
+            objAutor.Bio_Wikipedia__c = defol.pagwiki__c;
+        }
+    }
+}
+```   
+
+```Apex
+//Ejemplo optimo
+
+
+```
+
 # Custom Settings
 
 Los Custom Settings son similares a los objetos personalizados. Son un conjunto de datos asociados a una organización, un perfil, o un usuario especifico.
+
+Los custom settings se pueden insertar en Apex.
+
+```Apex
+Descuento__c objDescuento = new Descuento__c();
+objDescuento.Name = 'Test';
+objDescuento.Valor_descuento__c  = 5;
+objDescuento.SetupOwnerId  = '00e8X000001Gqh6QAC';
+insert objDescuento;
+```
+
+# Consideraciones
+
+- Aunque para ambos modelos se puede usar consultas SOQL, una forma más practica de consultarlos es la siguiente:
+
+```Apex
+//Custom metada type
+Map<String, Wiki_Autor__mdt> mapAutorWiki = Wiki_Autor__mdt.getAll();
+
+// Custom settings - Hierarchy 
+Descuento__c mc = Descuento__c.getOrgDefaults();
+
+Descuento__c mc = Descuento__c.getInstance(Profile_ID);
+```
