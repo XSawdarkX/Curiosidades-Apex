@@ -531,3 +531,14 @@ public class IP_Libro_tst {
     
 }
 ```
+
+Se puede incluso correr un proceso con un usuario especifico para probar comportamientos restrictivos:
+
+```Apex
+User u1 = [SELECT Id FROM User WHERE Alias='auser'];
+        
+//Run As U1
+System.RunAs(u1){
+
+}
+```
