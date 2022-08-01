@@ -74,8 +74,9 @@ public static void cargarWikiDesdeCustomSetting(List<Autor__c> lstAutores){
     Map<String, Wiki_Autor__mdt> mapAutorWiki = Wiki_Autor__mdt.getAll();
 
     for(Autor__c objAutor : lstAutores){
-
-        objAutor.Bio_Wikipedia__c = mapAutorWiki.get(objAutor.Name) != null ? mapAutorWiki.get(objAutor.Name).PagWiki__c : mapAutorWiki.get('Default').PagWiki__c;
+        
+        String nombre = objAutor.Name.replace(' ','_');
+        objAutor.Bio_Wikipedia__c = mapAutorWiki.get(nombre) != null ? mapAutorWiki.get(nombre).PagWiki__c : mapAutorWiki.get('Default').PagWiki__c;
     }
 }
 
