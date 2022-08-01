@@ -84,6 +84,8 @@ Map<String, Wiki_Autor__mdt> mapAutorWiki = new Map<String, Wiki_Autor__mdt>();
 for(Wiki_Autor__mdt objWikiAutor : [Select MasterLabel, pagwiki__c FROM Wiki_Autor__mdt]){
     mapAutorWiki.put(objWikiAutor.MasterLabel,objWikiAutor.pagwiki__c);
 }
+
+//Link para probar https://es.wikipedia.org/wiki/Shakira
 ```
 
 # Custom Settings
