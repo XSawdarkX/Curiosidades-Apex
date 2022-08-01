@@ -115,3 +115,5 @@ Descuento__c mc = Descuento__c.getOrgDefaults();
 
 Descuento__c mc = Descuento__c.getInstance(Profile_ID);
 ```
+
+- El custom metadata type se puede obtener desde una clase de prueba, mientras que las custom settings se necesitan crear
