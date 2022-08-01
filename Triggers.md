@@ -235,6 +235,12 @@ try{
 
 - Cuando elimino un registro de la Papelera de reciclaje, no se me ejecuta el Trigger.
 - Siempre diseñar la logica para que funcione masiva y simultaneamente. 
+
+```Apex
+
+
+```
+
 - Tener cuidado con las recursiones
 
 ```Apex
