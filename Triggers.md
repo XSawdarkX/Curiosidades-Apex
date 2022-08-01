@@ -237,8 +237,14 @@ try{
 - Siempre diseñar la logica para que funcione masiva y simultaneamente. 
 
 ```Apex
+// Bad practice
+Libro__c objLibro = Trigger.New[0];
+objLibro.Name = objLibro.Name +' Paso Trigger';
 
-
+//God practice
+for(Libro__c objLibro : Trigger.New){
+    objLibro.Name = objLibro.Name +' Paso Trigger';    
+}
 ```
 
 - Tener cuidado con las recursiones
@@ -418,6 +424,17 @@ List<Libro__c> lstLibros = [Select id,Name from Libro__c];
 System.debug('lstLibros size: '+lstLibros.size());
 System.debug('lstLibros: '+lstLibros);
 ```
+Ejemplo cargar info recurso estatico
+
+```Apex
+List<Libro__c> lstLibros = Test.loadData(Libro__c.sObjectType, 'booksTest');
+        
+for(Libro__c objLibro : lstLibros){
+    system.debug('Nombre Libro: '+objLibro.Name);
+    system.debug('Número serie: '+objLibro.IP_NumeroSerie__c);
+}
+```
+
 #### Clase de prueba opción # 1
 
 ```Apex
