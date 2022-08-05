@@ -9,7 +9,8 @@ a medida que se van liberando los recursos.
 Este tipo de procesamiento es útil cuando tenemos una tarea cuyo resultado no es necesario tenerlo de manera inmediata,
 o cuando existe un proceso demasiado extenso que puede bloquear la transacción entera. 
 
-Además, una de las ventajas más importantes a la hora de usar este tipo de procesamientos es que los limites de Apex aumentan. 
+Además, una de las ventajas más importantes a la hora de usar este tipo de procesamientos es que los limites de Apex aumentan. Como el limite de consultas SOQL que
+pasa de 100 a 200.
 
 Salesforce ofrece tres tipos de procesamiento asincrono:
 
@@ -113,5 +114,5 @@ Test.startTest();
 Test.stopTest();
 ```
 
-
+## Batch Apex
 
