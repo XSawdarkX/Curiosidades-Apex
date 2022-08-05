@@ -15,6 +15,7 @@ Salesforce ofrece tres tipos de procesamiento asincrono:
 
 ## Future Methods
 
+Usar la clase **IP_MetodosFuturos_cls**
 Un método futuro permite ejecutar una función en segundo plano.
 
 Se usa cuando necesitamos ejecutar operaciones de larga duración, como llamadas a servicios externos o cualquier operacion que
@@ -22,7 +23,7 @@ queramos corra en su propio hilo, en su propio contexto.
 
 También es útil cuando se quiere realizar operaciones DML Mixed. 
 
-Para definir un método futuro usamos la anotación @future arriba de su definición
+Para definir un método futuro usamos la anotación **@future** arriba de su definición
 
 ```Apex
 @future
@@ -43,5 +44,18 @@ como parametro el id de los mismos o cualquier otro dato que permita hacer una c
 public static void processRecords(List<ID> recordIds){   
     List<Account> accts = [SELECT Name FROM Account WHERE Id IN :recordIds];
 }
+```
+
+Para poder ejecutar un callout dentro de un método furuto, es necesario usar la anotación **@future(callout=true)**
+
+No es posible llamar un método futuro dentro de un método futuro.
+
+Para ejecutar un método futuro desde una clase de prueba se debe hacer el llamado dentro de los métodos **startTest()**, **stopTest()** de 
+la clase Test. Ya que de esta forma, el procesamiento se vuelve sincrono. 
+
+```Apex
+Test.startTest();        
+  IP_MetodosFuturos_cls.myFutureMethod();
+Test.stopTest();
 ```
 
