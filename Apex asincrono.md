@@ -59,3 +59,59 @@ Test.startTest();
 Test.stopTest();
 ```
 
+## Queueable Apex
+
+Usar la clase IP_ClaseEncolable_cls
+
+Podriamos definir un encolable como una versión mejorada de los métodos futuros. 
+
+Para definir un encolable se debe crear una clase e implementar la interface **Queueable**. Esta interfaz me permite encolar procesos 
+asincronos y monitorear el estado de cada uno.
+
+Cuando usamos la interfaz Queueable, de manera obligatoria debemos implementar el método **execute**. 
+
+```Apex
+public class AsyncExecutionExample implements Queueable {
+    public void execute(QueueableContext context) {
+        Account a = new Account(Name = 'Test Account Quequeable',Phone = '(415) 555-1212');
+        insert a;        
+    }
+}
+```
+
+Para ejecutar o encolar una clase encolable se usa el método **enqueueJob** de la clase System.
+
+```Apex
+ID jobID = System.enqueueJob(new IP_ClaseEncolable_cls());
+```
+
+Cuando encolo una clase, salesforce me devuelve un Id de trabajo, este Id lo puedo usar para monitorear el proceso haciendo
+una consulta sobre el objeto **AsyncApexJob**.
+
+```Apex
+AsyncApexJob jobInfo = [SELECT Status,NumberOfErrors FROM AsyncApexJob WHERE Id=:jobID];
+```
+
+También es posible revisar el estado del proceso desde configuraciones en **Apex Jobs**.
+
+A diferencia de los métodos futuros, una clase encolable te permite usar atributos con tipos de datos complejos, así como encadenar varios encolables ejecutando uno dentro de otro. 
+
+```Apex
+public class AsyncExecutionExample implements Queueable {
+    public void execute(QueueableContext context) {
+        System.enqueueJob(new SecondJob());
+    }
+}
+```
+Solo se puede ejecutar una clase encolable dentro de otra.
+
+De igual manera, tal como en los métodos futuros, para cubrir una clase encolable en una clase de prueba, se deben usar los métodos de la clase Test.
+
+```Apex
+Test.startTest();        
+   System.enqueueJob(new IP_ClaseEncolable_cls());
+Test.stopTest();
+```
+
+
+
