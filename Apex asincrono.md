@@ -133,7 +133,14 @@ public Database.QueryLocator start(Database.BatchableContext bc) {
 
 El método QueryLocator permite saltarse el limite de registros retornados por una consulta de 50.000m y lo extiende hasta 50 millones.
 
-- **Execute:**
+- **Execute:** Este método se encarga de procesar cada lote de información. Un lote se puede entender como una parte del total de registros obtenidos por el método start. El execute se ejecuta por cada lote de datos.
+
+Cantidad de lotes = Número de registros retornados por la consulta del método start / batch size.
+
+El **Batch size** me indica la cantidad de registros que puedo procesar en simultaneo (Maximo 200). Si no se especifica ningún Batch size cuando se ejecuta el batch
+por defecto toma 200.
+
+Estes método recibe como parametros una referencia al objeto Database.BatchableContext y una lista de sobjects.
 
 - **Finish:**
 
