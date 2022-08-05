@@ -62,7 +62,7 @@ Test.stopTest();
 
 ## Queueable Apex
 
-Usar la clase IP_ClaseEncolable_cls
+Usar la clase **IP_ClaseEncolable_cls**
 
 Podriamos definir un encolable como una versión mejorada de los métodos futuros. 
 
@@ -116,12 +116,22 @@ Test.stopTest();
 
 ## Batch Apex
 
+Usar el batch **IP_ActualizarInventario_bch**
+
 El batch es un tipo de proceso asincrono que permite construir y ejecutar un actividad compleja, de larga duración, y lo más importante, que maneja un gran volumen de datos.
 
 Para definir una Batch toca crear una clase e implementar la interfaz **Database.Batchable**. Una vez se implenete dicha interfaz, toca obligatoriamente implenetar sus
 tres métodos: 
 
-- **Start:**
+- **Start:** Este método tiene como objetivo definir el conjunto de registros que va a procesar el batch. Para elllo se utiliza el método **QueryLocator** de la clase Database. Este método solo se ejecuta una vez al comienzo del batch. 
+
+```Apex
+public Database.QueryLocator start(Database.BatchableContext bc) {
+    return Database.getQueryLocator([Select id from Libro__c where IP_Cantidad__c = 0]);
+}
+```
+
+El método QueryLocator permite saltarse el limite de registros retornados por una consulta de 50.000m y lo extiende hasta 50 millones.
 
 - **Execute:**
 
