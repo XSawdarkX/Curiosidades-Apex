@@ -176,12 +176,25 @@ Para ejecutar un batch se usa el método **executeBatch** de la clase Database. 
 ID batchprocessid = Database.executeBatch(new IP_ActualizarInventario_bch(),2);
 ```
 
-### hacer Calllouts
+### Hacer Calllouts
 
 Para hacer un Callout en un batch, se debe implementar también la interfaz **Database.AllowsCallouts**
 
 ```Apex
-public class SearchAndReplace implements Database.Batchable<sObject>, 
-   Database.AllowsCallouts{
+public class SearchAndReplace implements Database.Batchable<sObject>, Database.AllowsCallouts{
 }
 ```
+
+### Manteniendo el estado de las  variables
+
+Cada ejeción de un lote es considerada una transacción aparte, por lo que cualquier variable definida a nivel de la clase volvera su valor original después de cada iteración. Para mantener el estado de las variables, es necesario implementar la interfaz **Database.Stateful**
+
+```Apex
+public class SearchAndReplace implements Database.Batchable<sObject>, Database.Stateful{
+}
+```
+
+### Clases de prueba
+
+
+
