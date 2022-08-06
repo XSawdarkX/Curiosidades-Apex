@@ -133,7 +133,7 @@ public Database.QueryLocator start(Database.BatchableContext bc) {
 
 El método QueryLocator permite saltarse el limite de registros retornados por una consulta de 50.000m y lo extiende hasta 50 millones.
 
-- **Execute:** Este método se encarga de procesar cada lote de información. Un lote se puede entender como una parte del total de registros obtenidos por el método start. El execute se ejecuta por cada lote de datos.
+- **Execute:** Este método se encarga de procesar cada lote de información. Un lote se puede entender como una parte del total de registros obtenidos por el método start. El execute se ejecuta por cada lote de datos. Cada lote tiene su propio contexto de ejeccución y por lo tanto sus propios limites. 
 
 Cantidad de lotes = Número de registros retornados por la consulta del método start / batch size.
 
@@ -142,6 +142,20 @@ por defecto toma 200.
 
 Estes método recibe como parametros una referencia al objeto Database.BatchableContext y una lista de sobjects.
 
-- **Finish:**
+```Apex
+public void execute(Database.BatchableContext BC, list<Libro__c> lstLibros){
+
+    for(Libro__c objLibro : lstLibros){
+        objLibro.IP_Cantidad__c = 10;
+    }
+
+    update lstLibros;
+}
+```
+
+- **Finish:** Este método solo se ejecuta una vez depués de que terminen todas las ejecuciones de la función execute. Por lo general se usa para hacer operaciones pos
+procesamiento como enviar un mail. 
+
+Este método también recibe como parametro la referencia del objeto Database.BatchableContext, el cual podemos usar para conocer el estado de la ejecuión.
 
 
