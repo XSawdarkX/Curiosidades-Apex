@@ -196,5 +196,25 @@ public class SearchAndReplace implements Database.Batchable<sObject>, Database.S
 
 ### Clases de prueba
 
+Al igual que sus procesos asincronos hermanos, se usan los métodos de la clase Test para ejecutar el batch desde la clase de prueba. 
 
+## Apex Scheduler
 
+Usar la clase **IP_ScheduleClass_cls**
+
+Es posible programar una clase de Apex para que se ejecute en determinado periodo de tiempo, y con cierta frecuencia. Para ello, es necesario implementar a interfaz **Schedulable**. Cuando se usa esta interfaz es obligatorio implementar el método execute. 
+
+```Apex
+public class IP_ScheduleClass_cls implements Schedulable {
+
+  public void execute(SchedulableContext SC) {
+
+  }
+}
+```
+
+Para realizar la programación se usa el método **schedule** de la clase system. Este método recibe como parametros  
+
+```Apex
+
+```
