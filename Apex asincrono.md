@@ -239,3 +239,22 @@ String cronID = System.scheduleBatch(m, 'job example', cron);
 
 ### Clase de prueba schedule
 
+Para cubrir una clase que implementa la interfaz schedule se usan los métodos de la clase Test.
+
+```Apex
+static testmethod void test() {
+  Test.startTest();
+    String cron = '20 30 8 10 2 ?';
+    String jobId = System.schedule('testBasicScheduledApex',cron, new IP_ScheduleClass_cls());
+  Test.stopTest();
+}
+```
+### Variable cron
+
+La estructura de una varible Cron es:
+
+```Apex
+Seconds Minutes Hours Day_of_month Month Day_of_week Optional_year
+```
+
+Página para realizar expresiones [Cron](http://www.cronmaker.com/;jsessionid=node01auokyskmfdwuq2iqw27c6hpj280558.node0?0)
