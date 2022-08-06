@@ -258,3 +258,5 @@ Seconds Minutes Hours Day_of_month Month Day_of_week Optional_year
 ```
 
 Página para realizar expresiones [Cron](http://www.cronmaker.com/;jsessionid=node01auokyskmfdwuq2iqw27c6hpj280558.node0?0)
+
+Explicación [valores Cron](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_scheduler.htm)
