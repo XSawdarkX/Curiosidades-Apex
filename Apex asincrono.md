@@ -202,7 +202,7 @@ Al igual que sus procesos asincronos hermanos, se usan los métodos de la clase 
 
 Usar la clase **IP_ScheduleClass_cls**
 
-Es posible programar una clase de Apex para que se ejecute en determinado periodo de tiempo, y con cierta frecuencia. Para ello, es necesario implementar a interfaz **Schedulable**. Cuando se usa esta interfaz es obligatorio implementar el método execute. 
+Es posible programar una clase de Apex para que se ejecute en determinado periodo de tiempo, y con cierta frecuencia. Para ello es necesario implementar a interfaz **Schedulable**. Cuando se usa esta interfaz es obligatorio implementar el método execute. 
 
 ```Apex
 public class IP_ScheduleClass_cls implements Schedulable {
@@ -212,9 +212,30 @@ public class IP_ScheduleClass_cls implements Schedulable {
   }
 }
 ```
+Para realizar la programación se usa el método **schedule** de la clase System. Este método recibe como parametros:
 
-Para realizar la programación se usa el método **schedule** de la clase system. Este método recibe como parametros  
+- El nombre del proceso programado
+- Una variable de tipo String denominada **cron**, la cual me indica con que frecuencia se ejecutara la clase.
+- Una instancia de la clase schedule
 
 ```Apex
-
+IP_ScheduleClass_cls m = new IP_ScheduleClass_cls();
+String cron = '20 30 8 10 2 ?';
+String jobID = system.schedule('Test Schedule Job', cron, m);
 ```
+Este método también devuelve un Id del proceso para poder hacerle seguimiento a través del objeto **CronTrigger**.
+
+```Apex
+CronTrigger ct = [SELECT TimesTriggered, NextFireTime,CronJobDetail.Name FROM CronTrigger WHERE Id = :jobID];
+```
+
+También es posible programar la ejecución de un batch sin necesidad de implementar la interfaz schedule a través del método **scheduleBatch** de la clase System.
+
+```Apex
+IP_ActualizarInventario_bch m = new IP_ActualizarInventario_bch();
+String cron = '20 30 8 10 2 ?';
+String cronID = System.scheduleBatch(m, 'job example', cron);
+```
+
+### Clase de prueba schedule
+
