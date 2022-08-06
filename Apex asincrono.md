@@ -158,4 +158,30 @@ procesamiento como enviar un mail.
 
 Este método también recibe como parametro la referencia del objeto Database.BatchableContext, el cual podemos usar para conocer el estado de la ejecuión.
 
+```Apex
+public void finish(Database.BatchableContext BC){
+    System.debug('Termino de ejecutarse el batch');
+    AsyncApexJob a = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed,
+              TotalJobItems, CreatedBy.Email
+              FROM AsyncApexJob WHERE Id = :BC.getJobId()];
+    System.debug('AsyncApexJob: '+a);
+}
+```
 
+### Ejecución de una Batch
+
+Para ejecutar un batch se usa el método **executeBatch** de la clase Database. Este método recibe como parametro una instancia del batch, y el batch size.
+
+```Apex
+ID batchprocessid = Database.executeBatch(new IP_ActualizarInventario_bch(),2);
+```
+
+### hacer Calllouts
+
+Para hacer un Callout en un batch, se debe implementar también la interfaz **Database.AllowsCallouts**
+
+```Apex
+public class SearchAndReplace implements Database.Batchable<sObject>, 
+   Database.AllowsCallouts{
+}
+```
