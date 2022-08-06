@@ -69,5 +69,63 @@ Usar la clase **IP_AnimalService_wpr**. Es importante que los attributos de mi c
 IP_AnimalService_wpr results = (IP_AnimalService_wpr) JSON.deserialize(response.getBody(),IP_AnimalService_wpr.class);
 ```
 
+#### Ejemplo recibiendo respuesta XML
 
+Cuando el servicio envian un respuesta en formato XML usamos los siguientes métodos para gestionarla. Supongamos que la respuesta del servicio es:
 
+```Apex
+<address>
+    <name>Kirk Stevens</name>
+    <street1>808 State St</street1>
+    <street2>Apt. 2</street2>
+    <city>Palookaville</city>
+    <state>PA</state>
+    <country>USA</country>
+</address>
+```
+
+Lo primero que haremos sera ubicarnos en el documento por medio del método **getBodyDocument** de la clase HttpRequest.
+
+```Apex
+Dom.Document doc = res.getBodyDocument();
+```
+
+Posteriormente nos moveremos a la etiqueta principal o Raiz con el método **getRootElement**.
+
+```Apex
+ Dom.XMLNode address = doc.getRootElement();
+```
+
+Por último, para acceder al valor de cada etiqueta, usamos el método **getChildElement**
+
+```Apex
+String name = address.getChildElement('name', null).getText();
+String state = address.getChildElement('state', null).getText();
+```
+
+El ejemplo completo es:
+
+```Apex
+public void parseResponseDom(String url){
+    Http h = new Http();
+    
+    HttpRequest req = new HttpRequest();
+    req.setEndpoint(url);
+    req.setMethod('GET');
+    
+    HttpResponse res = h.send(req);
+    Dom.Document doc = res.getBodyDocument();
+
+    Dom.XMLNode address = doc.getRootElement();
+
+    String name = address.getChildElement('name', null).getText();
+    String state = address.getChildElement('state', null).getText();
+
+    System.debug('Name: ' + name);
+    System.debug('State: ' + state);
+
+    for(Dom.XMLNode child : address.getChildElements()) {
+       System.debug(child.getText());
+    }
+}
+```
