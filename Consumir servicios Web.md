@@ -53,3 +53,21 @@ if(response.getStatusCode() == 200) {
     }
 }
 ```
+Para leer la respuesta del servicio se puede usar el método **deserializeUntyped** de la clase JSON. Esta forma se usa cuando queremos obtener una tributo especifico
+de la respuesta.
+
+```Apex
+Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
+```
+
+Para obtener la estrucrutra completa de la respuesta, podemos crear una clase wrapper que simule el mismo formato que esperamos recibir. Para ello debemos usar 
+el método **deserialize** de la clase JSON.
+
+Usar la clase **IP_AnimalService_wpr**. Es importante que los attributos de mi clase wrapper se llamen igual que los de la respuesta JSON.
+
+```Apex
+IP_AnimalService_wpr results = (IP_AnimalService_wpr) JSON.deserialize(response.getBody(),IP_AnimalService_wpr.class);
+```
+
+
+
