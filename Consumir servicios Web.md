@@ -129,3 +129,51 @@ public void parseResponseDom(String url){
     }
 }
 ```
+
+#### Ejemplo solicitud método POST
+
+```Apex
+Http http = new Http();
+
+HttpRequest request = new HttpRequest();
+request.setEndpoint('https://th-apex-http-callout.herokuapp.com/animals');
+request.setMethod('POST');	
+request.setHeader('Content-Type', 'application/json;charset=UTF-8');
+request.setBody('{"name":"mighty moose"}');
+
+HttpResponse response = http.send(request);
+
+if(response.getStatusCode() != 201)
+  System.debug('The status code returned was not expected: ' + response.getStatusCode() + ' ' + response.getStatus());
+else 
+  System.debug(response.getBody());
+```
+
+Para crear el body en formato JSON se pueden usar tres formas: 
+
+- Crearlo manualmente concatenando Strings hasta crear la estrcutura, como se ve en el ejmplo de arriba.
+- Usando la clase JSONGenerator 
+
+```Apex
+JSONGenerator gen = JSON.createGenerator(true);
+gen.writeStartObject();
+gen.writeStringField('name', 'Tiburon');
+gen.writeEndObject();
+String pretty = gen.getAsString();
+System.debug('pretty: '+pretty);
+```
+- Con una clase wrapper. El nombre de los atributos o propiedades deben ser tal cual los espera el servicio
+
+```Apex
+public class IP_AnimalService_wpr {
+   public String name;
+}
+```
+
+```Apex
+IP_AnimalService_wpr objAnimal = new IP_AnimalService_wpr();
+objAnimal.Name = 'Leon'; 
+String JSONData = JSON.serialize(objAnimal);
+System.debug('JSONData: '+JSONData);
+```
+
