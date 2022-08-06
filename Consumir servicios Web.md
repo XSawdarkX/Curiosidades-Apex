@@ -1,5 +1,7 @@
 # Consumir Servicios Web
 
+Usar la clase **IP_ConsumoRestExample_cls**
+
 A través de Apex es posible consumir servicios web. Existe dos tipos de llamados que podemos usar para dicho proposito, REST y SOAP. 
 
 ## Servicio REST
@@ -20,6 +22,34 @@ o no.
 404 : recurso no encontrado
 500 : Erro interno del servicio
 
-Antes de hacer un llamado a un servicio web, este debe registrarse en la opción **Remote settings** dentro de configuraciones.
+Antes de hacer un llamado a un servicio web, este debe registrarse en la opción **Remote settings** dentro de configuraciones. 
 
+#### Ejemplo solicitud método GET
 
+Para hacer consumir un servicio web usamos tres clases:
+
+- **Http:** Esta clase permite iniciar un request y un responde Http.
+- **HttpRequest:** Esta clase permite construir el request de la solicitud
+- **HttpResponse:** Esta clase permitealmacenar la respuesta por parte del servicio
+
+```Apex
+Http http = new Http();
+
+HttpRequest request = new HttpRequest();
+request.setEndpoint('https://th-apex-http-callout.herokuapp.com/animals');
+request.setMethod('GET');
+
+HttpResponse response = http.send(request);
+
+if(response.getStatusCode() == 200) {
+
+    Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
+
+    List<Object> animals = (List<Object>) results.get('animals');
+    
+    System.debug('Received the following animals:');
+    for(Object animal: animals) {
+        System.debug(animal);
+    }
+}
+```
