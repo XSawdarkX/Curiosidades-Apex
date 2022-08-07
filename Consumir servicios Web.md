@@ -177,3 +177,47 @@ String JSONData = JSON.serialize(objAnimal);
 System.debug('JSONData: '+JSONData);
 ```
 
+### Clases de prueba Servicio REST
+
+Usar clases **IP_ConsumoRestExample_mck** y ****
+
+Para cubrir una clase que consume servicios web, es necesario crear una clase que implementa la interfaz **HttpCalloutMock**  para simular la respuesta por parte del servicio.
+
+```Apex
+global class YourHttpCalloutMockImpl implements HttpCalloutMock {
+    global HTTPResponse respond(HTTPRequest req) {
+        // Create a fake response.
+        // Set response values, and 
+        // return response.
+    }
+}
+```
+
+Después, en la clase de prueba, usamos el método **setMock** de la clase Test para obtener dicha respuesta. Este método recibe una instancia de la clase
+HttpCalloutMock, y una instancia del mock que creamos.
+
+```Apex
+@isTest
+public static void consumirAnimalsServiceTest(){
+  Test.setMock(HttpCalloutMock.class, new IP_ConsumoRestExample_mck());   
+  IP_ConsumoRestExample_cls.consumirAnimalsService();
+}
+```
+
+## Servicio SOAP
+
+Para consumir un servicio SOAP, primero es necesario tener el archivo wsdl del servicio. [Ejemplo archivo] (https://th-apex-soap-service.herokuapp.com/assets/calculator.xml?_ga=2.118020682.23553583.1659735192-527544349.1658848405)
+
+1. Una vez se tiene ese recurso, desde el boton **Generate From WSDL** ubicado en **Apex classes** en configuraciones, generamos las clases Apex correspondientes a dicho archivo.   
+2. Al final se generan dos clases, una para llamados síncronos y otra para llamados asíncronos comenzada con el sufijo Async. Apartir de esta clases consumimos el servicio.
+3. Para probar un consumo SOAP, se debe crear una clase que implemente la interfaz **WebServiceMock** 
+
+
+
+
+
+
+
+
+
+
