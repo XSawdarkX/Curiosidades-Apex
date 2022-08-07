@@ -48,6 +48,13 @@ global static String createBook(String nombre, String numeroSerie){
     return 'El registro '+objLibro.Id+' se inserto correctamente';
 }
 ```
+Para probar este ejemplo usar la siguiente url y body:
 
+/services/apexrest/Book/
+
+{
+"nombre" : "La ciudad fantasma",
+"numeroSerie" : "200B"
+}
 
 ## Servicio SOAP
