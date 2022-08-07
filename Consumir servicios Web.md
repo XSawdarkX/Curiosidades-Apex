@@ -206,7 +206,7 @@ public static void consumirAnimalsServiceTest(){
 
 ## Servicio SOAP
 
-Para consumir un servicio SOAP, primero es necesario tener el archivo wsdl del servicio. [Ejemplo archivo] (https://th-apex-soap-service.herokuapp.com/assets/calculator.xml?_ga=2.118020682.23553583.1659735192-527544349.1658848405)
+Para consumir un servicio SOAP, primero es necesario tener el archivo wsdl del servicio. [Ejemplo archivo](https://th-apex-soap-service.herokuapp.com/assets/calculator.xml?_ga=2.118020682.23553583.1659735192-527544349.1658848405)
 
 1. Una vez se tiene ese recurso, desde el boton **Generate From WSDL** ubicado en **Apex classes** en configuraciones, generamos las clases Apex correspondientes a dicho archivo.   
 2. Al final se generan dos clases, una para llamados síncronos y otra para llamados asíncronos comenzada con el sufijo Async. Apartir de esta clases consumimos el servicio.
