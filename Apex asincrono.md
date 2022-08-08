@@ -118,7 +118,7 @@ Test.stopTest();
 
 Usar el batch **IP_ActualizarInventario_bch**
 
-El batch es un tipo de proceso asincrono que permite construir y ejecutar un actividad compleja, de larga duración, y lo más importante, que maneja un gran volumen de datos.
+El batch es un tipo de proceso asincrono que permite construir y ejecutar una actividad compleja, de larga duración, y lo más importante, que maneja un gran volumen de datos.
 
 Para definir una Batch toca crear una clase e implementar la interfaz **Database.Batchable**. Una vez se implenete dicha interfaz, toca obligatoriamente implenetar sus
 tres métodos: 
