@@ -17,6 +17,8 @@ Este módulo tiene como propósito explicar la sintaxis básica de Apex, lo que 
 Una clase, partiendo de la base del paradigma Orientado a objetos, se podría definir como una plantilla o molde, bajo el cual se pueden crear objetos. Una clase
 consta de propiedades/atributos, y métodos. 
 
+Un paradigma se entiende como un estilo o forma de programar. 
+
 Para definir una clase se usa la siguiente sintaxis básica:
 
 [Modificador de acceso] Class [Nombre de la clase] {}
