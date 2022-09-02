@@ -407,7 +407,49 @@ También podemos editar registros masivamente:
 
 ## Recursos estaticos
 
+Puede usar recursos estáticos en una Visualforce a través de la variable global $Resource.Nombredelrecurso
+
+Un recurso estático puede ser una hoja de estilo, un archivo Js, una imagen, entre otros. 
+
+Se debe crear primero el recurso estatico en configuraciones
+
+La clave es el uso de la variable global $ Resource. Use la notación de puntos para combinarlo con el nombre del recurso en una etiqueta <apex:includeScript> (para archivos JavaScript), <apex:stylesheet> (para hojas de estilo CSS) o <apex:image> (para archivos gráficos) para agregarlo a su página.
+
+```Apex
+<apex:page standardController="Libro__c" recordSetVar="lstLibros">
+     
+  <!--Ejemplo css-->   
+  <apex:stylesheet value="{!$Resource.cssTest}"/>
+   <h1>Hola mundo</h1>   
+ 
+  <!--Ejemplo Js--> 
+  <apex:includeScript value="{! $Resource.jquery}"/>
+    
+  <script type="text/javascript">
+    jQuery(document).ready(function() {
+            jQuery("#message").html("Hello from jQuery!");
+    });
+  </script>
+     
+  <h1 id="message"></h1>   
+  
+  
+  <!--Ejemplo Imagen--> 
+  <apex:image url="{!$Resource.ImageTest}"/>
+
+</apex:page>
+```
+También puede agregar recursos estáticos comprimidos cuando tiene muchos archivos relacionados entre sí y desea agregarlo todos a un mismo archivo .zip
+
+```Apex
+<apex:page standardController="Libro__c" recordSetVar="lstLibros">  
+  <apex:stylesheet value="{!URLFOR($Resource.jQueryMobile,'jquery.mobile-1.4.5.css')}"/>
+</apex:page>
+```
+
 ## Controlador personalizado
+
+Puede agregar funcionalidad personalizada a través de los controladores custom. Los controladores personalizados no son más que clases de Apex. Si usa un controlador personalizado no puede usar el estándar.   
 
 ## extensiones
 
