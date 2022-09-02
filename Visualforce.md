@@ -29,7 +29,20 @@ Una pagina de visualforce se compone de dos elementos:
 
 ### De cara al desarrollador
 
+![image](https://user-images.githubusercontent.com/100179095/188042625-bcb7019b-a885-4420-bbc4-4cff1775d2ad.png)
+
+1. El desarrollador escribe y guarda una pagina visualforce.
+2. El servidor intenta compilar la pagina
+3. Si la compilación devuelve errores, se cancela el guardado y los incidentes se retornan al desarrollador
+4. Si no se generan errores, las instrucciones o la pagina, se guardan en el repositorio de metadatos y se envian al renderizador que termina
+actualizando la vista del desarrollador
+
 ### De cara al usuario final
+
+![image](https://user-images.githubusercontent.com/100179095/188042910-b6fdcc3b-adc0-43df-b6e6-13afe600c9ba.png)
+
+1. El usuario final solicita una pagina de visualforce
+2. Como lapagina ya esta compilada, el servidor simplemente recupera la metadata y renderiza la pagina
 
 ```Apex
 @future
