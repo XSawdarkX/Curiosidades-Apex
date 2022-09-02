@@ -76,6 +76,28 @@ $A.get("e.force:navigateToURL").setParams(
 
 Importante no moverse de la pestaña donde ejecute el comando, de lo contrario tocaría volver a ejecutar el código. 
 
+## Ejemplo Css y  Js
+
+```Apex
+<apex:page>
+
+    <style>
+    	h1{
+        	color : blue;
+        }
+    </style>
+    
+    <h1>Hello World</h1>
+    
+    <script>
+        window.onload = function() {
+            alert('Page is loaded');
+        };
+    </script>
+    
+</apex:page>
+```
+
 ## Expresiones
 
 ## variables globales
