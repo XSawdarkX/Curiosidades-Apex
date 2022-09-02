@@ -73,6 +73,9 @@ Para depurar y previsulizar la página se puede usar:
 $A.get("e.force:navigateToURL").setParams(
     {"url": "/apex/pageName"}).fire();
 ```
+
+Importante no moverse de la pestaña donde ejecute el comando, de lo contrario tocaría volver a ejecutar el código. 
+
 ## Expresiones
 
 ## variables globales
