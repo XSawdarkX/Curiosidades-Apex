@@ -49,12 +49,30 @@ actualizando la vista del desarrollador
 
 ## Creación de una visualforce
 
+Para crear una visualforce se pueden implementar diferentes métodos.
+
+1. Desde configuraciones en Visualfoce
+2. Desde la Developer console
+3. Si se tiene acivado el modo de desarrollador, con colocar una url como la siguiente, el sistema detecta si ya existe o no y me permite crearla de una vez. Esta forma funciona en Salesforce Classic. 
+
+**https://globant-63c-dev-ed.lightning.force.com/apex/HelloWorldTwo**
+
 ```Apex
 <apex:page>
     <h1>Hello World</h1>
 </apex:page>
 ```
 
+Para depurar y previsulizar la página se puede usar:
+
+1.  La developer console. COn el boton de **Peview**
+2.  Agregando la página al lugar donde va a quedar
+3.  Ejecutando el siguiente comando en la consola de Google. Esto para que funcione en lightning.En classic solo basta con colocar una url como la de arriba.
+ 
+```Apex
+$A.get("e.force:navigateToURL").setParams(
+    {"url": "/apex/pageName"}).fire();
+```
 ## Expresiones
 
 ## variables globales
