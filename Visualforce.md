@@ -13,7 +13,23 @@ Salsa de tomate, es la libreria.
 
 Las páginas de Visualforce tiene elementos HTML,Js y Css tal como una aplicación web estándar, pero también tiene elementos propios de Salesforce. 
 
+Una pagina de visualforce se compone de dos elementos:
 
+- El enmarcado: la parte visual
+- El controlador: La lógica del lado del servidor. Conjunto de instrucciones que se ejecuta cuando un usuario interactua con algún componente del enmarcado.
+
+## ¿Donde se puede usar?
+
+-	Como pestaña dentro de una aplicación 
+-	Dentro de un formato de página estándar a través del generador de aplicaciones 
+-	Como acción personalizada o acción rápida 
+-	Reemplazando la función de algún botón o vinculo estándar 
+
+## ¿Como esta diseñado?
+
+### De cara al desarrollador
+
+### De cara al usuario final
 
 ```Apex
 @future
