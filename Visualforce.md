@@ -302,6 +302,109 @@ del libro.
 
 ## Controlador de lista estandar
 
+El controlador de lista estándar le permite crear páginas de Visualforce que pueden mostrar o actuar sobre un conjunto de registros.
+
+El controlador de lista estándar proporciona muchos comportamientos poderosos y automáticos, como consultar registros de un objeto específico y hacer que los registros estén disponibles en una variable de colección, así como el filtrado y la paginación a través de los resultados. Agregar el controlador de lista estándar a una página es muy similar a agregar el controlador estándar (registro), pero con la intención de trabajar con muchos registros a la vez, en lugar de un registro a la vez.
+
+Para definir el controlador de lista estándar debe agregar el atributo **recordSetVar**, el cual guardara la colección de datos que usara la página. 
+
+```Apex
+<apex:page standardController="Libro__c" recordSetVar="lstLibros">
+     
+    <apex:pageBlock title="Contacts List"> 
+        <apex:pageBlockTable value="{! lstLibros}" var="objLibro">
+                <apex:column value="{! objLibro.Name}"/>
+                <apex:column value="{! objLibro.IP_NumeroSerie__c}"/>
+                <apex:column value="{! objLibro.IP_Cantidad__c}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>
+```
+Como este controlador permite trabajar con un conjunto de registros, no es necesario especificar un id en la url.
+
+Dentro de las acciones que se pueden usar con este controlador estan:
+
+- save
+- quicksave
+- cancel
+- first: muestra la primera página de registros 
+- last: muestra la última página de registros 
+- next
+- previous
+
+Puede usar algunos elementos estándar propios del controlador de lista estándar. Puede agregar filtros de vista de lista, por ejemplo. 
+
+```Apex
+<apex:page standardController="Libro__c" recordSetVar="lstLibros">
+     
+    <apex:form >
+    
+       <apex:pageBlock title="Libros List" id="lstLibros_list"> 
+       
+           <apex:selectList value="{!filterid}" size="1">
+               <apex:selectOptions value="{!listviewoptions}"/>
+               <apex:actionSupport event="onchange" reRender="lstLibros_list"/>
+           </apex:selectList>
+           
+        <apex:pageBlockTable value="{! lstLibros}" var="objLibro">
+                <apex:column value="{! objLibro.Name}"/>
+                <apex:column value="{! objLibro.IP_NumeroSerie__c}"/>
+                <apex:column value="{! objLibro.IP_Cantidad__c}"/>
+        </apex:pageBlockTable>
+        
+        </apex:pageBlock>
+     </apex:form>
+</apex:page>
+```
+También puede agregar paginación. Esto es útil para ver todos los registros del objeto, ya que por defecto solo puede ver 20, puede dividir los registros en páginas, agregar links de siguiente y anterior, y elegir cuantos registros quiere que se muestren por página.Para ellos debe usar expresiones proporcionadas por el controlador de lista estándar como **PageNumber**, **HasPrevious**, **HasNext**, entre otros. 
+
+```Apex
+<apex:page standardController="Libro__c" recordSetVar="lstLibros">
+     
+  <apex:pageBlock title="Viewing Books">
+      <apex:form id="theForm">
+        <apex:pageBlockSection >
+          <apex:dataList var="objLibro" value="{!lstLibros}" type="1">
+            {!objLibro.name}
+          </apex:dataList>
+        </apex:pageBlockSection>
+        
+        <apex:panelGrid columns="2">
+          <apex:commandLink action="{!previous}">Previous</apex:commandlink>
+          <apex:commandLink action="{!next}">Next</apex:commandlink>
+        </apex:panelGrid>
+      </apex:form> 
+  </apex:pageBlock> 
+     
+</apex:page>
+```
+
+También podemos editar registros masivamente:
+
+```Apex
+<apex:page standardController="Libro__c" recordSetVar="lstLibros">
+     
+  <apex:form >
+        <apex:pageBlock >
+            <apex:pageMessages />
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!quicksave}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!lstLibros}" var="objLibro">
+                <apex:column value="{!objLibro.name}"/>
+                <apex:column headerValue="Cantidad">
+                    <apex:inputField value="{!objLibro.IP_Cantidad__c}"/>
+                </apex:column>
+                <apex:column headerValue="Codigo">
+                    <apex:inputField value="{!objLibro.IP_NumeroSerie__c}"/>
+                </apex:column>
+            </apex:pageBlockTable>      
+        </apex:pageBlock>
+   </apex:form>
+     
+</apex:page>
+```
+
 ## Recursos estaticos
 
 ## Controlador personalizado
