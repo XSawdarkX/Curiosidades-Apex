@@ -100,11 +100,53 @@ Importante no moverse de la pestaña donde ejecute el comando, de lo contrario t
 
 ## Expresiones
 
-## variables globales
+Las expresiones se usan para mostrar información dinámica; como datos recuperados de la base de datos o un servicio web. Estos datos pueden ser cálculos, propiedades estándar, o variables globales.
 
-## Formulas
+Una expresión usa la siguiente sintaxis: {! expression }
 
-## Condicionales
+No se tienen en cuenta los espacios ni las mayúsculas o minúsculas.
+
+### variables globales
+
+Las variables globales se usan para mostrar recursos del sistema.
+
+```Apex
+<apex:page >
+     
+    <h1>Hello World dd</h1>
+    
+    <p> Buenos días {! $User.FirstName } {! $User.LastName}, tú username es: {! $User.username}</p>
+    
+    <p> Probando etiquetas personalizadas: {!$Label.CantidadLibrosLibreria}</p>
+    
+</apex:page>
+```
+Para probar el siguiente ejemplo usar el siguiente enlace:
+
+https://globant-63c-dev-ed--c.vf.force.com/apex/HelloWorld?edad=30&peso=60
+
+```Apex
+     <p>Mi edad es: {!$CurrentPage.parameters.edad}, pero mi peso es: {!$CurrentPage.parameters.peso}</p>
+```
+
+### Formulas
+
+Hay diferentes fórmulas estándar que puede usar en las expresiones como & para concatenar o TODAY() para obtener la fecha actual
+
+```Apex
+<apex:page >
+     
+    <h1>Hello World dd</h1>
+    
+    <p> Buenos días {! $User.FirstName & ' ' & $User.LastName } </p>
+    
+    <p> Today's Date is {! TODAY() } </p>
+    
+    <p> The year today is {! YEAR(TODAY()) } </p>
+    
+</apex:page>
+```
+### Condicionales
 
 ## Controlador estandar
 
