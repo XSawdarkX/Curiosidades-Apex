@@ -13,6 +13,8 @@ Salsa de tomate, es la libreria.
 
 Las páginas de Visualforce tiene elementos HTML,Js y Css tal como una aplicación web estándar, pero también tiene elementos propios de Salesforce. 
 
+De los elementos más comunes están **<apex:pageBlock>** que agrupa elementos relacionados, y **<apex:pageBlockSection>** que representa secciones desplegables dentro del bloque.  La segunda etiqueta siempre debe ir dentro de la primera. 
+
 Una pagina de visualforce se compone de dos elementos:
 
 - El enmarcado: la parte visual
@@ -119,6 +121,8 @@ Las variables globales se usan para mostrar recursos del sistema.
     
     <p> Probando etiquetas personalizadas: {!$Label.CantidadLibrosLibreria}</p>
     
+    <p> Permisos sobre el objeto Lead: {!$ObjectType.Lead.accessible}</p>
+    
 </apex:page>
 ```
 Para probar el siguiente ejemplo usar el siguiente enlace:
@@ -193,6 +197,67 @@ Además con la notación de puntos puedo acceder un nivel hacia mi objeto hijo.
 El controlador estándar también cuenta con acciones predeterminadas que permiten crear, modificar y eliminar información. 
 
 ## Componentes de salida
+
+Le permiten mostrar la información. Hay componentes que muestran un conjunto más amplio de información, como el elemento:  **<apex:detail/>** que muestra tal cual la página de detalles de un registro con sus listas relacionadas. Para ver en funcionamiento esta etiqueta necesita pasar el Id del registro en la url de la página.
+
+A través del atributo **relatedList** puede hacer que no se imprima ninguna lista relacionada, y luego con el componente **<apex:relatedList>** Agregar las listas que desee. 
+
+```Apex
+<apex:page standardController="Libro__c">
+    <apex:detail/>
+    
+    <apex:detail relatedList="false"/>
+    <apex:relatedList list="Compra_Libros__r" pageSize="5"/>
+
+</apex:page>
+```
+Hay otros components que permiten mostrar información en campo individuales, como <apex: outputField>.
+
+```Apex
+<apex:page standardController="Libro__c">
+    
+    <!--Ejemplo 1-->
+    <apex:outputField value="{! Libro__c.Name }"/>
+    
+    <!--Ejemplo 2-->
+    <apex:pageBlock title="Libro Summary">
+         <apex:outputField value="{! Libro__c.Name }"/>
+    </apex:pageBlock>
+     
+     <!--Ejemplo 3-->
+     <apex:pageBlock title="Libro Summary">
+         <apex:pageBlockSection >
+             <apex:outputField value="{! Libro__c.Name }"/>
+         </apex:pageBlockSection>
+     </apex:pageBlock>
+      
+</apex:page>
+```
+
+Para que la información se muestre con el formato de Salesforce, procure que su elemento **<apex: outputField>** se encuentre dentro de las etiquetas de bloque que vimos anteriormente, de lo contrario se imprimirán como texto normal. 
+
+Otro componente útil es **<apex:pageBlockTable>** que permite como su nombre lo indica generar una tabla. Es bastante funcional a la hora de querer mostrar una lista de registros relacionados, por ejemplo.
+
+```Apex
+<apex:page standardController="Libro__c">
+     
+     <apex:pageBlock title="Libro Summary">
+         <apex:pageBlockSection >
+             <apex:outputField value="{! Libro__c.Name }"/>
+         </apex:pageBlockSection>
+     </apex:pageBlock>
+     
+     <apex:pageBlock title="Compras Libros">
+       <apex:pageBlockTable value="{!Libro__c.Compra_Libros__r}" var="compraLibro">
+          <apex:column value="{!compraLibro.Name}"/>
+          <apex:column value="{!compraLibro.IP_Valor_Unitario__c}"/>
+          <apex:column value="{!compraLibro.IP_Cantidad__c}"/>
+          <apex:column value="{!compraLibro.IP_Valor_Compra__c}"/>
+       </apex:pageBlockTable>
+    </apex:pageBlock>
+      
+</apex:page>
+```
 
 ## Componentes de entrada
 
