@@ -148,7 +148,49 @@ Hay diferentes fórmulas estándar que puede usar en las expresiones como & para
 ```
 ### Condicionales
 
+Puede usar condicionales dentro de las expresiones
+
+```Apex
+<p>{! IF( CONTAINS('salesforce.com','force.com'),'Yep', 'Nope') }</p>
+```
+
 ## Controlador estandar
+
+La Visualforce usa la modelo vista controlador, y proporciona controladores estándar que permiten usar acciones estándar y acceso a datos de manera rápida. El controlador se encarga de proporcionar funcionalidad a la página. Por ejemplo, el controlador puede contener la lógica que se ejecutará cuando se haga clic en un botón
+
+La mayoría de los objetos estándar y todos los personalizados tienen controladores estándar que se pueden usar para interactuar con los datos asociados con el objeto, por lo que no es necesario que escriba el código para el controlador usted mismo. Puede ampliar los controladores estándar para agregar nuevas funciones o crear controladores personalizados desde cero.
+
+Para que el controlador estandar funcione debe usar el atributo **standardController** en la etiqueta principal, aquí se debe especificar el nombre
+Api del objeto. También es importante pasar el Id del registro por la url.
+
+https://globant-63c-dev-ed--c.vf.force.com/apex/HelloWorld?id=a018X00000YPQ5tQAH
+
+Cada controlador estandar incluye un método getter que retorna el registro especificado por el id de la url. Es importante que el registro corresponda con un id del objeto configurado como controlador estandar, de lo contrario el sistema arrojara un error.
+
+Para acceder a los campos del registro utilizo la siguiente expresión: {!object}
+
+Con la notación de punto puedo acceder hasta 5 niveles hacia arriba.
+
+```Apex
+<apex:page standardController="Libro__c">
+     
+    <h1>Hello World dd</h1>
+    
+    <p> <strong>Nombre del libro: </strong> {!Libro__c.Name}</p>
+    <p> <strong>Nombre del Autor: </strong> {!Libro__c.Autor__r.Name}</p>
+    <p> <strong>Nombre del propietario del Autor: </strong> {!Libro__c.Autor__r.owner.Name}</p>
+    
+</apex:page>
+```
+
+Además con la notación de puntos puedo acceder un nivel hacia mi objeto hijo.
+
+```Apex
+<apex:page standardController="Libro__c">
+    <p> <strong>Compra libros: </strong> {!Libro__c.Compra_Libros__r}</p>
+</apex:page>
+```
+El controlador estándar también cuenta con acciones predeterminadas que permiten crear, modificar y eliminar información. 
 
 ## Componentes de salida
 
