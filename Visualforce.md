@@ -196,6 +196,12 @@ Además con la notación de puntos puedo acceder un nivel hacia mi objeto hijo.
 ```
 El controlador estándar también cuenta con acciones predeterminadas que permiten crear, modificar y eliminar información. 
 
+- Save:  guarda o actualiza el registro y redirecciona a la página de detalles del mismo
+- quicksave: guarda o actualiza el registro 
+- edit
+- delete
+- cancel
+
 ## Componentes de salida
 
 Le permiten mostrar la información. Hay componentes que muestran un conjunto más amplio de información, como el elemento:  **<apex:detail/>** que muestra tal cual la página de detalles de un registro con sus listas relacionadas. Para ver en funcionamiento esta etiqueta necesita pasar el Id del registro en la url de la página.
@@ -260,6 +266,39 @@ Otro componente útil es **<apex:pageBlockTable>** que permite como su nombre lo
 ```
 
 ## Componentes de entrada
+
+Son componentes que permiten la recolección de datos para posteriormente hacer uso de ellos, ya sea para un cálculo o una operación sobre la base de datos. 
+Los componentes principales de este estilo son:
+
+- <apex:form>
+- <apex:inputField>
+- <apex:commandButton>
+
+El elemento **<apex:inputField>** muestra un campo de entrada en la interfaz, y si usa el controlador estándar, este respeta si el usuario puede ver el campo, si es obligatorio o único, en si todos los metadatos asociados a dicho campo. 
+
+```Apex
+<apex:form >
+    <apex:pageBlock title="Edit Libro">
+        <apex:pageBlockSection >
+            <apex:inputField value="{! Libro__c.Name }"/>
+        </apex:pageBlockSection>
+
+        <apex:pageBlockButtons >
+            <apex:commandButton action="{! Save }" value="Save Libro" />
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+</apex:form>    
+```
+### Manejo de errores
+
+Si existen reglas de validación, y el mensaje esta configurado para salir a nivel del campo, con solo usar la etiqueta **<apex:inputField>** es suficiente.
+
+Si se configura el mensaje para que aparezca de forma global, es necesario usar la etiqueta **<apex:pageMessages>**. Par aprovar usar la palabra "visual" en el nombre
+del libro.
+
+```Apex
+<apex:pageMessages > </apex:pageMessages> 
+```
 
 ## Controlador de lista estandar
 
