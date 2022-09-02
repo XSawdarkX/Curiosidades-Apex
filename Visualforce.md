@@ -44,9 +44,36 @@ actualizando la vista del desarrollador
 1. El usuario final solicita una pagina de visualforce
 2. Como lapagina ya esta compilada, el servidor simplemente recupera la metadata y renderiza la pagina
 
+## ¿Cuando debo usarlo?
+
+
+## Creación de una visualforce
+
 ```Apex
-@future
-public static void myFutureMethod(){   
-  System.debug('Este es un método futuro');
-}
+<apex:page>
+    <h1>Hello World</h1>
+</apex:page>
 ```
+
+## Expresiones
+
+## variables globales
+
+## Formulas
+
+## Condicionales
+
+## Controlador estandar
+
+## Componentes de salida
+
+## Componentes de entrada
+
+## Controlador de lista estandar
+
+## Recursos estaticos
+
+## Controlador personalizado
+
+## extensiones
+
