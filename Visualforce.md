@@ -465,6 +465,8 @@ Para obtener los parametros de la url se usa la siguiente sintaxis
 
 https://globant-63c-dev-ed--c.vf.force.com/apex/HelloWorld?numeroSerie=6B
 
+https://globant-63c-dev-ed--c.vf.force.com/apex/HelloWorld
+
 ```Apex
 numeroSerie = ApexPages.currentPage().getParameters().get('numeroSerie');
 ```
@@ -560,11 +562,114 @@ public PageReference save() {
 
 También es importante aclarar que los controladores estandar se ejecutan en modo del sistema, es decir, con todos los permisos.
 
-### Controlador persoalizado de lista
+## extensiones
 
+Una extensión es una clase de apex con un constructor que recibe un solo parametro, una instancia del controlador estandar, o una instancia el controlador custom.
 
+El objetivo de una extensión es:
+
+- Aprovechar las funcionalidades del controlador estandar pero sobreescribir algunas de sus funciones.
+- Agergar acciones nuevas
+
+Las extensiones también corren en modo del sistema. 
+
+para agregar una extensión a una visual se usa el atributo **extensions**. Además, si no se ha especifiado algún controlador, no se puede usar una extensión.
+
+```Apex
+<apex:page standardController= 'Libro__c' extensions='IP_HelloWorldExtensionOne_Cls'>
+     
+  
+</apex:page>
+```
+Ejemplo controlador estandar
+
+https://globant-63c-dev-ed--c.vf.force.com/apex/HelloWorld?id=a018X00000YPQ5tQAH
+
+```Apex
+public Libro__c objLibro;
+
+public IP_HelloWorldExtensionOne_Cls(ApexPages.StandardController controller){
+   objLibro =  (Libro__c) controller.getRecord(); 
+}
+
+public string getnombreyAutor(){
+    return 'El Autor del libro ' +objLibro.Name+' es: '+objLibro.Autor__r.Name;
+}
+```
+Ejemplo controlador custom
 
 https://globant-63c-dev-ed--c.vf.force.com/apex/HelloWorld
 
-## extensiones
+```Apex
+<apex:page Controller = 'IP_HelloWorldController_cls' extensions = 'IP_HelloWorldExtensionOne_Cls'>
+     
+    <p>{!Name & ' ' & Apellido}</p>
+    
+    <p>{!NameTest}</p>
+  
+</apex:page>
+```
 
+```Apex
+public class IP_HelloWorldController_cls {
+
+    public String getName(){
+    	return 'Daniel';    
+    }
+    
+    public String getNameTest(){
+        return 'Controlador personalizado';
+    }
+}
+```
+```Apex
+public class IP_HelloWorldExtensionOne_Cls {
+    
+    public IP_HelloWorldExtensionOne_Cls(IP_HelloWorldController_cls controller){
+       
+    }
+    
+    public String getApellido(){
+    	return 'Junca';    
+    }
+    
+    public String getNameTest(){
+        return 'Extension';
+    }
+}
+```
+Se puede tener más de una extensión separada por coma. En este escencario, si se tienen dos variables iguales. La extensión más a la izquierda, o la que esta de primeras, sobreescribe a las demas. 
+
+```Apex
+<apex:page Controller = 'IP_HelloWorldController_cls' extensions = 'IP_HelloWorldExtensionOne_Cls,IP_HelloWorldExtensionTwo_Cls'>
+     
+    <p>{!Apellido}</p>
+    
+</apex:page>
+```
+
+```Apex
+public class IP_HelloWorldExtensionOne_Cls {
+    
+    public IP_HelloWorldExtensionOne_Cls(IP_HelloWorldController_cls controller){
+       
+    }
+    
+    public String getApellido(){
+    	return 'Junca';    
+    }
+}
+```
+
+```Apex
+public class IP_HelloWorldExtensionTwo_Cls {
+	
+    public IP_HelloWorldExtensionTwo_Cls(IP_HelloWorldController_cls controller){
+       
+    }
+    
+    public String getApellido(){
+    	return 'Chavez';    
+    }
+}
+```
