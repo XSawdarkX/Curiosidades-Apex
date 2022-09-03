@@ -11,6 +11,19 @@ Ejemplo hamburguesa:
 Receta, es el framework.
 Salsa de tomate, es la libreria.
 
+Ejemplos frameworks y librerias
+
+- ruby on rails para Ruby (Este es un lenguaje de programación, que está principalmente orientado a objetos pero también puede ser programación funcional, por ejemplo)
+- django para Python
+- Angular para Js
+
+Librerias
+
+- MathJS
+- Chart.js
+- Jquery
+- React front-end dedsarrollado por Salesforce ahora conocido como Meta
+
 Las páginas de Visualforce tiene elementos HTML,Js y Css tal como una aplicación web estándar, pero también tiene elementos propios de Salesforce. 
 
 De los elementos más comunes están **<apex:pageBlock>** que agrupa elementos relacionados, y **<apex:pageBlockSection>** que representa secciones desplegables dentro del bloque.  La segunda etiqueta siempre debe ir dentro de la primera. 
