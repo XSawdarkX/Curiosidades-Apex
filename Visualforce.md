@@ -673,3 +673,48 @@ public class IP_HelloWorldExtensionTwo_Cls {
     }
 }
 ```
+
+## Clases de prueba
+
+Proba con **IP_ReciboExtension_tst** en la pagina **Recibo**
+
+Para crear clases de prueba de una extensión o un controlador personalizado se deben tener en cuenta dos cosas.
+
+1. El constructor. En un controlador personalizado, al tener un constructor sin parametros no hay que hacer nada, pero en una extensión toca definir un controlador estandar que recibe como parametro un registro del objeto en cuestión, y luego si con el controlador estandar crear un objeto de mi extensión para cubrir el constructor.
+
+```Apex
+@isTest
+public class IP_ReciboExtension_tst {
+
+     @testSetup static void createData(){  
+       Account obAccount = (Account)TestDataFactory.createSObject('Account');
+    }
+    
+    @isTest 
+    public static void testOne(){
+           
+        Account objAcc = [Select id from Account limit 1];
+       
+        ApexPages.StandardController standarController = new ApexPages.StandardController(objAcc);
+        IP_ReciboExtension_cls objExtension = new IP_ReciboExtension_cls(standarController); 
+        
+        objExtension.pdf();
+    }
+}
+```
+2. Para simular los parametros de la url debemos definir primero una instancia de nuestra pagina, y luego, a través de la siguiente estructura definir los
+parametros necesarios.
+
+```Apex
+@isTest 
+public static void testOne(){
+
+   PageReference pageRef = Page.Recibo;
+   Test.setCurrentPage(pageRef);
+	
+   Account objAcc = [Select id from Account limit 1];
+   
+   ApexPages.currentPage().getParameters().put('id',objAcc.Id);        
+}
+```
+
