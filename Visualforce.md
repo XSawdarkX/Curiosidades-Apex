@@ -451,5 +451,120 @@ También puede agregar recursos estáticos comprimidos cuando tiene muchos archi
 
 Puede agregar funcionalidad personalizada a través de los controladores custom. Los controladores personalizados no son más que clases de Apex. Si usa un controlador personalizado no puede usar el estándar.   
 
+Para usar un controlador personalizado usamos el parametro **Controller**.
+
+```Apex
+<apex:page controller="IP_HelloWorldController_cls">
+     
+</apex:page>
+```
+Un controlador puede tener un constructor pero sin parametros. Si bien se deja guardar bien cuando le incluyo algún parametro, cuando se intenta cargar la página salta
+un error.
+
+Para obtener los parametros de la url se usa la siguiente sintaxis
+
+https://globant-63c-dev-ed--c.vf.force.com/apex/HelloWorld?numeroSerie=6B
+
+```Apex
+numeroSerie = ApexPages.currentPage().getParameters().get('numeroSerie');
+```
+
+un controlador personalizado puede tener métodos getter a setter, aunque también puede tener propiedades.
+
+Para definir estos métodos siempre se usa la respectiva palabra más el nombre de la variable.Sin embargo, en la página, solo se llaman por el nombre del método
+sin tener en cuenta el get o el set.
+
+```Apex
+public String getAutor(){
+
+}
+
+public void setNombreLibro(String nombreLibro){
+
+}
+```
+
+Salesforce no garantiza el orden de ejecución de los métodos getter an setter, por lo que el siguiente ejemplo no se recomienda:
+
+```Apex
+public class conVsBad {
+    Contact c;
+
+    public Contact getContactMethod1() {
+        if (c == null) c = [SELECT Id, Name FROM Contact LIMIT 1];
+        return c;
+    }
+
+    public Contact getContactMethod2() {
+        return c;
+    }
+}
+```
+
+Ejemplo final:
+
+```Apex
+public Libro__c objLibro {get;set;}
+    public String searchText {get;set;}
+    public boolean adivino = false;
+    public String numeroSerie;
+    
+    public IP_HelloWorldController_cls(){
+        numeroSerie = ApexPages.currentPage().getParameters().get('numeroSerie');
+        
+        objLibro = (numeroSerie == null) ? new Libro__c() : [Select id,IP_NumeroSerie__c ,Name,Autor__r.Name from Libro__c where IP_NumeroSerie__c = :numeroSerie limit 1];
+    }
+    
+    public String getAutor(){
+        return (numeroSerie == null) ? 'No existe autor todavia' : objLibro.Autor__r.Name;
+    }
+    
+    public boolean getadivino(){
+        return adivino;
+    }
+    
+    public void adivinar(){
+        adivino = (searchText == objLibro.Name) ? true : false;
+    }
+    
+    public void save() {
+        
+        try {
+            upsert(objLibro);
+            ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.CONFIRM,'Operación exitosa'));
+        } catch(System.DMLException e) {
+            ApexPages.addMessages(e);
+        }
+              
+    }
+```
+
+Los métodos también pueden retornar como tipo de dato una **pageReference**, lo cual, como su nombre lo indica, es una referencia a otra pagina.
+
+```Apex
+public PageReference save() {
+
+    try {
+        upsert(objLibro);
+        ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.CONFIRM,'Operación exitosa'));
+    } catch(System.DMLException e) {
+        ApexPages.addMessages(e);
+        return null;
+    }
+
+    PageReference redirectSuccess = new ApexPages.StandardController(objLibro).view();
+    return (redirectSuccess);
+
+}
+```
+
+También es importante aclarar que los controladores estandar se ejecutan en modo del sistema, es decir, con todos los permisos.
+
+### Controlador persoalizado de lista
+
+
+
+https://globant-63c-dev-ed--c.vf.force.com/apex/HelloWorld
+
 ## extensiones
 
