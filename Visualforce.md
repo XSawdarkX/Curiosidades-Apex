@@ -66,6 +66,13 @@ actualizando la vista del desarrollador
 
 Para crear una visualforce se pueden implementar diferentes métodos.
 
+Cabe acalarar que uno puede crear páginas o componentes de visualforce. 
+
+
+Los componentes son pequeñas piezas reutilizables de funccionalidad. Yo puedo usar componentes en Páginas.
+
+La página es la interfaz completa.
+
 1. Desde configuraciones en Visualfoce
 2. Desde la Developer console
 3. Si se tiene acivado el modo de desarrollador, con colocar una url como la siguiente, el sistema detecta si ya existe o no y me permite crearla de una vez. Esta forma funciona en Salesforce Classic. 
@@ -574,6 +581,28 @@ public PageReference save() {
 ```
 
 También es importante aclarar que los controladores estandar se ejecutan en modo del sistema, es decir, con todos los permisos.
+
+Además, existe el atributo **action** que perrmite ejecutar una acción tan pronto se renderiza la página.
+
+```Apex
+<apex:page controller="IP_HelloWorldController_cls" action="{!accionInicial}">
+     
+</apex:page>
+```
+
+```Apex
+public class IP_HelloWorldController_cls {
+
+    public IP_HelloWorldController_cls(){
+         System.debug('Entro Constructor');
+    }
+    
+    public void accionInicial(){
+        System.debug('Entro acción inicial');
+    }
+    
+}
+```
 
 ## extensiones
 
