@@ -627,6 +627,9 @@ Ejemplo controlador estandar
 
 https://globant-63c-dev-ed--c.vf.force.com/apex/HelloWorld?id=a018X00000YPQ5tQAH
 
+El método **getRecord** me devuelve una referencia del registro especificado en la url, pero para usar cualquier campo se debe hacer referencia a él en el
+enmarcado, de lo contrario se originara un error. El unico campo al que se puede acceder sin problema es el Id.
+
 ```Apex
 public Libro__c objLibro;
 
@@ -638,6 +641,17 @@ public string getnombreyAutor(){
     return 'El Autor del libro ' +objLibro.Name+' es: '+objLibro.Autor__r.Name;
 }
 ```
+
+```Apex
+<apex:page standardController = 'Libro__c' extensions='IP_HelloWorldExtensionOne_Cls'>   
+    <h1>Hello Worlds</h1>
+    <p>{!Libro__c.Name}</p>
+    <p>{!Libro__c.Autor__r.Name}</p>
+    
+    <p>{!nombreyAutor}</p>
+</apex:page>
+```
+
 Ejemplo controlador custom
 
 https://globant-63c-dev-ed--c.vf.force.com/apex/HelloWorld
