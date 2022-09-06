@@ -1,5 +1,7 @@
 # Aura Component
 
+PROBAR CON EL COMPONENTE **AuraHelloWorld**
+
 ## ¿Que es?
 
 Es un framework que permite crear interfaces de usuario para el desarrollo de aplicaciones web en móviles y escritorios. 
@@ -42,19 +44,23 @@ Loa componentes aura se pueden crear desde :
 
 Aparte de dar un nombre al comonente, adicionalmente se puede seleccionar si se desea crear para usar en un Tab, Lightning page, Lightningrecord page o Lightning Communities page. 
 
-Cuando recien se crea el componente, podemos apreciar que al costado derecho se ven una serie de opciones. Estas opciones se conocen como recursos.
+Cuando recien se crea el componente, realmente se da vida a un Paquete de componente, el cual se puede entender como una carpeta.
+podemos apreciar que al costado derecho se ven una serie de opciones. Estas opciones se conocen como recursos, que se pueden entender como archivos Dentro de la carpeta.
+
 Todos los recursos están conectados automaticamente entre sí y cada uno tiene su propia función. En total son 8 recursos. 
+
+Un componente Aura se encuentra contenido en las etiquetas **<aura:component>**. 
 
 ### Recursos
 
-- **Component**:
-- **Controller**:
-- **Helper**:
-- **Style**:
-- **Documentation**:
-- **Rendered**:
-- **Design**:
-- **SVG**:
+- **Component**: Es la definición del componente. La parte visual. La interfaz en sí. 
+- **Controller**: el controlador del componente o archivo principal de JavaScript.Contiene los métodos que me van a gestionar los eventos disparados por el usuario final. La idea es que el Controller se dedice exclusivamente a llamar los métodos del helper. 
+- **Helper**: el auxiliar del componente o archivo secundario de JavaScript. Contiene los métodos que van a ser llamados por el Controller.
+- **Style**: Define los estilos del componente
+- **Documentation**: Para documentar el componente con una pequeña descripción o algunos códigos de ejemplo. 
+- **Rendered**: Permite configurar un renderizador de parte del cliente que sobreescribe el renderizado por defecto de un componente.
+- **Design**: Es un recurso requerido cuando el componente se va a usar en Lightning App Builder, Lightning pages, Experience Builder, or Flow Builder.
+- **SVG**: Recurso para configurar iconos personalizados para componentes usados en Lightning App Builder or Experience Builder.
 
 ### Previsualización
 
