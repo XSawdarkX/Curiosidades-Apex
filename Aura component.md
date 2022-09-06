@@ -20,3 +20,38 @@ Los componentes Aura manejan Js en el lado del cliente y Apex en el lado del ser
 
 
 ## ¿Desde donde se puede crear?
+
+Loa componentes aura se pueden crear desde : 
+
+- Desde la Developer Console
+- Desde Visual Studio Code
+
+Aparte de dar un nombre al comonente, adicionalmente se puede seleccionar si se desea crear para usar en un Tab, Lightning page, Lightningrecord page o Lightning Communities page. 
+
+Cuando recien se crea el componente, podemos apreciar que al costado derecho se ven una serie de opciones. Estas opciones se conocen como recursos.
+Todos los recursos están conectados automaticamente entre sí y cada uno tiene su propia función. En total son 8 recursos. 
+
+## Recursos
+
+- **Component**:
+- **Controller**:
+- **Helper**:
+- **Style**:
+- **Documentation**:
+- **Rendered**:
+- **Design**:
+- **SVG**:
+
+## Previsualización
+
+Lamentablemente, a diferencia de una Visualforce, no se puede previsualizar el aspecto del componente hasta que no se encuentre dentro de un contenedor. Una manera rápida de probar el componente es crear una aplicación Lightning desde la **Developer console** --> **Nuevo** --> **Lightning application** y llamar al componente de la siguiente forma. 
+
+```Apex
+<aura:application >
+	<c:NombreDelComponente/>
+</aura:application>
+```
+En el costado derecho de la aplicación hay una opción de preview.
+
+
+
