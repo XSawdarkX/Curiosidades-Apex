@@ -30,6 +30,8 @@ Un Aura component se puede usar en:
 - En comunidades
 - Crear aplicaciones independientes alojadas en Salesforce pero que se ejecutan en otro contexto
 
+A diferencia de Visualforce, no se pueden crear botones, solo acciones.
+
 Lightning Out es una función que amplía aplicaciones Lightning. Actúa como un puente para hacer aflorar componentes Lightning en cualquier contenedor Web remoto. Es
 decir, pueso usar mis componentes en sistemas externos. 
 
