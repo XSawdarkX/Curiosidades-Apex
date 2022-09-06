@@ -22,7 +22,7 @@ Los componentes Aura manejan Js en el lado del cliente y Apex en el lado del ser
 
 Un Aura component se puede usar en:
 
-- Para personalizar sus aplicaciones de Salesforce, ya se agregandolo cp,p Home page, o App page.
+- Para personalizar sus aplicaciones de Salesforce, ya se agregandolo a una Home page, o App page.
 - Como record page.
 - Como una acción rápida o acción global.
 - Como fichas
