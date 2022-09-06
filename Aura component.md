@@ -18,6 +18,20 @@ Los componentes Aura manejan Js en el lado del cliente y Apex en el lado del ser
 
 ## ¿Donde se puede usar?
 
+Un Aura component se puede usar en:
+
+- Para personalizar sus aplicaciones de Salesforce, ya se agregandolo cp,p Home page, o App page.
+- Como record page.
+- Como una acción rápida o acción global.
+- Como fichas
+- Para sustituir acciones estándar.  
+- En comunidades
+- Crear aplicaciones independientes alojadas en Salesforce pero que se ejecutan en otro contexto
+
+Lightning Out es una función que amplía aplicaciones Lightning. Actúa como un puente para hacer aflorar componentes Lightning en cualquier contenedor Web remoto. Es
+decir, pueso usar mis componentes en sistemas externos. 
+
+Un componente Lightning puede ser ejecutada o llamada desde una Visualforce.
 
 ## ¿Desde donde se puede crear?
 
@@ -31,7 +45,7 @@ Aparte de dar un nombre al comonente, adicionalmente se puede seleccionar si se 
 Cuando recien se crea el componente, podemos apreciar que al costado derecho se ven una serie de opciones. Estas opciones se conocen como recursos.
 Todos los recursos están conectados automaticamente entre sí y cada uno tiene su propia función. En total son 8 recursos. 
 
-## Recursos
+### Recursos
 
 - **Component**:
 - **Controller**:
@@ -42,7 +56,7 @@ Todos los recursos están conectados automaticamente entre sí y cada uno tiene 
 - **Design**:
 - **SVG**:
 
-## Previsualización
+### Previsualización
 
 Lamentablemente, a diferencia de una Visualforce, no se puede previsualizar el aspecto del componente hasta que no se encuentre dentro de un contenedor. Una manera rápida de probar el componente es crear una aplicación Lightning desde la **Developer console** --> **Nuevo** --> **Lightning application** y llamar al componente de la siguiente forma. 
 
@@ -53,5 +67,12 @@ Lamentablemente, a diferencia de una Visualforce, no se puede previsualizar el a
 ```
 En el costado derecho de la aplicación hay una opción de preview.
 
+### Aplicación vs componente
+
+- Puede llamar un componente desde una aplicación. Pero no una aplicación desde otra aplicación, o una aplicación desde un componente.
+- Una aplicación tiene una dirección URL independiente a la que puede acceder durante la prueba y que puede publicar para sus usuarios.
+- No puede agregar aplicaciones a Lightning Experience o la aplicación Salesforce: solo puede agregar componentes.
+- Las aplicaciones Componentes Lightning son un tipo de contenedor para nuestros Componentes Lightning.
+- Puede anidar componentes dentro de otros. Cuando llama un componente desde otro, es como si estuviera instanciándolo en el otro componente. 
 
 
