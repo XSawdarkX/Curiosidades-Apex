@@ -81,4 +81,81 @@ En el costado derecho de la aplicación hay una opción de preview.
 - Las aplicaciones Componentes Lightning son un tipo de contenedor para nuestros Componentes Lightning.
 - Puede anidar componentes dentro de otros. Cuando llama un componente desde otro, es como si estuviera instanciándolo en el otro componente. 
 
+## Expresiones
 
+La expresiones nos permiten mostrar información dinamica. 
+
+La sintaxis de una expresión es {!$Profile.Name}. 
+
+### Variables globales
+
+De acuerdo a la documentación de las variables globales, solo la de Label esta disponible en Aura component.
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <p>Hello world</p>
+    <p>La cantidad de libros en la Libreria es:  {!$User.c.CantidadLibrosLibreria}</p>
+</aura:component>
+```
+
+### Formulas
+
+Ejemplos:
+
+**add:** Suma dos numeros
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <p>Hello world</p>
+    <p>1 + 2 = {!add(1,2)}</p>
+</aura:component>
+```
+
+**concat:** Concatena dos argumentos
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <p>Hello world</p>
+    <p>Bienvenido {!concat('Daniel ','Junca')}!</p>
+</aura:component>
+```
+
+**lessthan:** retorna true si el primer argumento es menor que el segundo
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <p>Hello world</p>
+    <p>¿5 es menor que 10?: {!lessthan(5,10)}</p>
+</aura:component>
+```
+
+**and:** Evalua si las dos argumentos se cumplen
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <p>Hello world</p>
+    <p>{!and(true,true)}</p>
+</aura:component>
+```
+
+## Atributos
+
+
+## Proveedor de valores
+
+## Condicionales
+
+
+## Iterador
+
+
+## Algunos componentes preconstruidos o etiquetas propias de Aura
+
+
+## Controlador Js
+
+
+## Controlador Apex
+
+
+## Eventos
