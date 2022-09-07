@@ -322,14 +322,14 @@ al interior del if, lo que puede llegar a ser un poco confuso.
     
     <aura:attribute name="Edad" type="Integer" default='16'/>
     
-  	<aura:if isTrue="{!v.Edad >= 18}">
+    <aura:if isTrue="{!v.Edad >= 18}">
         
         Es mayor de Edad
         
         <aura:set attribute="else">
            No es menor de Edad 
         </aura:set>
-    </aura:if>
+     </aura:if>
     
 </aura:component>
 ```
@@ -345,19 +345,19 @@ También reclarcalar que el **&&** tampoco funciona como **and**, en su lugar us
     
   	<aura:if isTrue="{! v.Edad >= 1 &amp;&amp; lessthan(v.Edad,12)}">
         
-       Soy un niño
+       		Soy un niño
         
-        <aura:set attribute="else">
-           <aura:if isTrue="{! v.Edad >= 13 &amp;&amp; lessthan(v.Edad,18)}">
+        	<aura:set attribute="else">
+           		<aura:if isTrue="{! v.Edad >= 13 &amp;&amp; lessthan(v.Edad,18)}">
         
-        		Soy un adolescente
+        			Soy un adolescente
         
-                <aura:set attribute="else">
-                    Soy un adulto T-T
-                </aura:set>
-    		</aura:if>
-        </aura:set>
-    </aura:if>
+                		<aura:set attribute="else">
+                    			Soy un adulto T-T
+                		</aura:set>
+    			</aura:if>
+        	</aura:set>
+    	</aura:if>
     
 </aura:component>
 ```
