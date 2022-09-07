@@ -253,9 +253,18 @@ solo es necesario usar una vez el simbolo **!**
     
     <aura:attribute name="colorPalette" type="List" default="['red', 'green', 'blue','red']"/>
     
+    <p>colorPalette: {!v.colorPalette[0]}</p>
+    
+    <p>colorPalette cantidad elementos: {!v.colorPalette.length}</p>
+    
     <aura:attribute name="collection" type="Set" default="['red', 'green', 'blue','red']"/>
     
+    <p>collection cantidad elementos: {!v.collection.length}</p>
+    
     <aura:attribute name="sectionLabels" type="Map" default="{ a: 'label1', b: 'label2' }" />
+    
+    <p>sectionLabels1: {!v.sectionLabels.a}</p>
+    <p>sectionLabels2: {!v.sectionLabels.b}</p>
     
 </aura:component>
 ```
