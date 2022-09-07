@@ -314,6 +314,53 @@ Cuando el atributo de un componente es un objeto u otros datos estructurados (o 
 
 ## Condicionales
 
+Permiten evaluar una condición y hacer algo si se cumple o no. A diferencia de los if normales, en el aura el **else** no esta al mismo nivel, si no que se encuentra
+al interior del if, lo que puede llegar a ser un poco confuso.
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="Edad" type="Integer" default='16'/>
+    
+  	<aura:if isTrue="{!v.Edad >= 18}">
+        
+        Es mayor de Edad
+        
+        <aura:set attribute="else">
+           No es menor de Edad 
+        </aura:set>
+    </aura:if>
+    
+</aura:component>
+```
+
+Ejemplo else if. El operador **<** y **<=** no se puede usar, sine embargo podemos usar el método **lessthan**. 
+
+También reclarcalar que el **&&** tampoco funciona como **and**, en su lugar usamos: **&amp;&amp;**.
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="Edad" type="Integer" default='5'/>
+    
+  	<aura:if isTrue="{! v.Edad >= 1 &amp;&amp; lessthan(v.Edad,12)}">
+        
+       Soy un niño
+        
+        <aura:set attribute="else">
+           <aura:if isTrue="{! v.Edad >= 13 &amp;&amp; lessthan(v.Edad,18)}">
+        
+        		Soy un adolescente
+        
+                <aura:set attribute="else">
+                    Soy un adulto T-T
+                </aura:set>
+    		</aura:if>
+        </aura:set>
+    </aura:if>
+    
+</aura:component>
+```
 
 ## Iterador
 
