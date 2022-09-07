@@ -174,9 +174,30 @@ es de tipado fuerte.
 
 ### posibles tipos de datos
 
-
-
-
+- String
+```Apex
+```
+- Integer
+```Apex
+```
+- Date
+```Apex
+```
+- Decimal
+```Apex
+```
+- DateTime
+```Apex
+```
+- Tenemos las colecciones: List, Set, Map
+```Apex
+```
+- Objectos estándar y Custom
+```Apex
+```
+- Clases de Apex 
+```Apex
+```
 
 ## Proveedor de valores
 
