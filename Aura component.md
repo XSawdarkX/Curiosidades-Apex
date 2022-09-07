@@ -59,6 +59,13 @@ Un componente Aura se encuentra contenido en las etiquetas **<aura:component>**.
 - **Controller**: el controlador del componente o archivo principal de JavaScript.Contiene los métodos que me van a gestionar los eventos disparados por el usuario final. La idea es que el Controller se dedice exclusivamente a llamar los métodos del helper. 
 - **Helper**: el auxiliar del componente o archivo secundario de JavaScript. Contiene los métodos que van a ser llamados por el Controller.
 - **Style**: Define los estilos del componente
+
+```Apex
+p.THIS{
+    color:blue;
+}
+```
+
 - **Documentation**: Para documentar el componente con una pequeña descripción o algunos códigos de ejemplo. 
 - **Rendered**: Permite configurar un renderizador de parte del cliente que sobreescribe el renderizado por defecto de un componente.
 - **Design**: Es un recurso requerido cuando el componente se va a usar en Lightning App Builder, Lightning pages, Experience Builder, or Flow Builder.
@@ -146,7 +153,7 @@ Los componentes pueden tener atributos o variables. Se usan para almacenar datos
 pero a diferencia de una visualforce, yo no puedo acceder directamente a las propiedades de la clase Apex o Controlador. La manera de utilizar atributos de apex
 en mi componente es creando mis propios atributos en mi componente y llenandolos desde el Controlador Js o el Helper.
 
-Un atributo se define utilizando una etiqueta **<aura:attribute>**, que requiere valores para los atributos **name** y **type**, y acepta estos atributos opcionales: **default**, **description**, **required**.
+Un atributo se define utilizando una etiqueta **<aura:attribute>**, que requiere valores para los atributos **name** y **type**, y acepta estos atributos opcionales: **default**, **description**, **required** o **access**.
 
 ```Apex
 <aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
@@ -174,28 +181,110 @@ es de tipado fuerte.
 
 ### posibles tipos de datos
 
-- String
+- **String**
+
 ```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+
+    <aura:attribute name='message' type='String' default='everybody lies'/>
+    
+    <p>{!v.message}</p>
+    
+</aura:component>
 ```
-- Integer
+
+- **Integer**. Todos los valores por defecto, independientemente del tipo, deben ir entre comillas. También se puee observar que en la expresión del **Resultado**
+solo es necesario usar una vez el simbolo **!**
+
 ```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name='valor1' type='Integer' default='5'/>
+    <aura:attribute name='valor2' type='Integer' default='6'/>
+    
+    <p>Valor 1: {!v.valor1}</p>
+    <p>Valor 2: {!v.valor2}</p>
+    <p>Resultado: {!add(v.valor2,v.valor1)}</p>
+</aura:component>    
 ```
-- Date
+
+- **Date**. Siempre en formato YYYY-MM-DD
+
 ```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="startDate" type="Date" default='2022-09-20'/>
+    
+    <p>startDate: {!v.startDate}</p>
+    
+</aura:component>
 ```
-- Decimal
+
+- **Decimal**. Se puede especificar con puntos o comas.
+
 ```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name='valor1' type='Decimal' default='5,5'/>
+    <aura:attribute name='valor2' type='Decimal' default='6.4'/>
+    
+    <p>Valor 1: {!v.valor1}</p>
+    <p>Valor 2: {!v.valor2}</p>
+    <p>Resultado: {!add(v.valor2,v.valor1)}</p>
+    
+</aura:component>
 ```
-- DateTime
+
+- **DateTime**. Siempre en formato YYYY-MM-DDTHH:MM:SSZ
+
 ```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="lastModifiedDate" type="DateTime" default='2022-08-30T10:25:10Z'/>
+    
+    <p>lastModifiedDate: {!v.lastModifiedDate}</p>
+    
+</aura:component>
 ```
-- Tenemos las colecciones: List, Set, Map
+
+- **Tenemos las colecciones:** List, Set, Map
+
 ```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="colorPalette" type="List" default="['red', 'green', 'blue','red']"/>
+    
+    <aura:attribute name="collection" type="Set" default="['red', 'green', 'blue','red']"/>
+    
+    <aura:attribute name="sectionLabels" type="Map" default="{ a: 'label1', b: 'label2' }" />
+    
+</aura:component>
 ```
-- Objectos estándar y Custom
+
+- **Objectos estándar y Custom**. Si solo imprimo el objeto con un valor por defecto se mostrata **[object,object]**, pero yo puedo acceder a un campo en 
+especifio a través de la notación de puntos.
+
 ```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="acct" type="Account"/>
+    
+    <aura:attribute name="objLibro" type="Libro__c"/>
+    
+    <aura:attribute name="objLibro" type="Libro__c" 
+                    default="{
+				'Name': 'La quinta ola',
+        			'IP_Cantidad__c': '5',                                                
+                	        'IP_NumeroSerie__c ': '300B'}"/>
+    
+    <p>objLibro: {!v.objLibro}</p>
+    
+    <p>objLibro: {!v.objLibro.Name}</p>
+        
+</aura:component>
 ```
-- Clases de Apex 
+
+- **Clases de Apex**
+ 
 ```Apex
 ```
 
