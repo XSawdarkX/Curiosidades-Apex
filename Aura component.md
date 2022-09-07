@@ -142,6 +142,41 @@ Ejemplos:
 
 ## Atributos
 
+Los componentes pueden tener atributos o variables. Se usan para almacenar datos que cambian. Se comportan similar a los atributos o propiedades de una clase,
+pero a diferencia de una visualforce, yo no puedo acceder directamente a las propiedades de la clase Apex o Controlador. La manera de utilizar atributos de apex
+en mi componente es creando mis propios atributos en mi componente y llenandolos desde el Controlador Js o el Helper.
+
+Un atributo se define utilizando una etiqueta **<aura:attribute>**, que requiere valores para los atributos **name** y **type**, y acepta estos atributos opcionales: **default**, **description**, **required**.
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <p>Hello world</p>
+    
+    <!--Mal-->
+    <aura:attribute/>
+    
+    <!--Mal-->
+    <aura:attribute name='message'/>
+    
+    <!--Bien-->
+    <aura:attribute name='message' type='String'/>
+    
+</aura:component>
+```
+
+Si coloco un atributo como obligatorio y mi componente ya esta contenido en uno de los posibles entornos, menos en la aplicación que creamos al comienzo, el sistema
+me pedira que utilice el atributo **default** para darle un valor por defecto a mi variable.
+
+Para probar utilicé la pagína de registro de la Cuenta, agregando y desagregando el componente **AuraHelloWorld**. 
+
+Se puede acceder a la variable a través de su **name**. El **Type** es obligatorio porque debemos saber que tipo de información almacenara el atributo, es decir,
+es de tipado fuerte.
+
+### posibles tipos de datos
+
+
+
+
 
 ## Proveedor de valores
 
