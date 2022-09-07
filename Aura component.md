@@ -295,6 +295,11 @@ especifio a través de la notación de puntos.
 - **Clases de Apex**
  
 ```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+ 	<aura:attribute name="claseTest" type="IP_AuraController_cls"/>
+    
+</aura:component>
 ```
 
 ## Proveedor de valores
