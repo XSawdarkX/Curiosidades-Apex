@@ -364,6 +364,19 @@ También reclarcalar que el **&&** tampoco funciona como **and**, en su lugar us
 
 ## Iterador
 
+Me permite recorrer o Iterar un conjunto de valores.
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="colorPalette" type="List" default="['red', 'green', 'blue','red']"/>
+    
+    <aura:iteration var="color" items="{!v.colorPalette}">
+        <p>{!color}</p>
+    </aura:iteration>
+    
+</aura:component>
+```
 
 ## Algunos componentes preconstruidos o etiquetas propias de Aura
 
