@@ -304,6 +304,14 @@ especifio a través de la notación de puntos.
 
 ## Proveedor de valores
 
+Los proveedores de valores son una forma de agrupar, encapsular y acceder a los datos relacionados. **v** es un proveedor de valores para la vista.
+
+Piense en **v** como una variable automática que está disponible para su uso.
+
+![image](https://user-images.githubusercontent.com/100179095/188964140-5edfde26-2d68-4ce1-9cad-90ecfccad150.png)
+
+Cuando el atributo de un componente es un objeto u otros datos estructurados (o sea, no un valor primitivo), acceda a los valores de ese atributo empleando la misma notación de punto. Por ejemplo, {!v.account.Id} accede al campo Id de un registro de cuenta.
+
 ## Condicionales
 
 
