@@ -568,7 +568,7 @@ Helper
 ({
 	getBooksHelper : function(component,event) {
         
-         let action = component.get("c.getBook");
+         let action = component.get("c.getBooks");
         
          action.setCallback(this, function(response) {
             let state = response.getState();
@@ -590,10 +590,28 @@ Controlador Apex
 public class IP_AuraController_cls {
 
     @AuraEnabled
-    public static List<Libro__c> getBook() {
+    public static List<Libro__c> getBooks() {
         return [SELECT Name FROM Libro__c];
     }
 }
 ```
+
+1. Lo primero que se debe hacer es un llamado al método:  
+
+```Apex
+let action = component.get("c.getBooks");
+```
+
+2. La siguiente línea que se ejecuta es **$A.enqueueAction(action);**
+
+$A es una variable global de marco que proporciona un número de importantes funciones y servicios. $A.enqueueAction(action) agrega la llamada del servidor que acabamos de configurar a la cola de solicitudes del marco de componentes Aura. Esta, junto con otras solicitudes de servidor pendientes, se enviará al servidor en el siguiente ciclo de solicitudes.
+
+3. El llamado a los métodos de Apex funciona de manera asíncrona. 
+
+**this** es el ámbito en el que se ejecutará la devolución de llamadas; aquí this es la función del gestor de acciones en sí. Piense en él como una dirección, o quizá un número. La función es a lo que se llama cuando se devuelve la respuesta del servidor.
+
+**function(response) { ... });** es una función de devolución que se encarga de gestionar la repuesta del servidor. 
+
+Las funciones de devolución de llamadas toman un único parámetro, response, que es un objeto opaco que proporciona los datos devueltos, si los hubiera, y varios detalles sobre el estado de la solicitud.
 
 ## Eventos
