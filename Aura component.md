@@ -519,5 +519,16 @@ Helper
 
 ## Controlador Apex
 
+Los controladores del lado del servidor no son más que clases de apex que interactúan directamente con la base de datos. En estas clases se puede crear métodos para usar por el controlador Js. Estos métodos siempre deben ser globales o públicos, deben ser estáticos, y deben estar acompañados del tag **@AuraEnabled**
+
+Las llamadas de servidor son caras, y pueden tardar un poco de tiempo.
+
+La solución para mantener la capacidad de respuesta mientras se espera es que las respuestas de servidor se gestionan de forma **asíncrona**. Lo que esto significa es que cuando hace clic en el botón get Books, su controlador del lado del cliente desencadena una solicitud de servidor y sigue procesando. No solo no espera al servidor, ¡olvida que realizó la solicitud!
+
+Para conectar el componente con el controlador de apex no más hace falta usar el parámetro **controller** en la etiqueta de apertura **aura:component**
+
+```Apex
+<aura:component controller="IP_AuraController_cls">
+```
 
 ## Eventos
