@@ -429,6 +429,93 @@ Me permite recorrer o Iterar un conjunto de valores.
 
 ## Controlador Js
 
+Los controladores permiten que los componentes sean interactivos. Un controlador es básicamente un conjunto de código que define el comportamiento de su aplicación cuando “suceden cosas”. A través de la definición del componente se puede hacer referencias a métodos o funciones construidas en el controlador. Para ello se usa el proveedor de valores del controlador del lado del cliente c. En el ejemplo de abajo se llama la función handleClick por medio del atributo onclick del botón. 
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+     <aura:attribute name='message' type='String'/>
+    
+     <p>Message of the day: {!v.message}</p>
+    
+     <div>
+         <lightning:button label="You look nice today." onclick="{!c.handleClick}"/>
+        
+         <lightning:button label="Today is going to be a great day!" onclick="{!c.handleClick}"/>
+	 </div>	
+    
+</aura:component>
+```
+Por lo tanto, **{!c.handleClick}** es una referencia a un gestor de acciones o método en el controlador del componente.
+
+Tomando como referencia el patrón MVC. Lightning components sería más bien Vista-Controlador-Controlador-Base de datos. Ya que este marco de trabajo tiene un controlador del lado del cliente con Js, y un controlador del lado del servidor con Apex. 
+
+Ejemplo controlador Js
+
+```Apex
+({
+	handleClick : function(component, event, helper) {
+        
+   	let btnClicked = event.getSource();    
+        let btnMessage = btnClicked.get("v.label"); 
+        
+        component.set("v.message", btnMessage);     
+	}
+})
+```
+
+Los recursos de controlador tienen un formato interesante. Son objetos de JavaScript que contienen un mapa de pares de nombre-valor, donde el nombre es el nombre del gestor de acciones y el valor es la definición de una función. El gestor de acciones, para que se entienda mejor, es básicamente un método. El controlador puede tener un sinfín de métodos, cada uno separado por coma. 
+
+Los métodos, por regla general, independientemente si no se usa uno de ellos, cuenta con tres parámetros:
+
+- **Component:** El componente
+- **Event:** El evento que causo la llamada del gestor de acciones
+- **Helper:** Otro recurso Js para definir métodos reutilizables. 
+
+Puede llamar get() en cualquier componente y proporcionar el nombre del atributo que desea recuperar, en el formato v.attributeName. El resultado es el valor del atributo.
+
+Existe la contraparte del get(), y es el set() para modificar el valor de un atributo definido en el componente. component.set("v.message", ‘Nuevo valor’);  
+
+Ejemplo método get y Helper
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+     <aura:attribute name='message' type='String' default='Lindo día'/>
+    
+     <p>Message of the day: {!v.message}</p>
+    
+     <lightning:button label="You look nice today." onclick="{!c.handleClick}"/>
+    
+</aura:component>
+```
+
+Controlador Js
+```Apex
+({
+	handleClick : function(component, event, helper) {        
+        	helper.helperMethod(component,event);
+	}
+})
+```
+
+Helper
+```Apex
+({
+	helperMethod : function(component, event) {
+		let defaultMessage = component.get("v.message");     
+        
+        	console.log('defaultMessage: '+defaultMessage);
+        
+       		let btnClicked = event.getSource();  
+        	let btnMessage = btnClicked.get("v.label"); 
+        
+        	let finalmessage = defaultMessage + '/' + btnMessage;
+        
+        	component.set("v.message", finalmessage);     
+	}
+})
+```
 
 ## Controlador Apex
 
