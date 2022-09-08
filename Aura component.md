@@ -90,6 +90,13 @@ En el costado derecho de la aplicación hay una opción de preview.
 - Las aplicaciones Componentes Lightning son un tipo de contenedor para nuestros Componentes Lightning.
 - Puede anidar componentes dentro de otros. Cuando llama un componente desde otro, es como si estuviera instanciándolo en el otro componente. 
 
+### Diferencias vs Visualforce
+
+| Visualforce  | Aura component |
+| ------------- | ------------- |
+| Se almacena como una sola entidad, una sola página, cuando buscas una Visualforce en Visual studio solo aparecerá como un archivo. pag. Si se hace referencia a otros archivos como el controlador de ápex o recursos estáticos, pero estos se guardan en lugares diferentes  | Se almacena en una carpeta, ya que se distribuye en varios componentes, un total de 9. Cuando buscas un Aura component en Visual studio te encontraras con una carpeta y dentro de ella varios archivos    |
+| Content Cell  | Content Cell  |
+
 ## Expresiones
 
 La expresiones nos permiten mostrar información dinamica. 
@@ -425,6 +432,43 @@ Me permite recorrer o Iterar un conjunto de valores.
     <lightning:progressBar value="50" size="large" />
     
 </aura:component>
+```
+
+## Recursos estaticos
+
+Para poder usar recursos estaticos en Aura component usamos la variable global **$Resource** y el componente estandar **<ltng:require/>**
+
+Componente:
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    
+    <ltng:require styles="{!$Resource.cssTest}"/>
+    
+    <h1>Hola mundo</h1>   
+    
+    <ltng:require scripts="{!$Resource.jquery}" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+    
+    <img src="{!$Resource.ImageTest}"/>
+</aura:component>
+```
+
+Cliente Js:
+
+```Apex
+({
+    scriptsLoaded:function(){
+        console.log('Ya cargo Jquey!');
+    }
+})
+```
+
+Ejemplo cargando varios archivos Js
+
+```Apex
+scripts="{!join(',',
+          $Resource.jsLibraries + '/jsLibOne.js',
+          $Resource.jsLibraries + '/jsLibTwo.js')}"
 ```
 
 ## Controlador Js
