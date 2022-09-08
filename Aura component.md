@@ -95,7 +95,11 @@ En el costado derecho de la aplicación hay una opción de preview.
 | Visualforce  | Aura component |
 | ------------- | ------------- |
 | Se almacena como una sola entidad, una sola página, cuando buscas una Visualforce en Visual studio solo aparecerá como un archivo. pag. Si se hace referencia a otros archivos como el controlador de ápex o recursos estáticos, pero estos se guardan en lugares diferentes  | Se almacena en una carpeta, ya que se distribuye en varios componentes, un total de 9. Cuando buscas un Aura component en Visual studio te encontraras con una carpeta y dentro de ella varios archivos    |
-| Content Cell  | Content Cell  |
+| Se ejecuta del lado del servidor, recién se carga la pagina y cada vez que el usuario interactúa con ella, se hace una consulta al servidor, el cual retorna una nueva página con la solicitud (recarga de la página)    | Se ejecuta del lado del cliente con Js, recien se solicita el componente se empaquetan todos los archivos y se cargan al navegador web. Cuando el usuario interactúa con el componente, en realidad interactúa con el Js, si se necesitan cargar nuevos datos o guardar algunos, entonces si es necesario llamar al servidor.  |
+| Cuando se usa Visualforce como una aplicación, generalmente se crean varias paginas para poder navegar entre ellas  | Con los componentes aura, solo existe una “pagina”, la cual es renderizada y cambiada por el Js de acuerdo con el estado en la que se encuentre la aplicación. No hay necesidad de crear varias paginas  |
+| CLas paginas de visualforce no están diseñadas para generar una cadena de llamados sobre otras visualforce. Es decir, que una pagina vs este compuesta por varias páginas vs   | Los aura component sí. Ellos tienen algo llamado Eventos para la comunicación entre diferentes componentes |
+| CUna página visualforce esta diseñada para ser independiente   | Un componente siempre es parte de un todo   |
+| Tiene un controlador de ápex que funciona del lado del servidor. Tiene un controlador estándar que ya trae muchas funciones predefinidas, aunque se puede ampliar dicho funcionamiento creando controladores personalizados   | Tiene un controlador ápex del lado del servidor, y un controlador Js del lado del cliente, en el controlador Js es necesario crear un código pata la comunicación con el controlador de ápex, cosa que en una Visualforce no es necesario ya que la comunicación es directa.  |
 
 ## Expresiones
 
