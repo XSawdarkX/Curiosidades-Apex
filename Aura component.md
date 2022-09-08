@@ -531,4 +531,69 @@ Para conectar el componente con el controlador de apex no más hace falta usar e
 <aura:component controller="IP_AuraController_cls">
 ```
 
+Ejemplo llamada método apex sin parametros:
+
+Componente
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" 
+                controller='IP_AuraController_cls'>
+    
+     <aura:attribute name='books' type='Libro__c[]'/>
+    
+     <h1>Books</h1>
+    
+	 <aura:iteration var="book" items="{!v.books}">
+        <p>{!book.Name}</p>
+     </aura:iteration>    
+    
+     <lightning:button label="Get All Books" onclick="{!c.getBooks}"/>
+    
+</aura:component>
+```
+
+Controlador Js
+
+```Apex
+({
+	getBooks : function(component,event,helper) { 
+        	helper.getBooksHelper(component,event);
+	}
+})
+```
+
+Helper
+
+```Apex
+({
+	getBooksHelper : function(component,event) {
+        
+         let action = component.get("c.getBook");
+        
+         action.setCallback(this, function(response) {
+            let state = response.getState();
+            if (state === "SUCCESS") {
+                component.set("v.books", response.getReturnValue());
+            }else {
+                console.log("Failed with state: " + state);
+            }
+        });
+
+		$A.enqueueAction(action);
+	}
+})
+```
+
+Controlador Apex
+
+```Apex
+public class IP_AuraController_cls {
+
+    @AuraEnabled
+    public static List<Libro__c> getBook() {
+        return [SELECT Name FROM Libro__c];
+    }
+}
+```
+
 ## Eventos
