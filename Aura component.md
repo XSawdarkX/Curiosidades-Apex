@@ -631,32 +631,86 @@ $A es una variable global de marco que proporciona un número de importantes fun
 
 Las funciones de devolución de llamadas toman un único parámetro, response, que es un objeto opaco que proporciona los datos devueltos, si los hubiera, y varios detalles sobre el estado de la solicitud.
 
-Ejemplo llamada método apex con parametros:
+Ejemplo llamada método apex con parametros. En este ejemplo no se controlan los errores, por lo que si no se coloca nada en el input o se coloca un numero de serie 
+que no existe, el componente arrojara un error.
 
 Componente:
 
 ```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" 
+                controller='IP_AuraController_cls'>
+    
+     <aura:attribute name='numeroSerie' type='String'/>
+     <aura:attribute name='nombreLibro' type='String' default = 'Fake book'/>
+
+     <lightning:input name="nombreLibro" value="{! v.numeroSerie}" placeholder="Escribe el código del libro" label="Book code" />
+    
+     <div>
+     	<h1>Book</h1>
+    
+     	<p>{!v.nombreLibro}</p>
+     </div>
+    
+     <lightning:button label="Get All Books" onclick="{!c.getBook}"/>
+    
+</aura:component>
 ```
 
 Controlador Js
 
 ```Apex
+({
+	getBook : function(component,event,helper) { 
+        helper.getBookHelper(component);
+	}
+})
 ```
 
 Helper
 
 ```Apex
+({
+	getBookHelper : function(component) {
+        
+        	
+         let numeroSerie = component.get("v.numeroSerie");
+         let action = component.get("c.getBookName");
+        
+         action.setParams({
+            "numeroSerie": numeroSerie
+         });
+
+         action.setCallback(this, function(response) {
+            let state = response.getState();
+            if (state === "SUCCESS") {
+                component.set("v.nombreLibro", response.getReturnValue());
+            }else {
+                console.log("Failed with state: " + state);
+            }
+        });
+
+		$A.enqueueAction(action);
+	}
+})
 ```
 
 Controlador Apex
 
 ```Apex
+public class IP_AuraController_cls {
+
+    @AuraEnabled
+    public static String getBookName(String numeroSerie) {
+        return [SELECT Name FROM Libro__c where IP_NumeroSerie__c = :numeroSerie].Name;
+    }
+}
 ```
+
+
+Solo debe usar action.setParams y pasar los parámetros en formato Json. “numeroSerie” debe coincidir con el nombre del parámetro definido en el método apex.
 
 ### Grafica funcionamiento en conjunto
 
-
-
-
+![image](https://user-images.githubusercontent.com/100179095/189189417-3947c107-f9a5-4ef9-8c43-1840a2c94c3a.png)
 
 ## Eventos
