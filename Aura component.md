@@ -733,7 +733,18 @@ Los componentes no pueden llegar a otros componentes y establecer valores en ell
 
 ### Tipos de evento
 
+Se podría decir que hay tres tipos de eventos:
+
+- Los eventos del navegador, como el onvlick o el onchange.
+- Los eventos personalizados.
+- Eventos del sistema.
+
+
+#### Tipos de evento personalizados
+
 Existen dos tipos de eventos: componente y aplicación. Aquí estamos utilizando un evento componente, porque queremos que un componente antecesor capte y gestione el evento. Un antecesor es un componente “por encima” de este en la jerarquía de componentes. Si deseamos un evento del tipo “difusión general”, donde cualquier componente pueda recibirlo, utilizaríamos un evento aplicación en su lugar.
+
+Para estos ejemplos usaremos un poco de SLDS (Salesforce Lightning Design System ), son estilos propios de Salesforce.
 
 Ejemplo Componente event:
 
@@ -800,6 +811,8 @@ Componente:
     
 </aura:component>
 ```
+	
+La etiqueta **<aura:handler>** es el modo de decir que un componente puede, bueno, gestiona un evento específico. 
 
 En el parametro **event** debe ir el nombre del evento que definimos en el punto 1. Además en el **name** debe ir el mismo valor que colocamos en el mismo atriuto
 del punto 2 a la hora de registrar el evento.
@@ -816,3 +829,33 @@ Controlador Js
 	}
 })
 ```	
+#### Eventos propios del sistema
+	
+El marco puede activar varios eventos del sistema durante su ciclo de vida.
+	
+El evento de este tipo más usado es el **init**, que ocurre cuando el componente se crea/instancia o renderiza por primera vez.	
+
+Componente
+	
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+
+    <p>Main Component</p>
+
+</aura:component>
+```		
+
+El **this** hace referencia al componente actual.
+	
+Controlador Js
+	
+```Apex
+({
+	doInit : function(component,event,helper) { 
+       	console.log('Entro método doInit');
+	}
+})		
+```		
+	
