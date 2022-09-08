@@ -466,7 +466,24 @@ Ejemplo controlador Js
 
 Los recursos de controlador tienen un formato interesante. Son objetos de JavaScript que contienen un mapa de pares de nombre-valor, donde el nombre es el nombre del gestor de acciones y el valor es la definición de una función. El gestor de acciones, para que se entienda mejor, es básicamente un método. El controlador puede tener un sinfín de métodos, cada uno separado por coma. 
 
-Los métodos, por regla general, independientemente si no se usa uno de ellos, cuenta con tres parámetros:
+Los métodos pueden definirse sin parametro alguno
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+     
+     <lightning:button label="Get All Books" onclick="{!c.getBooks}"/>
+    
+</aura:component>
+```
+
+```Apex
+getBooks : function() { 
+     	console.log('Entro getBooks');  
+	}
+```
+
+Pero, por regla general, independientemente si no se usa uno de ellos, cuenta con tres parámetros. Los parametros pueden tener el nombre que quieran,
+pero es importante siempre agregar los tres, ya que el primero siempre representa al componente, el segungo al Evento, y el tercero al Helper.
 
 - **Component:** El componente
 - **Event:** El evento que causo la llamada del gestor de acciones
@@ -613,5 +630,33 @@ $A es una variable global de marco que proporciona un número de importantes fun
 **function(response) { ... });** es una función de devolución que se encarga de gestionar la repuesta del servidor. 
 
 Las funciones de devolución de llamadas toman un único parámetro, response, que es un objeto opaco que proporciona los datos devueltos, si los hubiera, y varios detalles sobre el estado de la solicitud.
+
+Ejemplo llamada método apex con parametros:
+
+Componente:
+
+```Apex
+```
+
+Controlador Js
+
+```Apex
+```
+
+Helper
+
+```Apex
+```
+
+Controlador Apex
+
+```Apex
+```
+
+### Grafica funcionamiento en conjunto
+
+
+
+
 
 ## Eventos
