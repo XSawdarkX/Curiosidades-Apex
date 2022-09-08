@@ -731,8 +731,24 @@ Su componente enciende la radio y envía un mensaje. ¿Hay alguien ahí con un a
 
 Los componentes no pueden llegar a otros componentes y establecer valores en ellos. No hay forma de decir “Hola jefe, voy a actualizar expenses.” Los componentes son autónomos. Cuando un componente desea que un componente antecesor realice un cambio en algo, lo solicita. Educadamente. Enviando un evento.
 
+### Tipos de evento
 
+Existen dos tipos de eventos: componente y aplicación. Aquí estamos utilizando un evento componente, porque queremos que un componente antecesor capte y gestione el evento. Un antecesor es un componente “por encima” de este en la jerarquía de componentes. Si deseamos un evento del tipo “difusión general”, donde cualquier componente pueda recibirlo, utilizaríamos un evento aplicación en su lugar.
 
+Ejemplo Componente event:
 
+El orden para usar un evento es el siguiente:
 
+1. Definir un evento
+
+- Desde la developer console creamos un nuevo lightning event.
+- Debemos especificar de que tipo sera, y opcionalmente podemos definirle parametros o atributos.
+
+```Apex
+<aura:event type="COMPONENT" description="Event template" >
+	<aura:attribute name="messageEvent" type="String"/>
+</aura:event>
+```
+
+2. Registrar un evento en la definición del componente .cmp en el componente hijo.
 
