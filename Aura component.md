@@ -380,6 +380,52 @@ Me permite recorrer o Iterar un conjunto de valores.
 
 ## Algunos componentes preconstruidos o etiquetas propias de Aura
 
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <lightning:card footer="Card Footer" title="Hello">
+        
+    </lightning:card>    
+    
+</aura:component>
+```
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <lightning:avatar src="/bad/image/url.jpg" initials="" fallbackIconName="standard:avatar"  alternativeText="Bob Wilson" class="slds-m-right_small"/>
+    
+</aura:component>
+```
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <lightning:button variant="brand" label="Brand" title="Brand action" onclick="{! c.handleClick }" />
+    
+</aura:component>
+```
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <h2>
+        Basic Input Date
+    	<lightning:helptext content="La fecha debe pertencer a este mes"/>
+    </h2>
+    
+    <lightning:input type="date" name="inputDate"/>
+    
+</aura:component>
+```
+
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <lightning:progressBar value="50" size="large" />
+    
+</aura:component>
+```
 
 ## Controlador Js
 
