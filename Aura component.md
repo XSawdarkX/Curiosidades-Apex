@@ -739,7 +739,7 @@ Ejemplo Componente event:
 
 El orden para usar un evento es el siguiente:
 
-1. Definir un evento
+1. Definir un evento. (**TestEvent**) 
 
 - Desde la developer console creamos un nuevo lightning event.
 - Debemos especificar de que tipo sera, y opcionalmente podemos definirle parametros o atributos.
@@ -750,5 +750,69 @@ El orden para usar un evento es el siguiente:
 </aura:event>
 ```
 
-2. Registrar un evento en la definición del componente .cmp en el componente hijo.
+2. Registrar un evento en la definición del componente .cmp en el componente hijo. (**AuraHelloWorldChild**)
 
+```Apex
+<aura:component >
+    
+    <aura:registerEvent name="sendMessage" type="c:TestEvent"/>
+    
+	<div class="slds-box slds-box_small slds-theme_default divChild">
+        <p id='headerChild'>Child Component</p>
+        <lightning:button label="Enviar Mensaje" onclick="{!c.fireEvent}"/>
+    </div>
+</aura:component>
+```
+
+El **c:** representa el namespace. En el atributo **type** va el nombre del evento que definimos en el primer punto.En el **name** puede ir cualquier cosa.
+
+3. Obtener una instancia del evento y ejecutarlo en el controlador Js del hijo
+
+```Apex
+({
+	fireEvent : function(component, event, helper) {
+		let message = 'Mensaje enviado desde el componente Hijo';
+        
+        let customEvent = component.getEvent("sendMessage");
+        customEvent.setParams({ "messageEvent": message });
+        customEvent.fire();
+	}
+})
+```
+
+4. Registrar un “gestor de eventos” en el componente <padre>. El gestor de eventos realmente es manejado por un gestor de acciones en el controlador
+
+Componente:
+	
+```Apex
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    
+    <aura:attribute name='message' type='String' default='Default message'/>
+    
+    <aura:handler name="sendMessage" event="c:TestEvent" action="{!c.listenEvent}"/>
+  
+    <div class="slds-box slds-box_small slds-theme_shade">
+        <p id='header'>Main Component</p>
+        <p><Strong>Message: </Strong> {!v.message} </p>
+        <br/>
+        <c:AuraHelloWorldChild/>
+    </div>
+    
+</aura:component>
+```
+
+En el parametro **event** debe ir el nombre del evento que definimos en el punto 1. Además en el **name** debe ir el mismo valor que colocamos en el mismo atriuto
+del punto 2 a la hora de registrar el evento.
+	
+	
+Controlador Js
+	
+```Apex
+({
+	listenEvent : function(component,event,helper) { 
+       
+        let message = event.getParam("messageEvent");
+        component.set('v.message',message);
+	}
+})
+```	
