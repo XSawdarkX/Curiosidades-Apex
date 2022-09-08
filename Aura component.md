@@ -714,3 +714,25 @@ Solo debe usar action.setParams y pasar los parámetros en formato Json. “nume
 ![image](https://user-images.githubusercontent.com/100179095/189189417-3947c107-f9a5-4ef9-8c43-1840a2c94c3a.png)
 
 ## Eventos
+
+El marco utiliza eventos para comunicar datos entre componentes. Los eventos generalmente se desencadenan por una acción del usuario.
+
+La forma correcta de crear una aplicación es crear componentes independientes y luego agruparlos para crear nuevas funciones de más alto nivel.
+
+Existen dos maneras principales de afectar o interactuar con otro componente:
+
+1. Establecer atributos en la etiqueta del componente. Los atributos públicos de un componente constituyen una parte de su API. <c:helloMessage message="{!v.customMessage}"/>
+
+2. A través de eventos. Del mismo modo que los atributos, los componentes declaran los eventos que envían y los eventos que pueden gestionar. Al igual que los atributos, estos eventos públicos constituyen una parte de la API pública del componente.
+
+Los componentes no envían eventos a otro componente. Esa no es la manera de funcionar de los eventos. Los componentes difunden eventos de un tipo en particular. Si hay un componente que responde a ese tipo de evento, y si ese componente “escucha” su evento, actuará sobre él.
+
+Su componente enciende la radio y envía un mensaje. ¿Hay alguien ahí con un aparato de radio encendido y sintonizado en la frecuencia correcta? Su componente no tiene manera de saberlo, de modo que debe redactar sus componentes de una forma en que no pase nada si nadie escucha los eventos que difunden. (O sea, puede que las cosas no funcionen, pero nada se bloquea.)
+
+Los componentes no pueden llegar a otros componentes y establecer valores en ellos. No hay forma de decir “Hola jefe, voy a actualizar expenses.” Los componentes son autónomos. Cuando un componente desea que un componente antecesor realice un cambio en algo, lo solicita. Educadamente. Enviando un evento.
+
+
+
+
+
+
