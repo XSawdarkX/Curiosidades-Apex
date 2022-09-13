@@ -172,12 +172,40 @@ HTML
 </template>   
 ``` 
     
-    
-    
-## Propiedades
-
 ## Condicional
 
+Permite evaluar una condición. No existe como tal una figrua de else. Solo existe el **template if:true** y el **template if:false**
+    
+Js  
+    
+```Apex
+import { LightningElement } from 'lwc';
+
+export default class HelloWorld extends LightningElement {
+
+    mostrarMensaje = false;
+
+}
+```       
+    
+HTML   
+    
+```Apex
+<template>
+    <template if:true={mostrarMensaje}>
+        <div class="slds-m-vertical_medium">
+            Hello world
+        </div>
+    </template>
+
+    <template if:false={mostrarMensaje}>
+        <div class="slds-m-vertical_medium">
+            mensaje Oculto
+        </div>
+    </template>
+</template>
+```     
+    
 ## Iterador
 
 ## Decoradores    
