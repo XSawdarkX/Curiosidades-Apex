@@ -49,8 +49,40 @@ Antes existian los sites y las comunidades, ahora salesforce homologo esos termi
     
 ## ¿Desde donde se puede crear?
     
-Un LWC solo se puede crear desde Visual studio code.    
-
+Un LWC solo se puede crear a través de un entorno de desarrollo, Salesforce recomienda Visual studio code.  
+    
+Para integrar Salesforce con VS se puede seguir este tutorial: 
+    
+[https://trailhead.salesforce.com/es-MX/content/learn/projects/quick-start-lightning-web-components/set-up-salesforce-dx] (Salesforce DX )
+    
+Una vez se haya hecho la integración podemos crear el LWC de dos formas:
+    
+- Por la paleta de comandos: ctrl + shift + p. Aquí escribimos SDFX: Create Lightning Web Component
+- Por la terminal:
+    
+ Con este comando
+    
+ sfdx force:lightning:component:create --type lwc -n helloWorld -d force-app/main/default/lwc
+    
+ O primero ubicandonos en la carpeta del lwc 
+    
+cd force-app/main/default/lwc
+    
+Y luego
+    
+sfdx force:lightning:component:create --type lwc -n helloWorld
+    
+Cuando recien se crea el componente este contiene tres archivos. 
+    
+- Un archivo html
+    
+- Un archivo Js
+    
+-   Un archivo XML de metadata: Aquí podemos usar ciertas etiquetas que nos permitiran dentro de otras cosas, exponer nuestro componente a los diferentes
+    contenedores
+    
+Podemos adicionalmente crear un archivo css o svg,  pero estos deben llamarse igual que el html y el Js, de lo contrario no funcionara.
+    
 ## Expresiones
 
 ## Propiedades
