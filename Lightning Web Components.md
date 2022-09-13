@@ -208,7 +208,7 @@ HTML
     
 ## Iterador
 
-Me permite recorrer un conjunto de valores. Cuando utilizo una etiqueta dentro del **<template for:each>**, es necesairo especificar un ley para cada elemento.
+Me permite recorrer un conjunto de valores. Cuando utilizo una etiqueta dentro del **template for:each**, es necesario especificar un key para cada elemento.
     
 Js  
     
