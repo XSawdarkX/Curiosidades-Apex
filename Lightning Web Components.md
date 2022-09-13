@@ -61,16 +61,22 @@ Una vez se haya hecho la integración podemos crear el LWC de dos formas:
 - Por la terminal:
     
  Con este comando
-    
+  
+```Apex    
  sfdx force:lightning:component:create --type lwc -n helloWorld -d force-app/main/default/lwc
+```    
     
- O primero ubicandonos en la carpeta del lwc 
+O primero ubicandonos en la carpeta del lwc 
     
+```Apex    
 cd force-app/main/default/lwc
+```
     
 Y luego
     
+```Apex     
 sfdx force:lightning:component:create --type lwc -n helloWorld
+```    
     
 Cuando recien se crea el componente este contiene tres archivos. 
     
