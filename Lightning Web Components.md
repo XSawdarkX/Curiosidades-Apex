@@ -89,6 +89,21 @@ Cuando recien se crea el componente este contiene tres archivos.
     
 Podemos adicionalmente crear un archivo css o svg,  pero estos deben llamarse igual que el html y el Js, de lo contrario no funcionara.
     
+Para exponer un LWC a algún contenedor seteamos la propiedad **isExposed** a true, y utilizamos la propiedad **target para indicarle el contenedor**. Esto se hace en el archivo XML.
+    
+Posibles valores para el contenedor: (Targets)[https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_configuration_tags]   
+    
+```Apex   
+ <?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>false</isExposed>
+    <targets>
+        <target>lightning__UtilityBar</target>
+    </targets>
+</LightningComponentBundle>   
+```     
+    
 ## Expresiones
 
 ## Propiedades
