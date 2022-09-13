@@ -103,8 +103,37 @@ Posibles valores para el contenedor: (Targets)[https://developer.salesforce.com/
     </targets>
 </LightningComponentBundle>   
 ```     
+### Explicación archivo JS
     
+La declaración import indica que el código de JavaScript utiliza la función **LightningElement** del módulo lwc.
+
+```Apex      
+import { LightningElement } from 'lwc';
+export default class MyComponent extends LightningElement {
+}
+``` 
+    
+LightningElement es la clase base para los componentes web Lightning, lo que nos permite utilizar el método connectedCallback() por ejemplo.
+    
+connectedCallback() : método que se activa cuando se inserta un componente en el Document Object Model (DOM)
+    
+La declaración export define una clase que amplía la clase LightningElement. Se recomienda poner el mismo nombre a la clase que al archivo de la clase de JavaScript, aunque no es un requisito obligatorio.
+ 
 ## Expresiones
+    
+Las expresiones siguen eel siguiente formato: {}
+    
+No es necesairo usar el caracter "!", ni un proovedor de valores como en Aura.
+    
+Js
+    
+```Apex
+``` 
+    
+HTML   
+    
+```Apex
+```     
 
 ## Propiedades
 
@@ -112,6 +141,8 @@ Posibles valores para el contenedor: (Targets)[https://developer.salesforce.com/
 
 ## Iterador
 
+## Decoradores    
+        
 
 ```Apex
 p.THIS{
