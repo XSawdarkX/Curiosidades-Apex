@@ -208,6 +208,30 @@ HTML
     
 ## Iterador
 
+Me permite recorrer un conjunto de valores. Cuando utilizo una etiqueta dentro del **<template for:each>**, es necesairo especificar un ley para cada elemento.
+    
+Js  
+    
+```Apex
+import { LightningElement } from 'lwc';
+
+export default class HelloWorld extends LightningElement {
+
+    colores = ['Amarillo','Azul','Rojo'];
+
+}
+```   
+ 
+HTML   
+    
+```Apex
+<template>
+    <template for:each={colores} for:item="color">
+        <p key='{color}'>{color}</p>
+    </template>
+</template>
+```         
+    
 ## Decoradores    
         
 
