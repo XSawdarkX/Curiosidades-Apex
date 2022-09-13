@@ -128,11 +128,21 @@ No es necesairo usar el caracter "!", ni un proovedor de valores como en Aura.
 Js
     
 ```Apex
+import { LightningElement } from 'lwc';
+
+export default class HelloWorld extends LightningElement {
+
+ message = 'Hello world';
+
+}
 ``` 
     
 HTML   
     
 ```Apex
+<template>
+    <p>{message}</p>
+</template>    
 ```     
 
 ## Propiedades
