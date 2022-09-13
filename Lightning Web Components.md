@@ -97,7 +97,7 @@ Posibles valores para el contenedor: (Targets)[https://developer.salesforce.com/
  <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>55.0</apiVersion>
-    <isExposed>false</isExposed>
+    <isExposed>true</isExposed>
     <targets>
         <target>lightning__UtilityBar</target>
     </targets>
