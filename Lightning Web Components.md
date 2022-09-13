@@ -145,6 +145,35 @@ HTML
 </template>    
 ```     
 
+Ejemplo función
+  
+Js  
+    
+```Apex
+import { LightningElement } from 'lwc';
+
+export default class HelloWorld extends LightningElement {
+
+    message = 'Hello world';
+
+    translateMessage(){
+        this.message = 'Hola Mundo';
+    }
+
+}   
+```       
+    
+HTML   
+    
+```Apex
+<template>
+    <p>{message}</p>
+    <button onclick='{translateMessage}'>Translate</button>
+</template>   
+``` 
+    
+    
+    
 ## Propiedades
 
 ## Condicional
