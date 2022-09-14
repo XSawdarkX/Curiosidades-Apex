@@ -232,6 +232,95 @@ HTML
 </template>
 ```         
     
+## Algunos componentes
+    
+Existen muchos componentes propios de Salesforce que incluso se pueden usar también con Aura. Sin embargo, el LWC se usa el - en vez de los dos puntos, para separar el spacename del nombre del componente.
+   
+lightning-card
+    
+```Apex
+<template>
+    <lightning-card  title="Hello">
+        <lightning-button label="New" slot="actions"></lightning-button>
+        <p class="slds-p-horizontal_small">Card Body (custom component)</p>
+        <p slot="footer">Card Footer</p>
+    </lightning-card>
+</template>    
+```    
+
+lightning-progress-step
+    
+```Apex
+<template>
+    <p>
+        A progress indicator displays the steps in a process. All steps preceding the step specified by currentStep are marked completed.
+    </p>
+    <lightning-progress-indicator current-step="3" type="base" has-error="true" variant="base">
+        <lightning-progress-step label="Step 1" value="1"></lightning-progress-step>
+        <lightning-progress-step label="Step 2" value="2"></lightning-progress-step>
+        <lightning-progress-step label="Step 3" value="3"></lightning-progress-step>
+        <lightning-progress-step label="Step 4" value="4"></lightning-progress-step>
+    </lightning-progress-indicator>
+</template>    
+```    
+    
+lightning-button-icon
+    
+```Apex
+<template>
+    <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+        Button-icons with the <code>variant</code> attribute omitted or set to the default value of <code>border</code>.
+    </h2>
+    <!-- with border / by default -->
+    <div class="slds-p-around_medium lgc-bg">
+        <lightning-button-icon icon-name="utility:settings"  alternative-text="Settings" title="Settings"></lightning-button-icon>
+    </div>    
+</template>
+    
+```    
+lightning-record-view-form
+    
+```Apex
+<template>
+    <lightning-record-view-form object-api-name='Libro__c' record-id='a018X00000YPQ60QAH'>
+        <lightning-output-field field-name='Name'></lightning-output-field>
+    </lightning-record-view-form>
+</template>    
+```    
+
+lightning-map
+
+Js
+    
+```Apex
+import { LightningElement } from 'lwc';
+
+export default class HelloWorld extends LightningElement {
+
+mapMarkers = [
+    {
+        location: {
+            Street: '1 Market St',
+            City: 'San Francisco',
+            Country: 'USA',
+        },
+        title: 'The Landmark Building',
+        description:
+            'Historic <b>11-story</b> building completed in <i>1916</i>',
+    },
+];
+
+}   
+```   
+    
+HTML
+    
+```Apex
+<template>
+    <lightning-map map-markers={mapMarkers}> </lightning-map>  
+</template>   
+```      
+    
 ## Decoradores    
         
 
