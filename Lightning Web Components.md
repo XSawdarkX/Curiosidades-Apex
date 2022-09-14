@@ -426,7 +426,78 @@ HTML
     
  ### llamarlos de forma imperativa   
     
-Esta forma me permite ejecutar un método de Apex a voluntad, como cuando hago clic en algún botón por ejemplo.
+Esta forma me permite ejecutar un método de Apex a voluntad, como cuando hago clic en algún botón por ejemplo. 
+    
+Si observamos, esta forma usa Promesas.
+    
+Una promesa es un objeto que representa un valor que puede que esté disponible «ahora», en un «futuro» o que «nunca» lo esté. Como no se sabe cuándo va a estar disponible, todas las operaciones dependientes de ese valor, tendrán que posponerse en el tiempo. Sigue leyendo para saber cómo funcionan, ya que puede serte de gran utilidad a la hora de crear una web profesional.
+
+JavaScript es «single threaded» (un solo hilo), lo que significa que solo puede ejecutar una acción al mismo tiempo, por lo que utilizar promesas facilita, en buena medida, el control de flujos de datos asíncronos en una aplicación.    
+    
+```   
+Js
+
+```Apex 
+import { LightningElement } from 'lwc';
+import obtenerLibros from '@salesforce/apex/IP_LWC_cls.getBooks';
+
+export default class HelloWorld extends LightningElement {
+
+    searchKey = '70B';
+    libros;
+    error;
+
+    handleKeyChange(event) {
+        this.searchKey = event.target.value;
+    }
+
+    handleSearch() {
+        obtenerLibros({ numeroSerie: this.searchKey })
+            .then((result) => {
+                this.libros = result;
+                this.error = undefined;
+            })
+            .catch((error) => {
+                this.error = error;
+                this.libros = undefined;
+            });
+    }
+
+}
+```    
+    
+HTML  
+    
+```Apex 
+<template>
+    <lightning-card title="ApexImperativeMethodWithParams" icon-name="custom:custom63"
+    >
+        <div class="slds-var-m-around_medium">
+            <lightning-layout vertical-align="end" class="slds-var-m-bottom_small">
+                <lightning-layout-item flexibility="grow">
+                    <lightning-input
+                        type="search"
+                        onchange={handleKeyChange}
+                        label="Search"
+                        value={searchKey}
+                    ></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-var-p-left_xx-small">
+                    <lightning-button
+                        label="Search"
+                        onclick={handleSearch}
+                    ></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+            <template if:true={libros}>
+                <template for:each={libros} for:item="libro">
+                    <p key={libro.Id}>{libro.Name}</p>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>  
+```           
     
     
     
