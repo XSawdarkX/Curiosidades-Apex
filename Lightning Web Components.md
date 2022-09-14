@@ -363,3 +363,70 @@ helloWorld HTML
 - **@track:** ordena al marco de trabajo que observe los cambios en las propiedades de un objeto o en los elementos de una matriz. Si se produce un cambio, el marco de trabajo vuelve a representar el componente. YA NO ES NECESARIO USARLO    
     
 -  **@wire:** ofrece una manera sencilla de obtener y vincular datos desde una organización de Salesforce. 
+    
+ ## Usando Apex
+    
+ Puedo llamar clases de apex usando dos formas:
+    
+ Independientemente de cual forma se utilice, es necesairo primero importar los métodos de apx que vamos a usar. Par ello usamos la siguiente estrutura:
+    
+ ```Apex   
+ import obtenerLibros from '@salesforce/apex/IP_LWC_cls.getBooks';  
+ ```  
+     
+### El decorador wire   
+    
+El decorador Wire es reactivo, es decir, cada vez que el valor de algún parametro de nuestro método cambia, se ejecuta.   
+   
+Clase Apex
+    
+```Apex    
+public with sharing class IP_LWC_cls {
+   
+    @AuraEnabled(cacheable=true)
+    public static List<Libro__c> getBooks(String numeroSerie){
+        return [Select id,Name,Autor__r.Name from Libro__c where IP_NumeroSerie__c = :numeroSerie];
+    }
+}
+    
+```   
+Js
+
+```Apex 
+import { LightningElement,wire } from 'lwc';
+import obtenerLibros from '@salesforce/apex/IP_LWC_cls.getBooks';
+
+export default class HelloWorld extends LightningElement {
+
+    searchKey = '70B';
+
+    @wire(obtenerLibros, { numeroSerie: '$searchKey' })
+    libros;  
+
+    handleKeyChange(event) {
+        const searchKey = event.target.value;
+        this.searchKey = searchKey;
+    }
+
+}    
+```    
+    
+HTML  
+    
+```Apex 
+<template>
+    <lightning-input type="search"  class="slds-m-bottom_small"  onchange={handleKeyChange} label="Search" value={searchKey}></lightning-input>
+    <template if:true={libros.data}>
+        <template for:each={libros.data} for:item="Libro">
+            <p key={libros.Id}>{Libro.Name}</p>
+        </template>
+    </template>
+</template>    
+```       
+    
+ ### llamarlos de forma imperativa   
+    
+Esta forma me permite ejecutar un método de Apex a voluntad, como cuando hago clic en algún botón por ejemplo.
+    
+    
+    
