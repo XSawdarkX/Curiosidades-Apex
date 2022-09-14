@@ -172,6 +172,50 @@ HTML
 </template>   
 ``` 
     
+Ejemplo Label
+    
+Js
+   
+```Apex
+import { LightningElement } from 'lwc';
+import labelName from '@salesforce/label/c.CantidadLibrosLibreria';
+
+export default class HelloWorld extends LightningElement {
+
+   cantidad =  labelName;
+}
+```     
+    
+HTML
+    
+```Apex
+<template>
+    Hay {cantidad} libros en la libreria
+</template>
+```         
+    
+Ejemplo recurso estatico
+    
+Js  
+    
+```Apex
+import { LightningElement } from 'lwc';
+import imageCity from '@salesforce/resourceUrl/ImageTest';
+
+export default class HelloWorld extends LightningElement {
+
+   image =  imageCity;
+}
+```       
+    
+HTML   
+    
+```Apex
+<template>
+    <img src={image}>
+</template>
+```             
+    
 ## Condicional
 
 Permite evaluar una condición. No existe como tal una figrua de else. Solo existe el **template if:true** y el **template if:false**
