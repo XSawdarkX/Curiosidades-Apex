@@ -559,4 +559,69 @@ HTML
    <c-child-lwc message='Avicii'></c-child-lwc>
 </template>   
 ```         
+   
+### Hijo a padre
+    
+El componente secundario envía el evento y el componente principal lo escucha. Al enviar el evento, se crea un objeto de evento que el componente secundario puede pasar al principal. El componente principal tiene un gestor para responder al evento.
+    
+Hijo childLwc
+
+Js
+ 
+```Apex     
+import { LightningElement } from 'lwc';
+
+export default class ChildLwc extends LightningElement {
+
+    playSong() {
+        const event = new CustomEvent('song', {
+            detail: 'nice to meet you '
+        });
+        this.dispatchEvent(event);
+    }
+
+}    
+```     
+    
+HTML    
+    
+```Apex     
+<template>
+    <div>
+        Componente hijo: 
+        <button onclick={playSong}>Play Song</button>
+    </div>
+</template>
+```
+    
+Padre helloWorld
+    
+Js
+ 
+```Apex     
+import { LightningElement } from 'lwc';
+
+export default class HelloWorld extends LightningElement {
+
+    song;
+
+    handlePlay(evt) {
+        this.song = evt.detail;
+     }
+}
+```     
+    
+HTML    
+    
+```Apex     
+<template>
+   <div> 
+   <p>Componente Padre</p>
+   La canción es: {song}
+   </div> 
+
+   <c-child-lwc onsong={handlePlay}></c-child-lwc>
+   
+</template>
+```             
     
