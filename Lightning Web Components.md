@@ -359,3 +359,7 @@ helloWorld HTML
     <c-child-lwc message='Hello'></c-child-lwc>
 </template>
 ```    
+    
+- **@track:** ordena al marco de trabajo que observe los cambios en las propiedades de un objeto o en los elementos de una matriz. Si se produce un cambio, el marco de trabajo vuelve a representar el componente. YA NO ES NECESARIO USARLO    
+    
+-  **@wire:** ofrece una manera sencilla de obtener y vincular datos desde una organización de Salesforce. 
