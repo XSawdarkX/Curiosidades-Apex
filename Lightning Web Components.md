@@ -322,10 +322,40 @@ HTML
 ```      
     
 ## Decoradores    
-        
+  
+Se suelen utilizar los decoradores en JavaScript para modificar el comportamiento de una propiedad o una función.
 
+Para utilizar un decorador, impórtelo del módulo lwc y colóquelo antes de la propiedad o la función.
+    
+Se pueden importar varios decoradores, pero cada propiedad o función concreta solo puede tener un decorador. 
+    
+- **@api:** marca un campo como público. Las propiedades públicas definen la API de un componente. Un componente propietario que utiliza el componente en su marcado HTML puede acceder a las propiedades públicas del componente. Todas las propiedades públicas son reactivas, lo que significa que el marco de trabajo observa la propiedad buscando cambios. Cuando los valores de la propiedad cambian, el marco de trabajo reacciona y vuelve a representar el componente.  
+
+Utilizar ambos componentes **helloWorld** y **childLwc** 
+    
+childLwc Js. Para probar este decorador, ejecutarlo primero sin usarlo, y luego usandolo. Para ello debe importar y colocar a la propiedad message.
+    
 ```Apex
-p.THIS{
-    color:blue;
+import { LightningElement } from 'lwc';
+
+export default class ChildLwc extends LightningElement {
+    message;
 }
 ```
+childLwc HTML
+    
+```Apex
+<template>
+    Componente hijo: {message}
+</template>
+```
+ 
+helloWorld HTML    
+   
+```Apex
+<template>
+    <p>Componente padre</p>
+
+    <c-child-lwc message='Hello'></c-child-lwc>
+</template>
+```    
