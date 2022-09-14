@@ -498,6 +498,65 @@ HTML
     </lightning-card>
 </template>  
 ```           
+ 
+## Eventos
+  
+Los eventos me permiten comunicar información entre componentes. Se puede tener una comunicación de padre a hijo, o viceversa.
     
+### Padre a hijo 
     
+Invocando una función del componente hijo, desde el componente padre.
+    
+hijo childLwc
+    
+Js
+ 
+```Apex     
+import { LightningElement } from 'lwc';
+import { api } from 'lwc';
+
+export default class ChildLwc extends LightningElement {
+
+   @api message;
+
+   @api
+   play(song) {
+       console.log('Playing '+song);
+   }
+}    
+```     
+    
+HTML    
+    
+```Apex     
+<template>
+    Componente hijo: {message}
+</template>    
+```     
+ 
+Padre helloWorld
+    
+Js
+ 
+```Apex     
+import { LightningElement } from 'lwc';
+
+export default class HelloWorld extends LightningElement {
+
+    handlePlay() {
+        this.template.querySelector('c-child-lwc').play('without you');
+     }
+}
+```     
+    
+HTML    
+    
+```Apex     
+<template>
+   <p>Componente Padre</p>
+
+   <button onclick={handlePlay}>Play Song</button>
+   <c-child-lwc message='Avicii'></c-child-lwc>
+</template>   
+```         
     
