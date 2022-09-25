@@ -73,7 +73,32 @@ Lo primero que se debe realizar es la creación de las **Apex sharing reason**, 
 
 Las Apex sharing reason son una forma en que los desarrolladores pueden saber el porque ellos compartieron un registro con un grupo de usuarios. También permite compartir el mismo registro varias veces usando diferentes razones.
 
+Para crear una **razon** solo es necesario definir su nombre.
 
+A continuación se muestra como se llama desde apex:
 
+```Apex
+Schema.CustomObject__Share.rowCause.SharingReason__c
+```
 
+Las listas relacionadas Apex sharing reasons y Apex managed sharing recalculation, solo estan disponibles para objetos custom.
 
+Ejemplo:
+
+```Apex
+// Create new sharing object for the custom object Job.
+Libro__Share libroShr  = new Libro__Share();
+
+// Set the ID of record being shared.
+libroShr.ParentId = 'a018X00000YPeZrQAL';
+
+// Set the ID of user or group being granted access.
+libroShr.UserOrGroupId = '0058X00000FLXEcQAP';
+
+// Set the access level.
+libroShr.AccessLevel = 'Read';
+
+libroShr.RowCause = Schema.Libro__Share.RowCause.TestReason__c;
+
+insert libroShr;
+```
