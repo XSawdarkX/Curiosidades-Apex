@@ -23,3 +23,13 @@ Cuando se comparte un registro, también es importante especificar el nivel de a
 ```Apex
 
 ```
+
+## Sharing a Record Using Apex
+
+Para realizar este proceimiento es necesario usar el objeto Sharing correspondiente al objeto del registro que vamos a compartir.
+
+Para objetos estandar el nombre de dicho objeto es el mismo nombre API más la palabra **Share**.Ejemplo: **AccountShare**, **ContactShare**. Para objectos Custom, es el
+mismo nombre API más **__Share**.Ejemplo:**Libro__Share**. 
+
+Es una relación **Maestro detalle**, los objetos que actuan como hijos no tienen un objeto Sharing, ya que el nivel de acceso depende del objeto Maestro. 
+
