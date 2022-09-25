@@ -28,8 +28,37 @@ Cuando se comparte un registro, también es importante especificar el nivel de a
 
 Para realizar este proceimiento es necesario usar el objeto Sharing correspondiente al objeto del registro que vamos a compartir.
 
-Para objetos estandar el nombre de dicho objeto es el mismo nombre API más la palabra **Share**.Ejemplo: **AccountShare**, **ContactShare**. Para objectos Custom, es el
-mismo nombre API más **__Share**.Ejemplo:**Libro__Share**. 
+Para objetos estandar el nombre de dicho objeto es el mismo nombre API más la palabra **Share**.Ejemplo: **AccountShare**, **ContactShare**. Para objectos Custom, es el mismo nombre API más **__Share**.Ejemplo:**Libro__Share**. 
 
 Es una relación **Maestro detalle**, los objetos que actuan como hijos no tienen un objeto Sharing, ya que el nivel de acceso depende del objeto Maestro. 
 
+### Compartir el registro manualmente
+
+El siguiente ejemplo es el más básico que podemos tener. Basicmanete se esta compartiendo un registro manualmente. Tal como mencionamos anteriormente, podemos especificar una causa o una razón por la cual se comparte el registro, por defecto esta causa tiene un valor de **Manual**. Por lo que no es necesario especificarlo.
+
+
+```Apex
+// Create new sharing object for the custom object Job.
+Libro__Share libroShr  = new Libro__Share();
+
+// Set the ID of record being shared.
+libroShr.ParentId = 'a018X00000YPQ5zQAH';
+
+// Set the ID of user or group being granted access.
+libroShr.UserOrGroupId = '0058X00000FLXEcQAP';
+
+// Set the access level.
+libroShr.AccessLevel = 'Read';
+
+Database.SaveResult sr = Database.insert(libroShr,false);
+```
+
+Si se desea especificar tampoco habría problema, se realiza de la siguiente manera:
+
+```Apex
+libroShr.RowCause = Schema.Libro__Share.RowCause.Manual;
+```
+
+Cuando se comparte el registro de este forma, si el propietario cambia, se pierde el compartimiento. 
+
+Los posibles valores para el campo **AccessLevel** son **read** y **edit**.
