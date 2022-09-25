@@ -62,3 +62,18 @@ libroShr.RowCause = Schema.Libro__Share.RowCause.Manual;
 Cuando se comparte el registro de este forma, si el propietario cambia, se pierde el compartimiento. 
 
 Los posibles valores para el campo **AccessLevel** son **read** y **edit**.
+
+### Compartir el registro con Apex sharing reason
+
+Este tipo de compartimiento se mantiene aunque el propietario del registro cambie.
+
+Lo primero que se debe realizar es la creación de las **Apex sharing reason**, para ello es necesario ir a la página de detalles del objeto y buscar la lista relacionada del mismo nombre. Esta lista esta solo disponible desde **classic**. 
+
+![image](https://user-images.githubusercontent.com/100179095/192170717-316e6341-116c-43df-8494-ccbbdc92124a.png)
+
+Las Apex sharing reason son una forma en que los desarrolladores pueden saber el porque ellos compartieron un registro con un grupo de usuarios. También permite compartir el mismo registro varias veces usando diferentes razones.
+
+
+
+
+
