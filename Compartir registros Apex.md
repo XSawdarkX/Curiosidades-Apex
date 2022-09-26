@@ -20,10 +20,6 @@ Cuando se comparte un registro, también es importante especificar el nivel de a
 - **Read/Write:** El grupo o el usuario especificado puede ver y editar el registro.
 - **Full Access:**  El grupo o el usuario especificado puede ver, editar, tranferir, compartir y borrar el registro. Este valor solo esta disponible en Sharing Settings.
 
-```Apex
-
-```
-
 ## Sharing a Record Using Apex
 
 Para realizar este proceimiento es necesario usar el objeto Sharing correspondiente al objeto del registro que vamos a compartir.
