@@ -107,6 +107,8 @@ insert libroShr;
 
 Es posible crear un batch cuya función en recalcular los compartimientos hechos con Apex sharing reasons. Este batch se debe asociar a la lista relacionada **Apex Sharing Recalculation** a nivel de la página de detaller del objeto en Salesforce classic.
 
+![image](https://user-images.githubusercontent.com/100179095/192171945-d9fe26eb-41b7-490c-aed0-53320a9a52d6.png)
+
 También es posible ejecutar el btach desde la ventana anonima con el método **execute**.
 
 Basicamente lo que hace la clase es borrar los registros del objeto share y los vuelve a insertar. 
