@@ -26,5 +26,6 @@ Permite convertir el valor original de un campo moneda en la moneda del usuario.
 ```Apex
 Select id,Name,format(convertCurrency(IP_PrecioBase__c)) from Libro__c where id = 'a018X00000YPeZrQAL'
 ```
-![image](https://user-images.githubusercontent.com/100179095/192174521-c8c5a6f1-361d-4db5-bcbc-80f13d3c6ba3.png)
+![image](https://user-images.githubusercontent.com/100179095/192174563-482b0d3f-0a89-4e5f-999e-035ee0fb46b9.png)
+
 
