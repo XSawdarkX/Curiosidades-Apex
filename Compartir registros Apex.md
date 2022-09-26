@@ -116,4 +116,6 @@ Basicamente lo que hace la clase es borrar los registros del objeto share y los 
 Aquí un ejemplo: [Recalculating Apex](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_bulk_sharing_recalc.htm)
 
 
+## Cosas a tener en cuenta
 
+- Cuando compartimos el mismo registro con el mismo usuario más de una vez pero con diferentes niveles de acceso, gana el nivel de acceso más permisivo, es decir, **Edit**. 
