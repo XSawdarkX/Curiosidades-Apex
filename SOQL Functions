@@ -1,0 +1,26 @@
+# SOQL Functions
+
+## Format
+
+Permite mostrar valores de **número**, **fecha**,**tiempo**, y **moneda** en el formato local del usuario.
+
+### Ejemplo moneda sin format
+
+```Apex
+Select id,Name,IP_PrecioBase__c from Libro__c where id = 'a018X00000YPeZrQAL'
+```
+
+### Ejemplo moneda con format
+
+```Apex
+Select id,Name,format(IP_PrecioBase__c) from Libro__c where id = 'a018X00000YPeZrQAL'
+```
+
+## convertCurrency
+
+Permite convertir el valor original de un campo moneda en la moneda del usuario. Se puede combinar con la función **format**
+
+```Apex
+
+```
+
