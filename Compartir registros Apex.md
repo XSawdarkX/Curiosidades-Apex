@@ -102,3 +102,16 @@ libroShr.RowCause = Schema.Libro__Share.RowCause.TestReason__c;
 
 insert libroShr;
 ```
+
+## Recalculating Apex Managed Sharing
+
+Es posible crear un batch cuya función en recalcular los compartimientos hechos con Apex sharing reasons. Este batch se debe asociar a la lista relacionada **Apex Sharing Recalculation** a nivel de la página de detaller del objeto en Salesforce classic.
+
+También es posible ejecutar el btach desde la ventana anonima con el método **execute**.
+
+Basicamente lo que hace la clase es borrar los registros del objeto share y los vuelve a insertar. 
+
+Aquí un ejemplo: (Recalculating Apex)[https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_bulk_sharing_recalc.htm]
+
+
+
