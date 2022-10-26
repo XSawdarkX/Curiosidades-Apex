@@ -61,3 +61,9 @@ Apex generalmente corre en modo sistema, es decir, tiene permisos sobre todos lo
 
 Se debe ubicar depués de las cláusulas **FROM**  o **WHERE**, y antes de **ORDER BY**, **LIMIT**, O **OFFSET**.
 
+```Apex
+List<Libro__c> lstLibros = [SELECT id,Name,IP_Cantidad__c FROM Libro__c WITH SECURITY_ENFORCED];
+```
+
+Si el usuario que ejecuta el código no tiene permisos sobre alguno de los campos, o sobre el objeto, el sistema arrojara un error de permisos insuficientes. 
+
