@@ -53,3 +53,11 @@ ORDER BY Name
 LIMIT 100
 OFFSET 0
 ```
+## WITH SECURITY_ENFORCED
+
+Esta cláusula da la posibilidad de evaluar la seguridad a nivel de campo y a nivel de objeto. 
+
+Apex generalmente corre en modo sistema, es decir, tiene permisos sobre todos los campos de todos los objetos. Para forzar la seguridad sobre dichos items, se utiliza la cláusula **WITH SECURITY_ENFORCED**. Esta solo tiene encuenta lo especificado en las cláusulas **SELECT** y **FROM**.
+
+Se debe ubicar depués de las cláusulas **FROM**  o **WHERE**, y antes de **ORDER BY**, **LIMIT**, O **OFFSET**.
+
