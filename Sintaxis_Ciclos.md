@@ -105,7 +105,7 @@ En el ejemplo de arriba, el sistema ejecuta la consulta a la base de datos y ret
 También es posible hacer la consulta previamente y almacenarla en una lista para luego recorrerla con un for each. 
 
 ```Apex
-List<> lstAccount = [SELECT Id, Name from Account where Name = 'Facebook'];
+List<Account> lstAccount = [SELECT Id, Name from Account where Name = 'Facebook'];
 
 for (Account a : lstAccount) {
     System.debug('Account Name:'+ a.Name);
